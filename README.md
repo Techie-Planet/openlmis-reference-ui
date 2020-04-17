@@ -1,20 +1,14 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# OpenLMIS Covid UI
+This user interface is designed to be a single page web application that is optimized for offline and low-bandwidth environments.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Multiple UI modules are compiled together with the OpenLMIS dev-ui to create the OpenLMIS Reference-UI. UI modules included in the OpenLMIS Reference-UI are:
+* [OpenLMIS Auth UI](https://github.com/OpenLMIS/openlmis-auth-ui)
+* [OpenLMIS Fulfillment UI](https://github.com/OpenLMIS/openlmis-fulfillment-ui)
+* [OpenLMIS Reference Data UI](https://github.com/OpenLMIS/openlmis-referencedata-ui)
+* [OpenLMIS Report UI](https://github.com/OpenLMIS/openlmis-report-ui)
+* [OpenLMIS Requisition UI](https://github.com/OpenLMIS/openlmis-requisition-ui)
+* [OpenLMIS UI Components](https://github.com/OpenLMIS/openlmis-ui-components)
+* [OpenLMIS UI Layout](https://github.com/OpenLMIS/openlmis-ui-layout)
+* [OpenLMIS Stock Management UI](https://github.com/OpenLMIS/openlmis-stockmanagement-ui)
+* [OpenLMIS Cold Chain Equipment UI](https://github.com/OpenLMIS/openlmis-cce-ui)
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)

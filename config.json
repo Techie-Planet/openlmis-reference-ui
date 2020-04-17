@@ -8,7 +8,7 @@
     "/openlmis-fulfillment-ui",
     "/openlmis-requisition-ui",
     "/openlmis-stockmanagement-ui",
-    "/mw-dhis2-integration-ui"
+    "/openlmis-cce-ui"
   ],
   "REPORTING_SERVICES": "requisitions",
   "requisitionWarningProgramCode": "tb",
