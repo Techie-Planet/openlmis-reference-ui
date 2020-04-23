@@ -1,0 +1,18 @@
+{
+    "cceInventoryList.addEquipment": "Add Equipment",
+    "cceInventoryList.cceInventory": "Equipment Inventory",
+    "cceInventoryList.facility": "Facility",
+    "cceInventoryList.program": "Program",
+    "cceInventoryList.serialNo": "Serial No.",
+    "cceInventoryList.makeModel": "Make/Model",
+    "cceInventoryList.type": "Type",
+    "cceInventoryList.functionalStatus": "Functional Status",
+    "cceInventoryList.lastUpdated": "Last Updated",
+    "cceInventoryList.yearInstalled": "Year Installed",
+    "cceInventoryList.referenceName": "Reference Name",
+    "cceInventoryList.rtmAlerts.title": "RTM Alerts",
+    "cceInventoryList.actions": "Actions",
+    "cceInventoryList.view": "View",
+    "cceInventoryList.noInventoryItems": "No inventory items found.",
+    "cceInventoryList.search": "Search"
+}
