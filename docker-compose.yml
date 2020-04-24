@@ -85,4 +85,4 @@ services:
 
   image:
     build: .
-    image: openlmis/covid-ui
+    image: openlmis/reference-instance-ui
