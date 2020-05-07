@@ -69,7 +69,7 @@ services:
       - '/openlmis-requisition-ui'
 
   ui-components:
-    image: openlmis/ui-components:7.2.2
+    image: openlmis/ui-components:7.2.3-SNAPSHOT
     volumes:
       - '/openlmis-ui-components'
 
