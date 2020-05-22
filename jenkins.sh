@@ -5,7 +5,7 @@ fi
 
 /usr/local/bin/docker-compose pull
 /usr/local/bin/docker-compose down --volumes
-/usr/local/bin/docker-compose run --entrypoint ./build.sh covid-ui
+/usr/local/bin/docker-compose run --entrypoint ./build.sh reference-instance-ui
 /usr/local/bin/docker-compose build image
 /usr/local/bin/docker-compose down --volumes
 
