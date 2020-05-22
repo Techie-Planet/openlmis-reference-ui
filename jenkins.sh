@@ -1,5 +1,5 @@
 if [ $COVID_ENV_DIRECTORY ]; then
-  echo "building image for production instance"
+  echo "building image for the $COVID_ENV_DIRECTORY instance"
   cp ./credentials/$COVID_ENV_DIRECTORY/.env .env
 fi
 
@@ -9,7 +9,7 @@ fi
 /usr/local/bin/docker-compose build image
 /usr/local/bin/docker-compose down --volumes
 
-if [ $COVID_ENV_DIRECTORY == 'covid-ref' ]; then
+if [ $COVID_ENV_DIRECTORY == "covid-ref" ]; then
   echo "pushing image for reference instance"
   docker tag openlmis/covid-ui:latest openlmis/covid-ui:${version}
   docker push openlmis/covid-ui:${version}
