@@ -1,0 +1,19 @@
+{
+    "cceInventoryItemDetails.district": "District",
+    "cceInventoryItemDetails.facility": "Facility",
+    "cceInventoryItemDetails.equipmentType": "Equipment Type",
+    "cceInventoryItemDetails.makeModel": "Make/Model",
+    "cceInventoryItemDetails.serialNumber": "Serial Number",
+    "cceInventoryItemDetails.equipmentHistory": "Equipment History",
+    "cceInventoryItemDetails.yearOfInstallation": "Year of Installation/Commission",
+    "cceInventoryItemDetails.source": "Source",
+    "cceInventoryItemDetails.yearOfWarrantyExpiry": "Year of Warranty Expiry",
+    "cceInventoryItemDetails.equipmentIdentification": "Equipment Identification",  
+    "cceInventoryItemDetails.close": "Close",
+    "cceInventoryItemDetails.additionalNotes": "Additional Notes",
+    "cceInventoryItemDetails.utilization": "Utilization",
+    "cceInventoryItemDetails.edit": "Edit",
+    "cceInventoryItemDetails.updateStatus": "Update Status",
+    "cceInventoryItemDetails.program": "Program",
+    "cceInventoryItemDetails.liters": "liters"
+}
