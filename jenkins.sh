@@ -1,6 +1,7 @@
 if [ $COVID_ENV_DIRECTORY ]; then
   echo "building image for the $COVID_ENV_DIRECTORY instance"
   cp ./credentials/$COVID_ENV_DIRECTORY/.env .env
+  cp ./credentials/$COVID_ENV_DIRECTORY/config.json config.json
 fi
 
 /usr/local/bin/docker-compose pull
