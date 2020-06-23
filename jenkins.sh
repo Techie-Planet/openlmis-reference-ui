@@ -10,7 +10,7 @@ fi
 /usr/local/bin/docker-compose build image
 /usr/local/bin/docker-compose down --volumes
 
-docker login -u DOCKERHUB_USER -p DOCKERHUB_PASSWORD
+docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
 if [ $COVID_ENV_DIRECTORY == "covid-ref" ]; then
   echo "pushing image for reference instance"
   docker tag openlmis/covid-ui:latest openlmis/covid-ui:${version}
