@@ -13,6 +13,8 @@
     "report.reports": "Reports",
     "report.viewReports": "View Reports",
     "report.xls": "XLS",
+    "report.facilityAssignmentConfigurationErrors": "Facility Assignment Configuration Errors",
+    "report.aggregateEquipmentStatusByFacility": "Aggregate Equipment Status by Facility",
     "report.superset.auth.pageRequiresAuthorization": "This page requires authorization in the reporting stack. If nothing shows up, you still can authorize manually by",
     "report.superset.auth.clickingHere": "clicking here",
     "report.superset.reportingRateAndTimeliness": "Reporting Rate and Timeliness",
