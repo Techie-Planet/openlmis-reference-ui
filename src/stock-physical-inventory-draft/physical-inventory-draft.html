@@ -66,7 +66,7 @@
                 <td ng-if="!vm.canEditLot(lineItem)">
                     {{lineItem.displayLotMessage}}
                 </td>
-                <td>{{lineItem.lot.expirationDate}}</td>
+                <td>{{lineItem.lot.expirationDate | date: 'dd/MM/yyyy'}}</td>
                 <!-- COV-149: ends here -->
                 <td align="right">{{lineItem.stockOnHand}}</td>
                 <td class="digit-cell" >
