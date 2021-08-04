@@ -81,7 +81,7 @@
                         {{lineItem.displayLotMessage}}
                     </td>
                     <!-- COV-149: ends here -->
-                    <td ng-show="vm.hasLot">{{lineItem.lot.expirationDate | date: 'dd/MM/yyyy'}}</td>
+                    <td ng-show="vm.hasLot">{{lineItem.lot.expirationDate}}</td>
                     <td align="right">{{lineItem.$previewSOH}}</td>
                     <td ng-show="vm.srcDstAssignments" openlmis-invalid="{{lineItem.$errors.assignmentInvalid ? 'openlmisForm.required' : '' | message}}">
                         <select ng-model="lineItem.assignment"
