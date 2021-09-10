@@ -27,7 +27,7 @@
 
         $stateProvider.state('openlmis.contactSupport', {
             label: 'openlmisSupport.contactSupport',
-            showInNavigation: true,
+            showInNavigation: false,
             priority: -999,
             externalUrl: 'https://openlmis.atlassian.net/servicedesk/customer/portal/40'
         });

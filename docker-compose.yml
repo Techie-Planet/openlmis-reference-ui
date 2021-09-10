@@ -1,7 +1,7 @@
 version: "2"
 services:
 
-  reference-instance-ui:
+  reference-ui:
     image: openlmis/dev-ui:9.0.1
     working_dir: /app
     volumes:
@@ -85,4 +85,4 @@ services:
 
   image:
     build: .
-    image: openlmis/covid-ui
+    image: openlmis/reference-ui
