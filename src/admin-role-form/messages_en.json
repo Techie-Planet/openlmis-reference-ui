@@ -68,5 +68,5 @@
     "adminRoleForm.stockStatusReportView": "View Stock Status Report",
     "adminRoleForm.stockoutsReportView": "View Stockout Report",
     "adminRoleForm.systemNotificationsManage": "Manage system notifications",
-    "adminRoleForm.lotsManage": "Manage lots"
+    "adminRoleForm.lotsManage": "Manage Lots/Batch Numbers"
 }

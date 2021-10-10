@@ -1,4 +1,4 @@
 {
-    "stockPhysicalInventoryDraft.alreadyExistingProducts": "The following lot codes are already assigned to existing products. Would you like to continue? ${lots}",
+    "stockPhysicalInventoryDraft.alreadyExistingProducts": "The following Lot/Batch Number are already assigned to existing products. Would you like to continue? ${lots}",
     "stockPhysicalInventoryDraft.yes": "Yes"
 }
