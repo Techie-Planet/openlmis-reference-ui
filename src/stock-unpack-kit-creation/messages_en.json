@@ -1,0 +1,5 @@
+{
+    "stockUnpackKitCreation.lotCode": "Lot/Batch Number",
+    "stockUnpackKitCreation.noLotDefined": "No Lot/Batch Number defined",
+    "stockUnpackKitCreation.productHasNoLots": "No Lot/Batch Number defined"
+}
