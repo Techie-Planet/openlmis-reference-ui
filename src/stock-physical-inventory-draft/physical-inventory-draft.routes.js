@@ -94,14 +94,13 @@
                             .values()
                             .value();
                         groups.forEach(function(group) {
-                            group = $filter('orderBy')(group, 'lot.expirationDate');
                             group.forEach(function(lineItem) {
                                 // COV-149: Added lot-management feature
                                 orderableGroupService.determineLotMessage(lineItem, group, true);
                                 // COV-149: ends here
                             });
                         });
-                        return groups;
+                        return $filter('orderBy')(groups, 'lot.expirationDate');
                     });
                 },
                 reasons: function(facility, program, stockReasonsFactory) {
