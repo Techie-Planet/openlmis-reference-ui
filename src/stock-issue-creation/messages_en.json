@@ -1,5 +1,6 @@
 {
     "stockIssueCreation.lotCode": "Lot/Batch Number",
     "stockIssueCreation.noLotDefined": "No Lot/Batch Number defined",
-    "stockIssueCreation.productHasNoLots": "No Lot/Batch Number defined"
+    "stockIssueCreation.productHasNoLots": "No Lot/Batch Number defined",
+    "stockIssueCreation.reasonComments": "Comments"
 }
