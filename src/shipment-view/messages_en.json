@@ -1,0 +1,5 @@
+{
+    "shipmentView.lotCode": "Lot/Batch Number",
+    "shipmentView.noLotDefined": "No Lot/Batch Number defined",
+    "shipmentView.productHasNoLots": "No Lot/Batch Number defined"
+}
