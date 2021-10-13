@@ -52,6 +52,7 @@
             <caption ng-if="!vm.displayItems.length">{{vm.key('noProducts') | message}}</caption>
             <thead>
                 <tr>
+                    <th>{{vm.key('date') | message}}</th>
                     <th>{{vm.key('productCode') | message}}</th>
                     <th>{{vm.key('product') | message}}</th>
                     <th ng-show="vm.hasLot">{{vm.key('lotCode') | message}}</th>
@@ -63,12 +64,15 @@
                     <th ng-if="vm.showReasonDropdown">{{vm.key('reasonComments') | message}}</th>
                     <th>{{vm.key('quantity') | message}}</th>
                     <th ng-if="vm.showVVMStatusColumn">{{vm.key('vvmStatus') | message}}</th>
-                    <th>{{vm.key('date') | message}}</th>
                     <th>{{vm.key('actions') | message}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="lineItem in vm.items">
+                    <td class="date-cell">
+                        <input id="lineItem.occurredDate" type="date" ng-model="lineItem.occurredDate"
+                            ng-change="vm.validateDate(lineItem)" max-date="vm.maxDate" required/>
+                    </td>
                     <td>{{lineItem.orderable.productCode}}</td>
                     <td>{{lineItem.orderable | productName}}</td>
                     <!-- COV-149: Added lot-management feature -->
@@ -112,10 +116,6 @@
                             ng-options="status as vm.getStatusDisplay(status) for status in vm.vvmStatuses"
                             placeholder="{{'stockAdjustmentCreation.selectStatus' | message}}">
                         </select>
-                    </td>
-                    <td class="date-cell">
-                        <input id="lineItem.occurredDate" type="date" ng-model="lineItem.occurredDate"
-                            ng-change="vm.validateDate(lineItem)" max-date="vm.maxDate" required/>
                     </td>
                     <td>
                         <button type="button" class="danger" ng-click="vm.remove(lineItem)">{{vm.key('remove') | message}}</button>
