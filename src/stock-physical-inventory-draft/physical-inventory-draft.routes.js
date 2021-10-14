@@ -100,7 +100,7 @@
                                 // COV-149: ends here
                             });
                         });
-                        return groups;//$filter('orderBy')(groups, 'lot.expirationDate');
+                        return groups;
                     });
                 },
                 reasons: function(facility, program, stockReasonsFactory) {
