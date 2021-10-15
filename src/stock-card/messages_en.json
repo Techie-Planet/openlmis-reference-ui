@@ -1,3 +1,4 @@
 {
-    "stockCard.lot": "Lot/Batch Number"
+    "stockCard.lot": "Lot/Batch Number",
+    "stockCard.manufacturer": "Manufacturer"
 }
