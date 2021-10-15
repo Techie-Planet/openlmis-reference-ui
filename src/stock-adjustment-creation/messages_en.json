@@ -3,5 +3,6 @@
     "stockAdjustmentCreation.lotCode": "Lot/Batch Number",
     "stockAdjustmentCreation.noLotDefined": "No Lot/Batch Number defined",
     "stockAdjustmentCreation.productHasNoLots": "No Lot/Batch Number defined",
-    "stockAdjustmentCreation.reasonComments": "Comments"
+    "stockAdjustmentCreation.reasonComments": "Comments",
+    "stockAdjustmentCreation.manufacturer": "Manufacturer"
 }
