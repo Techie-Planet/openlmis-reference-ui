@@ -1,4 +1,5 @@
 {
     "adminOrderableEdit.netContent": "Presentation (Doses/Vial)",
-    "adminOrderableEdit.name": "Product Name"
+    "adminOrderableEdit.name": "Product Name",
+    "adminOrderableEdit.productManufacturer": "Manufacturer"
 }
