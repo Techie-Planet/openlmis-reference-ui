@@ -19,6 +19,14 @@
     &.is-unserviceable::before {
         color: $gray;
     }
+    
+    &.is-installed::before {
+        color: $gray;
+    }
+    
+    &.is-awaiting-installation::before {
+        color: $gray;
+    }
 }
 
 .cce-inventory-item-update-status {
