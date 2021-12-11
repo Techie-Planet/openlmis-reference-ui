@@ -95,12 +95,20 @@
                             .value();
                         groups.forEach(function(group) {
                             group.sort(function(x, y) {
-                                if (x.lot === null) { return -1; }
-                                if (y.lot === null) { return 1; }
+                                if (x.lot === null) { 
+                                    return -1; 
+                                }
+                                if (y.lot === null) { 
+                                    return 1; 
+                                }
                                 var xdate = new Date(x.lot.expirationDate);
                                 var ydate = new Date(y.lot.expirationDate);
-                                if (xdate < ydate) { return -1; }
-                                if (xdate > ydate) { return 1; }
+                                if (xdate < ydate) { 
+                                    return -1; 
+                                }
+                                if (xdate > ydate) { 
+                                    return 1; 
+                                }
                                 return 0;
                             });
                         });
