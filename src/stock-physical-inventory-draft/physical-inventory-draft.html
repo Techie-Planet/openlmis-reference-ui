@@ -56,7 +56,7 @@
                 <td align="right"></td>
                 <td align="right"></td>
             </tr>
-            <tr ng-repeat="lineItem in lineItems | orderBy:'lot?lot.lotCode:\'\''" ng-repeat-end>
+            <tr ng-repeat="lineItem in lineItems | orderBy:'lot?lot.expirationDate:\'\''" ng-repeat-end>
                 <td>{{lineItems.length > 1 ? '' : lineItem.orderable.productCode}}</td>
                 <td>{{lineItems.length > 1 ? '' : (lineItem.orderable | productName)}}</td>
                 <td>{{lineItems.length > 1 ? '' : lineItem.orderable.extraData.productManufacturer}}</td>
