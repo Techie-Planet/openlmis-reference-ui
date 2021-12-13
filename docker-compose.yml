@@ -1,7 +1,7 @@
 version: "2"
 services:
   reference-ui:
-    image: openlmis/dev-ui:9.0.4-SNAPSHOT
+    image: openlmis/dev-ui:9.0.3
     working_dir: /app
     volumes:
       - '.:/app'
@@ -54,7 +54,7 @@ services:
     volumes:
       - '/openlmis-requisition-ui'
   stockmanagement-ui:
-    image: openlmis/stockmanagement-ui:2.1.1-RC1
+    image: openlmis/stockmanagement-ui:2.1.1
     volumes:
      - '/openlmis-stockmanagement-ui'
   cce-ui:
