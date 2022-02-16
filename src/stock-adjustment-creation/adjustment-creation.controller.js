@@ -81,6 +81,14 @@
         /**
          * @ngdoc property
          * @propertyOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name showUseBy
+         * @type {boolean}
+         */
+        vm.showUseBy = false;
+
+        /**
+         * @ngdoc property
+         * @propertyOf stock-adjustment-creation.controller:StockAdjustmentCreationController
          * @name showVVMStatusColumn
          * @type {boolean}
          *
@@ -321,6 +329,62 @@
         /**
          * @ngdoc method
          * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name clearProperty
+         *
+         * @description
+         * remove free text from given object.
+         *
+         * @param {Object} obj      given target to be changed.
+         * @param {String} property given property to be cleared.
+         */
+        vm.clearProperty = function(obj, property) {
+            if (obj) {
+                obj[property] = null;
+            }
+        };
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name submit
+         *
+         * @description
+         * Submit all added items.
+         */
+        vm.fetchLastUseByDate = function(lineItem) {
+
+            if (!lineItem.extraData) {
+                lineItem.extraData = {};
+            }
+
+            lineItem.extraData.useByFromParent = null;
+            lineItem.extraData.useByStatus = null;
+            lineItem.extraData.useBy = null;
+
+            if (lineItem.assignment && lineItem.orderable.extraData.enableUseBy) {
+                var programId = program.id;
+                var facilityId = lineItem.assignment.node.referenceId;
+                var orderableId = lineItem.orderable.id;
+                var lotId = lineItem.lot.id;
+
+                stockAdjustmentCreationService.getStockLatestUsebyDate(programId,
+                    facilityId, orderableId, lotId)
+                    .then(function(response) {
+                        var latestUseByDate = response.latestUseByDate;
+                        if (latestUseByDate) {
+                            lineItem.extraData.useByFromParent = true;
+                            lineItem.extraData.useByStatus = 'Thawed';
+                            lineItem.extraData.useBy = latestUseByDate;
+                        }
+                    }, function(errorResponse) {
+                        console.log(errorResponse);
+                    });
+            }
+        };
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
          * @name submit
          *
          * @description
@@ -551,6 +615,7 @@
                         });
                         return addedLineItems;
                     });
+
                     stockAdjustmentCreationService.submitAdjustments(
                         program.id, facility.id, addedLineItems, adjustmentType
                     )
@@ -660,6 +725,7 @@
             vm.facility = facility;
             vm.reasons = reasons;
             vm.showReasonDropdown = (adjustmentType.state !== ADJUSTMENT_TYPE.KIT_UNPACK.state);
+            vm.showUseBy = (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state);
             vm.srcDstAssignments = srcDstAssignments;
             vm.addedLineItems = $stateParams.addedLineItems || [];
             $stateParams.displayItems = displayItems;
