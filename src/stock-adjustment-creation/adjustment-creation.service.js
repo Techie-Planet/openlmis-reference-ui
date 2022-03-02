@@ -44,12 +44,19 @@
 
         this.submitAdjustments = submitAdjustments;
 
-        function getStockLatestUsebyDate(programId, facilityId, orderableId, lotId) {
+        function getStockLatestUsebyDate(programId, 
+                                        facilityId, 
+                                        orderableId, 
+                                        lotId,
+                                        reasonId,
+                                        destinationFacility) {
             return stockLatestUsebyResource.get({
                 program: programId,
                 facility: facilityId,
-                orderableIds: orderableId,
-                orderableLotsIds: lotId
+                orderableId: orderableId,
+                orderableLotsId: lotId,
+                reasonId: reasonId,
+                destinationFacilityId: destinationFacilityId
             }).$promise;
         }
 

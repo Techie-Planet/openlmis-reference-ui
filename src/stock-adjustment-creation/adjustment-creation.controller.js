@@ -357,6 +357,10 @@
                 lineItem.extraData = {};
             }
 
+            if(adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state){
+                return;
+            }
+
             lineItem.extraData.useByFromParent = null;
             lineItem.extraData.useByStatus = null;
             lineItem.extraData.useBy = null;
@@ -366,9 +370,11 @@
                 var facilityId = lineItem.assignment.node.referenceId;
                 var orderableId = lineItem.orderable.id;
                 var lotId = lineItem.lot.id;
+                var reasonId = lineItem.reason.id;
+                var destinationFacility = facility.id;
 
                 stockAdjustmentCreationService.getStockLatestUsebyDate(programId,
-                    facilityId, orderableId, lotId)
+                    facilityId, orderableId, lotId, reasonId, destinationFacility)
                     .then(function(response) {
                         var latestUseByDate = response.latestUseByDate;
                         if (latestUseByDate) {
@@ -725,7 +731,8 @@
             vm.facility = facility;
             vm.reasons = reasons;
             vm.showReasonDropdown = (adjustmentType.state !== ADJUSTMENT_TYPE.KIT_UNPACK.state);
-            vm.showUseBy = (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state);
+            vm.showUseBy = (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state ||  
+                            adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state);
             vm.srcDstAssignments = srcDstAssignments;
             vm.addedLineItems = $stateParams.addedLineItems || [];
             $stateParams.displayItems = displayItems;
