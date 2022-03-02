@@ -44,12 +44,7 @@
 
         this.submitAdjustments = submitAdjustments;
 
-        function getStockLatestUsebyDate(programId, 
-                                        facilityId, 
-                                        orderableId, 
-                                        lotId,
-                                        reasonId,
-                                        destinationFacility) {
+        function getStockLatestUsebyDate(programId, facilityId, orderableId, lotId, reasonId, destinationFacilityId) {
             return stockLatestUsebyResource.get({
                 program: programId,
                 facility: facilityId,
