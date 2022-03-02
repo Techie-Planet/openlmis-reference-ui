@@ -365,19 +365,17 @@
             lineItem.extraData.useByStatus = null;
             lineItem.extraData.useBy = null;
             var lotIdAvailable = lineItem.lot || lineItem.lot.id;
-            var reasonIdAvailable = lineItem.reason || lineItem.reason.id;
 
             if (lineItem.assignment && lineItem.orderable.extraData.enableUseBy
-                && lotIdAvailable && reasonIdAvailable) {
+                && lotIdAvailable) {
                 var programId = program.id;
                 var facilityId = lineItem.assignment.node.referenceId;
                 var orderableId = lineItem.orderable.id;
                 var lotId = lineItem.lot.id;
-                var reasonId = lineItem.reason.id;
                 var destinationFacility = facility.id;
 
                 stockAdjustmentCreationService.getStockLatestUsebyDate(programId,
-                    facilityId, orderableId, lotId, reasonId, destinationFacility)
+                    facilityId, orderableId, lotId, destinationFacility)
                     .then(function(response) {
                         var latestUseByDate = response.latestUseByDate;
                         if (latestUseByDate) {
