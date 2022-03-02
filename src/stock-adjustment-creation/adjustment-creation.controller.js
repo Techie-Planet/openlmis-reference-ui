@@ -367,7 +367,8 @@
             var lotIdAvailable = lineItem.lot || lineItem.lot.id;
             var reasonIdAvailable = lineItem.reason || lineItem.reason.id;
 
-            if (lineItem.assignment && lineItem.orderable.extraData.enableUseBy && lotIdAvailable && reasonIdAvailable) {
+            if (lineItem.assignment && lineItem.orderable.extraData.enableUseBy 
+                && lotIdAvailable && reasonIdAvailable) {
                 var programId = program.id;
                 var facilityId = lineItem.assignment.node.referenceId;
                 var orderableId = lineItem.orderable.id;
