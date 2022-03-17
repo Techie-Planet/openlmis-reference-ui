@@ -11,5 +11,6 @@
     "/openlmis-stockmanagement-ui",
     "/openlmis-offline-ui",
     "/one-network-integration-ui"
-  ]
+  ],
+  "showRequisitionLessOrder": "true"
 }
