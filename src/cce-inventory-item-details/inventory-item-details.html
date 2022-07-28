@@ -1,0 +1,78 @@
+<div class="modal inventory-item-details" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">
+                  {{vm.inventoryItem.referenceName}}
+              </h1>
+            </div>
+            <div class="modal-body" ng-if="vm.inventoryItem">
+                <aside class="cce-inventory-item-status {{vm.getFunctionalStatusClass()}}">
+                    <p>{{vm.getFunctionalStatusLabel() | message}}</p>
+                    <p>
+                        <em>{{vm.inventoryItem.lastModifier.firstName}} {{vm.inventoryItem.lastModifier.lastName}}</em>
+                        {{vm.inventoryItem.modifiedDate | date:'yy/MM/dd HH:mm:ss'}}
+                    </p>
+                    <button ng-show="vm.userHasRightToEdit" id="status-update" ng-click="vm.goToStatusUpdate(vm.inventoryItem)">
+                        {{'cceInventoryItemDetails.updateStatus' | message}}
+                    </button>
+                </aside>
+                <dl class="horizontal-list">
+                    <dt>{{'cceInventoryItemDetails.district' | message}}</dt>
+                    <dd>{{vm.inventoryItem.facility.geographicZone.name}}</dd>
+                    <dt>{{'cceInventoryItemDetails.facility' | message}}</dt>
+                    <dd>{{vm.inventoryItem.facility.name}}</dd>
+                    <dt>{{'cceInventoryItemDetails.program' | message}}</dt>
+                    <dd id="program">{{vm.inventoryItem.program.name}}</dd>
+                    <dt>{{'cceInventoryItemDetails.equipmentType' | message}}</dt>
+                    <dd>{{vm.inventoryItem.catalogItem.type}}</dd>
+                </dl>
+
+                <div class="sub-heading">
+                    <h3 class="title">
+                        {{'cceInventoryItemDetails.equipmentIdentification' | message}}
+                    </h3>
+                </div>
+                <dl class="horizontal-list">
+                    <dt>{{'cceInventoryItemDetails.makeModel' | message}}</dt>
+                    <dd>{{vm.inventoryItem.catalogItem | makeModel}}</dd>
+                    <dt>{{'cceInventoryItemDetails.serialNumber' | message}}</dt>
+                    <dd>{{vm.inventoryItem.equipmentTrackingId}}</dd>
+                </dl>
+
+                <div class="sub-heading">
+                    <h3 class="title">
+                        {{'cceInventoryItemDetails.equipmentHistory' | message}}
+                    </h3>
+                </div>
+                <dl class="horizontal-list">
+                    <dt>{{'cceInventoryItemDetails.utilization' | message}}</dt>
+                    <dd id="utilization">{{vm.getUtilizationStatusLabel(vm.inventoryItem.utilization) | message}}</dd>
+                    <dt>{{'cceInventoryItemDetails.yearOfInstallation' | message}}</dt>
+                    <dd>{{vm.inventoryItem.yearOfInstallation}}</dd>
+                </dl>
+                <dl class="horizontal-list" id="source" ng-if="vm.inventoryItem.source">
+                    <dt>{{'cceInventoryItemDetails.source' | message}}</dt>
+                    <dd>{{vm.inventoryItem.source}}</dd>
+                </dl>
+                <dl class="horizontal-list" id="year-of-warranty-expiry"
+                    ng-if="vm.inventoryItem.yearOfWarrantyExpiry">
+                    <dt>{{'cceInventoryItemDetails.yearOfWarrantyExpiry' | message}}</dt>
+                    <dd>{{vm.inventoryItem.yearOfWarrantyExpiry}}</dd>
+                </dl>
+                <dl id="additional-notes" ng-if="vm.inventoryItem.additionalNotes">
+                    <dt>{{'cceInventoryItemDetails.additionalNotes' | message}}</dt>
+                    <dd>{{vm.inventoryItem.additionalNotes}}</dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button id="close" ui-sref="openlmis.cce.inventory">
+                    {{'cceInventoryItemDetails.close' | message}}
+                </button>
+                <button ng-show="vm.userHasRightToEdit" id="edit" class="primary" ng-click="vm.goToEditPage(vm.inventoryItem)">
+                    {{'cceInventoryItemDetails.edit' | message}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

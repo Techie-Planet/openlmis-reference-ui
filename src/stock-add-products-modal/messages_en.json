@@ -1,0 +1,7 @@
+{
+    "stockAddProductsModal.newNotExpirationDate": "Expiration Date",
+    "stockAddProductsModal.newLotCode": "Lot/Batch Number",
+    "stockAddProductsModal.lotCode": "Lot/Batch Number",
+    "stockAddProductsModal.noLotDefined": "No Lot/Batch Number defined",
+    "stockAddProductsModal.productHasNoLots": "No Lot/Batch Number defined"
+}

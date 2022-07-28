@@ -1,0 +1,10 @@
+{
+    "stockAdjustmentCreation.newNotExpirationDate": "Expiration Date",
+    "stockAdjustmentCreation.lotCode": "Lot/Batch Number",
+    "stockAdjustmentCreation.noLotDefined": "No Lot/Batch Number defined",
+    "stockAdjustmentCreation.productHasNoLots": "No Lot/Batch Number defined",
+    "stockAdjustmentCreation.reasonComments": "Comments",
+    "stockAdjustmentCreation.manufacturer": "Manufacturer",
+    "stockAdjustmentCreation.useBy": "Use By",
+    "stockAdjustmentCreation.useByStatus": "Use By Status"
+}

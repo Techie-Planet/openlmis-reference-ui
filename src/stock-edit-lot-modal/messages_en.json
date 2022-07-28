@@ -1,0 +1,10 @@
+{
+    "stockEditLotModal.cancel": "Cancel",
+    "stockEditLotModal.save": "Save",
+    "stockEditLotModal.title": "Edit Lot/Batch Number",
+    "stockEditLotModal.lotCode": "Lot/Batch Number",
+    "stockEditLotModal.expirationDate": "Expiration date",
+    "stockEditLotModal.expirationDateInvalid": "Lot/Batch Number expiration date should be a future date.",
+    "stockEditLotModal.expirationDateInvalidForLotCode": "There exists another expiration date for this code.",
+    "stockEditLotModal.lotCodeInvalid": "This Lot/Batch Number already exists."
+}

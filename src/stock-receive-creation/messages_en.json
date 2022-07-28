@@ -1,0 +1,6 @@
+{
+    "stockReceiveCreation.lotCode": "Lot/Batch Number",
+    "stockReceiveCreation.noLotDefined": "No Lot/Batch Number defined",
+    "stockReceiveCreation.productHasNoLots": "No Lot/Batch Number defined",
+    "stockReceiveCreation.reasonComments": "Comments"
+}

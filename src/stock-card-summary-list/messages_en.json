@@ -1,0 +1,6 @@
+{
+    "stockCardSummaryList.lotCode": "Lot/Batch Number",
+    "stockCardSummaryList.noLotDefined": "No Lot/Batch Number defined",
+    "stockCardSummaryList.productHasNoLots": "No Lot/Batch Number defined",
+    "stockCardSummaryList.manufacturer": "Manufacturer"
+}

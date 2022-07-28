@@ -1,0 +1,14 @@
+{
+  "orderedBuildDirectories": [
+    "/openlmis-ui-components",
+    "/openlmis-ui-layout",
+    "/openlmis-auth-ui",
+    "/openlmis-referencedata-ui",
+    "/openlmis-report-ui",
+    "/openlmis-fulfillment-ui",
+    "/openlmis-requisition-ui",
+    "/openlmis-stockmanagement-ui",
+    "/openlmis-cce-ui",
+    "/pcmt-integration-ui"
+  ]
+}
