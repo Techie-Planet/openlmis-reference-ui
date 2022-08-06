@@ -1,0 +1,9 @@
+{
+    "adminLotEdit.lotCode": "Lot/Batch Number",
+    "adminLotEdit.editLot.title": "Edit Lot/Batch Number: \"${lot}\"",
+    "adminLotEdit.editLot": "Edit Lot/Batch Number",
+    "adminLotEdit.save.confirmationQuestion": "Do you want to edit this Lot/Batch Number?",
+    "adminLotsEdit.lotNotFound": "Lot/Batch Number not found",
+    "adminLotEdit.save.success": "Lot/Batch Number saved successfully",
+    "adminLotEdit.save.failure": "Failed to save Lot/Batch Number"
+}
