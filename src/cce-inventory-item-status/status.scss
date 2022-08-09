@@ -1,0 +1,63 @@
+.cce-inventory-item-status-box {
+    display: flex;
+}
+
+.cce-inventory-item-status {
+    @include icon('circle');
+
+    &::before {
+        margin-right: 0.5em;
+    }
+
+    &.is-functioning::before {
+        color: $green;
+    }
+
+    &.is-awaiting-repair::before {
+        color: $red;
+    }
+    &.is-unserviceable::before {
+        color: $gray;
+    }
+}
+
+.cce-inventory-item-update-status {
+    @include icon('edit');
+    color: $dark-gray;
+    padding-left: 0.5em;
+}
+
+.cce-alert-date {
+    display: block;
+}
+
+.rtm-alert-status-active {
+    @include icon('bell');
+    margin-left: auto;
+    padding-left: 0.5em;
+}
+
+.rtm-alert-status-inactive {
+    @include icon('bell-o');
+    margin-left: auto;
+    padding-left: 0.5em;
+}
+
+.rtm-alert-status-unavailable {
+    margin-left: auto;
+}
+
+.cce-alert-date {
+    display: block;
+}
+
+.cce-alert-entry > button {
+    float: right;
+    margin-left: 0.5em;
+}
+
+#cce-active-alerts > dt > button {
+    clear: left;
+    margin-top: 0.5em;
+    font-weight: normal;
+}
