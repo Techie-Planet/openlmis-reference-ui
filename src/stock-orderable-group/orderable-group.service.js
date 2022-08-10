@@ -259,7 +259,7 @@
          */
         function areOrderablesUseVvm(orderableGroups) {
             var groupsWithVVM = orderableGroups.filter(filterOrderablesThatUseVvm);
-            console.log('USE VM DEBUG', groupsWithVVM);
+            console.log('USE VM DEBUG', orderableGroups, groupsWithVVM);
             return groupsWithVVM.length > 0;
         }
 
