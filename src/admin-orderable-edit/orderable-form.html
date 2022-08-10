@@ -6,7 +6,11 @@
     <label for="productManufacturer">{{'adminOrderableEdit.productManufacturer' | message}}</label>
     <input id="productManufacturer" type="text" ng-model="vm.orderable.extraData.productManufacturer" />
     <label for="vvmStatus" class="checkbox">
-        <input id="vvmStatus" type="checkbox" ng-model="vm.orderable.extraData.useVVM" value="'true'"/>
+        <input id="vvmStatus" type="checkbox" 
+                ng-model="vm.orderable.extraData.useVVM" 
+                ng-init="vm.orderable.extraData.useVVM='true'" 
+                ng-true-value="vm.orderable.extraData.useVVM='true'" 
+                ng-false-value="vm.orderable.extraData.useVVM='false'"/>
         {{'adminOrderableEdit.useVVM' | message}}
     </label>
     <label for="description">{{'adminOrderableEdit.description' | message}}</label>
