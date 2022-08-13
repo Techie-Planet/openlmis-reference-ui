@@ -1,0 +1,10 @@
+{
+    "openlmisFacilityProgramSelect.facility": "Facility",
+    "openlmisFacilityProgramSelect.facilityType": "Facility Type",
+    "openlmisFacilityProgramSelect.myFacility": "My Facility",
+    "openlmisFacilityProgramSelect.program": "Program",
+    "openlmisFacilityProgramSelect.supervisedFacility": "Supervised Facility",
+    "openlmisFacilityProgramSelect.selectFacility": "Select Facility",
+    "openlmisFacilityProgramSelect.selectProgram": "Select Program",
+    "openlmisFacilityProgramSelect.type": "Type"
+}
