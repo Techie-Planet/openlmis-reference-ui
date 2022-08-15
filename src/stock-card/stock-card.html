@@ -40,6 +40,10 @@
       <strong>{{'stockCard.expiryDate' | message}}</strong>
       {{vm.stockCard.lot.expirationDate | openlmisDate}}
     </li>
+    <li>
+      <strong>{{'stockCard.vvmStatus' | message}}</strong>
+      {{vm.stockCard.extraData.vvmStatus}}
+    </li>
   </ul>
 </aside>
 
@@ -53,6 +57,7 @@
       <th>{{'stockCard.to' | message}}</th>
       <th>{{'stockCard.reason' | message}}</th>
       <th>{{'stockCard.adjustment' | message}}</th>
+      <th>{{'stockCard.vvmStatus' | message}}</th>
       <th>{{'stockCard.soh' | message}}</th>
       <th>{{'stockCard.signature' | message}}</th>
     </tr>
@@ -72,6 +77,7 @@
         {{ vm.getReason(lineItem) }}
       </td>
       <td align="right">{{lineItem.quantity}}</td>
+      <td align="right">{{lineItem.extraData.vvmStatus}}</td>
       <td align="right">{{lineItem.stockOnHand}}</td>
       <td>{{lineItem.signature}}</td>
     </tr>

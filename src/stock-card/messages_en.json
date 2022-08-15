@@ -1,4 +1,5 @@
 {
     "stockCard.lot": "Lot/Batch Number",
-    "stockCard.manufacturer": "Manufacturer"
+    "stockCard.manufacturer": "Manufacturer",
+    "stockCard.vvmStatus": "VVM Status"
 }
