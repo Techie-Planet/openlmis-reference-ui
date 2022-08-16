@@ -82,7 +82,7 @@
                 <td>{{fulfills.lot ? (fulfills.lot.expirationDate | openlmisDate) : ''}}</td>
                 <td>{{fulfills.occurredDate | openlmisDate}}</td>
                 <td>{{fulfills.stockOnHand}}</td>
-                <td>{{fulfills.extraData.vvmStatus}}</td>
+                <td>{{fulfills.extraData && fulfills.extraData.vvmStatus ? fulfills.extraData.vvmStatus : ''}}</td>
                 <td>
                     <button ng-if="fulfills.stockCard" type="button" ng-click="vm.viewSingleCard(fulfills.stockCard.id)" class="primary">
                         {{'stockCardSummaryList.view'| message}}
