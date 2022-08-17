@@ -26,21 +26,16 @@
      */
     angular
         .module('requisition-initiate')
-        .service('supplyLineByFaciltyProgram', service);
+        .service('supplyLineByFaciltyProgramService', service);
 
     service.$inject = [
-        'facilityService', 'SupervisoryNodeResource', 'SupplyLineResource'
+        '$q', 'facilityService', 'SupervisoryNodeResource', 'SupplyLineResource'
     ];
 
-    function service(facilityService, SupervisoryNodeResource, SupplyLineResource) {
+    function service($q, facilityService, SupervisoryNodeResource, SupplyLineResource) {
 
         var supervisoryNodeResource = new SupervisoryNodeResource();
         var supplyLineResource = new SupplyLineResource();
-
-        this.get = get;
-        this.create = create;
-        this.update = update;
-        this.send = send;
         this.getSupplyLineData = getSupplyLineData;
 
         function getSupplyLineData(selectedProgram, selectedRequestingFacility, setSupplyingFacilityOptions) {
@@ -49,31 +44,43 @@
                     programId: selectedProgram,
                     facilityId: selectedRequestingFacility
                 })
-                    .then((page) => {
-                        const nodes = page.content;
-    
+                    .then(function(page) {
+                        var nodes = page.content;
+
                         if (nodes.length > 0) {
-                            Promise.all(nodes.map((node) => (
+                            $q.all(nodes.map(function(node) {
                                 supplyLineResource.query({
                                     programId: selectedProgram,
                                     supervisoryNodeId: node.id
-                                })
-                            )))
-                                .then((results) => {
-                                    const supplyLines = _.flatten(results.map((it) => (it.content)));
-                                    const facilityIds = _.uniq(supplyLines.map((it) => (it.supplyingFacility.id)));
-                                    const facSNMap = {}
-                                    supplyLines.forEach(it => {
+                                });
+                            }))
+                                .then(function(results) {
+                                    var supplyLines = _.flatten(results.map(function(it) {
+                                        return it.content;
+                                    }));
+
+                                    var facilityIds = _.uniq(supplyLines.map(function(it) {
+                                        return it.supplyingFacility.id;
+                                    }));
+
+                                    var facSNMap = {};
+                                    angular.forEach(supplyLines, function(it) {
                                         facSNMap[it.supplyingFacility.id] = it.supervisoryNode.id;
                                     });
-    
+
                                     if (facilityIds.length > 0) {
                                         facilityService.query({
                                             id: facilityIds
                                         })
-                                            .then((resp) => {
-                                                const facilities = resp.content;
-                                                setSupplyingFacilityOptions(_.map(facilities, facility => ({ name: facility.name, value: facility.id, sNId: facSNMap[facility.id] })));
+                                            .then(function(resp) {
+                                                var facilities = resp.content;
+                                                setSupplyingFacilityOptions(_.map(facilities, function(facility) {
+                                                    return {
+                                                        name: facility.name,
+                                                        value: facility.id,
+                                                        sNId: facSNMap[facility.id]
+                                                    };
+                                                }));
                                             });
                                     } else {
                                         setSupplyingFacilityOptions([]);

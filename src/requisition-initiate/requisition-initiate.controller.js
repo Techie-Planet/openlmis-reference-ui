@@ -31,12 +31,13 @@
 
     RequisitionInitiateController.$inject = [
         'requisitionService', '$state', 'loadingModalService', 'notificationService', 'REQUISITION_RIGHTS',
-        'permissionService', 'authorizationService', '$stateParams', 'periods', 'canInitiateRnr', 'UuidGenerator'
+        'permissionService', 'authorizationService', '$stateParams', 'periods', 'canInitiateRnr', 'UuidGenerator',
+        'supplyLineByFaciltyProgramService'
     ];
 
     function RequisitionInitiateController(requisitionService, $state, loadingModalService, notificationService,
                                            REQUISITION_RIGHTS, permissionService, authorizationService, $stateParams,
-                                           periods, canInitiateRnr, UuidGenerator) {
+                                           periods, canInitiateRnr, UuidGenerator, supplyLineByFaciltyProgramService) {
 
         var vm = this,
             uuidGenerator = new UuidGenerator(),
@@ -47,6 +48,28 @@
         vm.initRnr = initRnr;
         vm.periodHasRequisition = periodHasRequisition;
         vm.goToRequisition = goToRequisition;
+
+        /**
+         * @ngdoc property
+         * @propertyOf requisition-initiate.controller:RequisitionInitiateController
+         * @name supplylingfacilities
+         * @type {List}
+         *
+         * @description
+         * Holds an array of supplying facilities
+         */
+        vm.supplylingfacilities = [];
+
+        /**
+         * @ngdoc property
+         * @propertyOf requisition-initiate.controller:RequisitionInitiateController
+         * @name seletedSupplylingfacility
+         * @type {Object}
+         *
+         * @description
+         * Holds the selected supplying facilities
+         */
+        vm.seletedSupplylingfacility = undefined;
 
         /**
          * @ngdoc property
@@ -108,6 +131,11 @@
          * status.
          */
         function loadPeriods() {
+            supplyLineByFaciltyProgramService.getSupplyLineData(
+                vm.program.id,
+                vm.facility.id,
+                setSupplyingFacilityOptions
+            );
             $state.go('openlmis.requisitions.initRnr', {
                 supervised: vm.isSupervised,
                 program: vm.program.id,
@@ -116,6 +144,18 @@
             }, {
                 reload: true
             });
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf requisition-initiate.controller:RequisitionInitiateController
+         * @name setSupplyingFacilityOptions
+         *
+         * @description
+         * Set Supplying Facilities
+         */
+        function setSupplyingFacilityOptions(supplylingfacilities) {
+            vm.supplylingfacilities = supplylingfacilities;
         }
 
         /**
