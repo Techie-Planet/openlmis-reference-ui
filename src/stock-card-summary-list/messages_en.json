@@ -3,5 +3,6 @@
     "stockCardSummaryList.noLotDefined": "No Lot/Batch Number defined",
     "stockCardSummaryList.productHasNoLots": "No Lot/Batch Number defined",
     "stockCardSummaryList.manufacturer": "Manufacturer",
-    "stockCardSummaryList.vvmStatus": "VVM Status"
+    "stockCardSummaryList.vvmStatus": "VVM Status",
+    "stockCardSummaryList.noVVMStatus": " "
 }

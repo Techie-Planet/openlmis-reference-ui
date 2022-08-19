@@ -13,11 +13,11 @@
 
   <ul>
     <li>
-      <strong>{{'stockCard.productCode'|message}}</strong>
+      <strong>{{'stockCard.productCode'| message}}</strong>
       {{vm.stockCard.orderable.productCode}}
     </li>
     <li>
-      <strong>{{'stockCard.manufacturer'|message}}</strong>
+      <strong>{{'stockCard.manufacturer'| message}}</strong>
       {{vm.stockCard.orderable.extraData.productManufacturer}}
     </li>
     <li>
@@ -42,7 +42,7 @@
     </li>
     <li>
       <strong>{{'stockCard.vvmStatus' | message}}</strong>
-      {{vm.stockCard.extraData && vm.stockCard.extraData.vvmStatus ? vm.stockCard.extraData.vvmStatus : ''}}
+      {{ vm.getProductVVM(vm.stockCard) }}
     </li>
   </ul>
 </aside>
@@ -77,7 +77,9 @@
         {{ vm.getReason(lineItem) }}
       </td>
       <td align="right">{{lineItem.quantity}}</td>
-      <td align="right">{{lineItem.extraData && lineItem.extraData.vvmStatus ? lineItem.extraData.vvmStatus : ''}}</td>
+      <td align="center">
+        {{ vm.getLineItemVVMStatus(lineItem) }}
+      </td>
       <td align="right">{{lineItem.stockOnHand}}</td>
       <td>{{lineItem.signature}}</td>
     </tr>
