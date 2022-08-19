@@ -22,8 +22,8 @@
     <br/><br/>
     <label>{{'Supplyling Facility'}}</label>
     <select id="supplylingfacility" ng-model="vm.seletedSupplylingfacility"
-        no-auto-select="true"
-        ng-options="sFacility.sNId as sFacility.name for sFacility in vm.supplylingfacilities | unique:'sNId' | orderBy:'name' track by sNId"
+        no-auto-select="false"
+        ng-options="sFacility as sFacility.name for sFacility in vm.supplylingfacilities"
         placeholder="{{'Select Supplyling Facility'}}">
     </select>
 </form>

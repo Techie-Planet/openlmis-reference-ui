@@ -156,7 +156,7 @@
          */
         function initRnr(selectedPeriod) {
             var user = authorizationService.getUser();
-
+            var superVisoryNodeId = vm.seletedSupplylingfacility;
             vm.error = '';
 
             loadingModalService.open();
@@ -172,7 +172,7 @@
                         selectedPeriod.id,
                         vm.emergency,
                         key,
-                        vm.seletedSupplylingfacility
+                        superVisoryNodeId.sNId
                     )
                         .then(function(data) {
                             goToInitiatedRequisition(data);
