@@ -51,6 +51,8 @@ describe('RequisitionInitiateController', function() {
                 facility: this.facility.id
             };
 
+            this.supplyingFacilities = [];
+
             this.requisition = new RequisitionDataBuilder()
                 .withProcessingPeriod(this.periods[0])
                 .withProgram(this.programs[0])
@@ -74,7 +76,8 @@ describe('RequisitionInitiateController', function() {
             this.vm = $injector.get('$controller')('RequisitionInitiateController', {
                 periods: this.periods,
                 $stateParams: this.$stateParams,
-                canInitiateRnr: this.canInitiateRnr
+                canInitiateRnr: this.canInitiateRnr,
+                supplyingFacilities: this.supplyingFacilities
             });
         });
     });
@@ -125,7 +128,7 @@ describe('RequisitionInitiateController', function() {
 
         expect(this.requisitionService.initiate)
             .toHaveBeenCalledWith(this.vm.facility.id, this.vm.program.id, this.periods[0].id,
-                this.vm.emergency, this.key);
+                this.vm.emergency, this.key, undefined);
     });
 
     it('should display error when user has no right to init requisition', function() {

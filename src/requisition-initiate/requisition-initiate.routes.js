@@ -56,6 +56,15 @@
                         );
                     }
                     return false;
+                },
+                supplyingFacilities: function(supplyLineByFaciltyProgramService, $stateParams) {
+                    if ($stateParams.program && $stateParams.facility && supplyLineByFaciltyProgramService) {
+                        return supplyLineByFaciltyProgramService.getSupplyLineData(
+                            $stateParams.program,
+                            $stateParams.facility
+                        );
+                    }
+                    return undefined;
                 }
             }
         });

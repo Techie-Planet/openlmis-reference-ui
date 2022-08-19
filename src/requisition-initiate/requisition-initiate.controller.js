@@ -32,12 +32,12 @@
     RequisitionInitiateController.$inject = [
         'requisitionService', '$state', 'loadingModalService', 'notificationService', 'REQUISITION_RIGHTS',
         'permissionService', 'authorizationService', '$stateParams', 'periods', 'canInitiateRnr', 'UuidGenerator',
-        'supplyLineByFaciltyProgramService'
+        'supplyingFacilities'
     ];
 
     function RequisitionInitiateController(requisitionService, $state, loadingModalService, notificationService,
                                            REQUISITION_RIGHTS, permissionService, authorizationService, $stateParams,
-                                           periods, canInitiateRnr, UuidGenerator, supplyLineByFaciltyProgramService) {
+                                           periods, canInitiateRnr, UuidGenerator, supplyingFacilities) {
 
         var vm = this,
             uuidGenerator = new UuidGenerator(),
@@ -116,6 +116,7 @@
             vm.emergency = $stateParams.emergency === 'true';
             vm.periods = periods;
             vm.canInitiateRnr = canInitiateRnr;
+            vm.supplylingfacilities = supplyingFacilities;
         }
 
         /**
@@ -131,11 +132,6 @@
          * status.
          */
         function loadPeriods() {
-            supplyLineByFaciltyProgramService.getSupplyLineData(
-                vm.program.id,
-                vm.facility.id,
-                setSupplyingFacilityOptions
-            );
             $state.go('openlmis.requisitions.initRnr', {
                 supervised: vm.isSupervised,
                 program: vm.program.id,
@@ -144,18 +140,6 @@
             }, {
                 reload: true
             });
-        }
-
-        /**
-         * @ngdoc method
-         * @methodOf requisition-initiate.controller:RequisitionInitiateController
-         * @name setSupplyingFacilityOptions
-         *
-         * @description
-         * Set Supplying Facilities
-         */
-        function setSupplyingFacilityOptions(supplylingfacilities) {
-            vm.supplylingfacilities = supplylingfacilities;
         }
 
         /**
@@ -182,7 +166,14 @@
                 facilityId: vm.facility.id
             })
                 .then(function() {
-                    requisitionService.initiate(vm.facility.id, vm.program.id, selectedPeriod.id, vm.emergency, key)
+                    requisitionService.initiate(
+                        vm.facility.id,
+                        vm.program.id,
+                        selectedPeriod.id,
+                        vm.emergency,
+                        key,
+                        vm.seletedSupplylingfacility
+                    )
                         .then(function(data) {
                             goToInitiatedRequisition(data);
                         })

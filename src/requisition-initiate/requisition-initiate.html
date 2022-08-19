@@ -20,11 +20,12 @@
     </fieldset>
     <input type="submit" value="{{'requisitionInitiate.search'|message}}"/>
     <br/><br/>
-    <label for="supplylingfacility">{{'Supplyling Facility'}}</label>
-    <select id="supplylingfacility"
-        ng-model="vm.seletedSupplylingfacility"
-        ng-options="facility as facility.name for facility in vm.supplylingfacilities"
-        placeholder="{{'Select Supplyling Facility'}}"></select>
+    <label>{{'Supplyling Facility'}}</label>
+    <select id="supplylingfacility" ng-model="vm.seletedSupplylingfacility"
+        no-auto-select="true"
+        ng-options="sFacility.sNId as sFacility.name for sFacility in vm.supplylingfacilities | unique:'sNId' | orderBy:'name' track by sNId"
+        placeholder="{{'Select Supplyling Facility'}}">
+    </select>
 </form>
 <section class="openlmis-table-container">
     <table>

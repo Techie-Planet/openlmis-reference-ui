@@ -38,18 +38,17 @@
         var supplyLineResource = new SupplyLineResource();
         this.getSupplyLineData = getSupplyLineData;
 
-        function getSupplyLineData(selectedProgram, selectedRequestingFacility, setSupplyingFacilityOptions) {
+        function getSupplyLineData(selectedProgram, selectedRequestingFacility) {
             if (selectedProgram && selectedRequestingFacility) {
-                supervisoryNodeResource.query({
+                return supervisoryNodeResource.query({
                     programId: selectedProgram,
                     facilityId: selectedRequestingFacility
                 })
                     .then(function(page) {
                         var nodes = page.content;
-
                         if (nodes.length > 0) {
-                            $q.all(nodes.map(function(node) {
-                                supplyLineResource.query({
+                            return $q.all(nodes.map(function(node) {
+                                return supplyLineResource.query({
                                     programId: selectedProgram,
                                     supervisoryNodeId: node.id
                                 });
@@ -58,41 +57,35 @@
                                     var supplyLines = _.flatten(results.map(function(it) {
                                         return it.content;
                                     }));
-
                                     var facilityIds = _.uniq(supplyLines.map(function(it) {
                                         return it.supplyingFacility.id;
                                     }));
-
                                     var facSNMap = {};
-                                    angular.forEach(supplyLines, function(it) {
+                                    supplyLines.forEach(function(it) {
                                         facSNMap[it.supplyingFacility.id] = it.supervisoryNode.id;
                                     });
-
                                     if (facilityIds.length > 0) {
-                                        facilityService.query({
+                                        return facilityService.query({
                                             id: facilityIds
                                         })
                                             .then(function(resp) {
                                                 var facilities = resp.content;
-                                                setSupplyingFacilityOptions(_.map(facilities, function(facility) {
+                                                return _.map(facilities, function(facility) {
                                                     return {
                                                         name: facility.name,
                                                         value: facility.id,
                                                         sNId: facSNMap[facility.id]
                                                     };
-                                                }));
+                                                });
                                             });
-                                    } else {
-                                        setSupplyingFacilityOptions([]);
                                     }
+                                    return [];
                                 });
-                        } else {
-                            setSupplyingFacilityOptions([]);
                         }
+                        return [];
                     });
-            } else {
-                setSupplyingFacilityOptions([]);
             }
+            return $q.all([]);
         }
     }
 })();

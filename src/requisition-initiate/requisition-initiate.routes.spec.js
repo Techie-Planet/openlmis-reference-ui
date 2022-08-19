@@ -16,11 +16,18 @@
 describe('openlmis.requisitions.initRnr state', function() {
 
     var $q, $state, $rootScope, $stateParams, requisitionInitiateFactory, PeriodDataBuilder, periods,
-        periodFactory;
+        periodFactory, supplyLineByFaciltyProgramService;
 
     beforeEach(function() {
         module('referencedata-period');
-        module('requisition-initiate');
+        module('requisition-initiate', function($provide) {
+            supplyLineByFaciltyProgramService = jasmine.createSpyObj(
+                'supplyLineByFaciltyProgramService', ['getSupplyLineData']
+            );
+            $provide.service('supplyLineByFaciltyProgramService', function() {
+                return supplyLineByFaciltyProgramService;
+            });
+        });
 
         inject(function($injector) {
             $q = $injector.get('$q');
@@ -46,6 +53,7 @@ describe('openlmis.requisitions.initRnr state', function() {
 
         spyOn(requisitionInitiateFactory, 'canInitiate').andReturn($q.resolve(true));
         spyOn(periodFactory, 'get').andReturn($q.resolve(periods));
+        supplyLineByFaciltyProgramService.getSupplyLineData.andReturn($q.resolve([]));
     });
 
     describe('periods resolve', function() {
