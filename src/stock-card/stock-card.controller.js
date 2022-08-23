@@ -13,7 +13,7 @@
  * http://www.gnu.org/licenses.  For additional information contact info@OpenLMIS.org. 
  */
 
-(function () {
+(function() {
 
     'use strict';
 
@@ -49,7 +49,7 @@
          * Print specific stock card.
          *
          */
-        vm.print = function () {
+        vm.print = function() {
             stockCardService.print(vm.stockCard.id);
         };
 
@@ -66,6 +66,7 @@
          * @return {string} VVM status in roman numeral
          */
         function getProductVVM(stockCard) {
+            console.log(JSON.stringify(stockCard));
             return stockCard.extraData && stockCard.extraData.vvmStatus
                 ? convertVVMStatusToRoman(stockCard.extraData.vvmStatus)
                 : '';
@@ -89,7 +90,7 @@
         }
 
         function convertVVMStatusToRoman(vvmStatus) {
-            if (!vvmStatus) return '';
+            if (!vvmStatus) { return ''; }
             var stageArr = vvmStatus.split('_');
             var stageInt = Number.parseInt(stageArr[1]);
             var romanNumeral = convertToRoman(stageInt);
@@ -98,32 +99,7 @@
 
         function convertToRoman(num) {
             if (num < 1) {
-                return '';
-            }
-            if (num >= 100) {
-                return 'C' + convertToRoman(num - 100);
-            }
-            if (num >= 90) {
-                return 'XC' + convertToRoman(num - 90);
-            }
-            if (num >= 80) {
-                return 'LXXX' + convertToRoman(num - 80);
-            }
-            if (num >= 70) {
-                return 'LXX' + convertToRoman(num - 70);
-            }
-            if (num >= 60) {
-                return 'LX' + convertToRoman(num - 60);
-            }
-            if (num >= 50) {
-                return 'L' + convertToRoman(num - 50);
-            }
-            if (num >= 40) {
-                return 'XL' + convertToRoman(num - 40);
-            }
-            if (num >= 10) {
-                return 'X' + convertToRoman(num - 10);
-            }
+                return ''; }
             if (num >= 9) {
                 return 'IX' + convertToRoman(num - 9);
             }
@@ -143,9 +119,9 @@
 
             var items = [];
             var previousSoh;
-            angular.forEach(stockCard.lineItems, function (lineItem) {
+            angular.forEach(stockCard.lineItems, function(lineItem) {
                 if (lineItem.stockAdjustments.length > 0) {
-                    angular.forEach(lineItem.stockAdjustments.slice().reverse(), function (adjustment, i) {
+                    angular.forEach(lineItem.stockAdjustments.slice().reverse(), function(adjustment, i) {
                         var lineValue = angular.copy(lineItem);
                         if (i !== 0) {
                             lineValue.stockOnHand = previousSoh;
