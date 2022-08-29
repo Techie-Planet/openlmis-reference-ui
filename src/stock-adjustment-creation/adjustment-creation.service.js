@@ -30,16 +30,22 @@
 
     service.$inject = [
         '$filter', 'StockEventRepository', 'openlmisDateFilter',
-        'messageService', 'productNameFilter', 'dateUtils', '$rootScope'
+        'messageService', 'productNameFilter', 'dateUtils', '$rootScope',
+        '$resource', 'stockmanagementUrlFactory'
     ];
 
     function service($filter, StockEventRepository, openlmisDateFilter,
-                     messageService, productNameFilter, dateUtils, $rootScope) {
+                     messageService, productNameFilter, dateUtils, $rootScope,
+                     $resource, stockmanagementUrlFactory) {
         var repository = new StockEventRepository();
 
         this.search = search;
 
         this.submitAdjustments = submitAdjustments;
+
+        this.getFacilityIssueIdResource = getFacilityIssueIdResource;
+
+        var facilityIssueIdResource = $resource(stockmanagementUrlFactory('/api/issuedStockItems'));
 
         function search(keyword, items, hasLot) {
             var result = [];
@@ -76,10 +82,11 @@
             return result;
         }
 
-        function submitAdjustments(programId, facilityId, lineItems, adjustmentType) {
+        function submitAdjustments(programId, facilityId, lineItems, adjustmentType, newIssueId) {
             var event = {
                 programId: programId,
-                facilityId: facilityId
+                facilityId: facilityId,
+                documentNumber: newIssueId ? newIssueId : ''
             };
             event.lineItems = _.map(lineItems, function(item) {
                 return angular.merge({
@@ -120,6 +127,14 @@
             return item.lot ?
                 item.lot.lotCode :
                 (hasLot ? messageService.get('orderableGroupService.noLotDefined') : '');
+        }
+
+        function getFacilityIssueIdResource(programId, facilityId, issueId) {
+            return facilityIssueIdResource.get({
+                program: programId,
+                facility: facilityId,
+                documentNumber: issueId
+            }).$promise;
         }
     }
 })();

@@ -492,7 +492,7 @@
                     });
 
                     stockAdjustmentCreationService.submitAdjustments(
-                        program.id, facility.id, addedLineItems, adjustmentType
+                        program.id, facility.id, addedLineItems, adjustmentType, vm.newIssueId
                     )
                         .then(function() {
                             if (offlineService.isOffline()) {
@@ -626,6 +626,13 @@
             vm.hasPermissionToAddNewLot = hasPermissionToAddNewLot;
             vm.canAddNewLot = false;
             initiateNewLotObject();
+
+            vm.isReceiveState = (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state);
+            if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state) {
+                vm.newIssueId = 'IS-' + Math.floor(Math.random() * (9999999 - 1000000) + 1000000);
+            }
+            vm.issueIdSelectionChange = issueIdSelectionChange;
+            vm.issueIds = ['IS-4666763'];
         }
 
         function initiateNewLotObject() {
@@ -753,6 +760,14 @@
                     }
                 });
             }
+        }
+
+        function issueIdSelectionChange() {
+            stockAdjustmentCreationService.getFacilityIssueIdResource(program.id,
+                facility.id,
+                vm.issueId).then(function(result) {
+                console.log(result);
+            });
         }
 
         onInit();

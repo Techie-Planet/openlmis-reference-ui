@@ -1,7 +1,14 @@
 <h2>
     {{vm.key('title') | message:{'facilityCode': vm.facility.code, 'facilityName': vm.facility.name, 'program': vm.program.name} }}
 </h2>
-
+<div>
+    <span ng-if="vm.newIssueId">Issue ID: {{vm.newIssueId}}</span>
+    <select ng-if="vm.isReceiveState" id="issueId" ng-model="vm.issueId" 
+            placeholder="Issue ID"
+            ng-options="issueId for issueId in vm.issueIds"
+            ng-change="vm.issueIdSelectionChange()">
+    </select>
+</div>
 <div class="stock-adjustment-creation">
     <section class="openlmis-table-container">
         <form ng-submit="vm.search()">
