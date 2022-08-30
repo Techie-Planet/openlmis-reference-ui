@@ -43,9 +43,11 @@
 
         this.submitAdjustments = submitAdjustments;
 
-        this.getFacilityIssueIdResource = getFacilityIssueIdResource;
+        this.getFacilityIssueId = getFacilityIssueId;
+        this.getFacilityIssueIdNumber = getFacilityIssueIdNumber;
 
         var facilityIssueIdResource = $resource(stockmanagementUrlFactory('/api/issuedStockItems'));
+        var getFacilityIssueIdNumberResource = $resource(stockmanagementUrlFactory('/api/issuedStockItemsNumber'));
 
         function search(keyword, items, hasLot) {
             var result = [];
@@ -129,11 +131,18 @@
                 (hasLot ? messageService.get('orderableGroupService.noLotDefined') : '');
         }
 
-        function getFacilityIssueIdResource(programId, facilityId, issueId) {
+        function getFacilityIssueId(programId, facilityId, issueId) {
             return facilityIssueIdResource.get({
                 program: programId,
                 facility: facilityId,
                 documentNumber: issueId
+            }).$promise;
+        }
+
+        function getFacilityIssueIdNumber(programId, facilityId) {
+            return getFacilityIssueIdNumberResource.get({
+                program: programId,
+                facility: facilityId
             }).$promise;
         }
     }

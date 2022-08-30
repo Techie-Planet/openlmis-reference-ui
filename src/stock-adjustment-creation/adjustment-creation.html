@@ -3,8 +3,9 @@
 </h2>
 <div>
     <span ng-if="vm.newIssueId">Issue ID: {{vm.newIssueId}}</span>
-    <select ng-if="vm.isReceiveState" id="issueId" ng-model="vm.issueId" 
+    <select ng-if="vm.isReceiveState" id="issueIdSelect" ng-model="vm.issueId" 
             placeholder="Issue ID"
+            no-auto-select="false"
             ng-options="issueId for issueId in vm.issueIds"
             ng-change="vm.issueIdSelectionChange()">
     </select>

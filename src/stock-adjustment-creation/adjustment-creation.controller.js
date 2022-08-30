@@ -627,12 +627,17 @@
             vm.canAddNewLot = false;
             initiateNewLotObject();
 
-            vm.isReceiveState = (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state);
+            if (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
+                vm.isReceiveState = true;
+                vm.issueIds = null;
+                vm.issueId = null;
+                vm.issueIdSelectionChange = issueIdSelectionChange;
+                fetchIssueIds();
+            }
+
             if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state) {
                 vm.newIssueId = 'IS-' + Math.floor(Math.random() * (9999999 - 1000000) + 1000000);
             }
-            vm.issueIdSelectionChange = issueIdSelectionChange;
-            vm.issueIds = ['IS-4666763'];
         }
 
         function initiateNewLotObject() {
@@ -763,10 +768,20 @@
         }
 
         function issueIdSelectionChange() {
-            stockAdjustmentCreationService.getFacilityIssueIdResource(program.id,
+            console.log(vm.issueIds);
+            stockAdjustmentCreationService.getFacilityIssueId(program.id,
                 facility.id,
                 vm.issueId).then(function(result) {
                 console.log(result);
+            });
+        }
+
+        function fetchIssueIds() {
+            stockAdjustmentCreationService.getFacilityIssueIdNumber(program.id,
+                facility.id).then(function(result) {
+                vm.issueIds = result;
+                console.log(vm.issueIds, $scope);
+                $scope.$apply();
             });
         }
 
