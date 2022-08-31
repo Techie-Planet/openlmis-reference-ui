@@ -629,14 +629,13 @@
 
             if (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
                 vm.isReceiveState = true;
-                vm.issueIds = null;
                 vm.issueId = null;
                 vm.issueIdSelectionChange = issueIdSelectionChange;
                 fetchIssueIds();
             }
 
             if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state) {
-                vm.newIssueId = 'IS-' + Math.floor(Math.random() * (9999999 - 1000000) + 1000000);
+                vm.newIssueId = 'A-' + Math.floor(Math.random() * (999999999 - 100000000) + 100000000);
             }
         }
 
@@ -768,20 +767,54 @@
         }
 
         function issueIdSelectionChange() {
-            console.log(vm.issueIds);
             stockAdjustmentCreationService.getFacilityIssueId(program.id,
                 facility.id,
-                vm.issueId).then(function(result) {
-                console.log(result);
+                vm.issueId).then(function(results) {
+                vm.addedLineItems.length = 0;
+                results.forEach(function(item) {
+                    vm.orderableGroups.forEach(function(array) {
+                        array.forEach(function(arrayItem) {
+                            var isOrderable = arrayItem.orderable.id ===  item.orderableId;
+                            var isLot = arrayItem.lot === item.lotId
+                                        || (arrayItem.lot !==  null && arrayItem.lot.id === item.lotId);
+                            if (isOrderable && isLot) {
+                                var selectedItem  = orderableGroupService
+                                    .findByLotInOrderableGroup(array, arrayItem.lot);
+                                selectedItem.stockOnHand = array.stockOnHand;
+                                var lineItem = _.extend({
+                                    $errors: {},
+                                    $previewSOH: selectedItem.stockOnHand,
+                                    extraData: item.extraData
+                                },
+                                selectedItem, copyDefaultValue());
+                                lineItem.quantity = item.quantity;
+                                if (item.extraData !== null) {
+                                    lineItem.vvmStatus = item.extraData.vvmStatus;
+                                }
+                                vm.srcDstAssignments.forEach(function(assignment) {
+                                    if (assignment.node.referenceId === item.supplyingFacilityId) {
+                                        lineItem.assignment = assignment;
+                                    }
+                                });
+                                vm.reasons.forEach(function(reason) {
+                                    if (reason.name === 'Transfer In') {
+                                        lineItem.reason = reason;
+                                    }
+                                });
+                                vm.addedLineItems.unshift(lineItem);
+                            }
+                        });
+                    });
+                });
             });
         }
 
         function fetchIssueIds() {
-            stockAdjustmentCreationService.getFacilityIssueIdNumber(program.id,
-                facility.id).then(function(result) {
-                vm.issueIds = result;
-                console.log(vm.issueIds, $scope);
-                $scope.$apply();
+            $scope.$evalAsync(function() {
+                stockAdjustmentCreationService.getFacilityIssueIdNumber(program.id,
+                    facility.id).then(function(result) {
+                    vm.issueIds = result;
+                });
             });
         }
 

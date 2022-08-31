@@ -31,12 +31,12 @@
     service.$inject = [
         '$filter', 'StockEventRepository', 'openlmisDateFilter',
         'messageService', 'productNameFilter', 'dateUtils', '$rootScope',
-        '$resource', 'stockmanagementUrlFactory'
+        '$resource', 'openlmisUrlFactory'
     ];
 
     function service($filter, StockEventRepository, openlmisDateFilter,
                      messageService, productNameFilter, dateUtils, $rootScope,
-                     $resource, stockmanagementUrlFactory) {
+                     $resource, openlmisUrlFactory) {
         var repository = new StockEventRepository();
 
         this.search = search;
@@ -45,9 +45,6 @@
 
         this.getFacilityIssueId = getFacilityIssueId;
         this.getFacilityIssueIdNumber = getFacilityIssueIdNumber;
-
-        var facilityIssueIdResource = $resource(stockmanagementUrlFactory('/api/issuedStockItems'));
-        var getFacilityIssueIdNumberResource = $resource(stockmanagementUrlFactory('/api/issuedStockItemsNumber'));
 
         function search(keyword, items, hasLot) {
             var result = [];
@@ -132,6 +129,12 @@
         }
 
         function getFacilityIssueId(programId, facilityId, issueId) {
+            var facilityIssueIdResource = $resource(openlmisUrlFactory('/api/issuedStockItems'), {}, {
+                get: {
+                    method: 'GET',
+                    isArray: true
+                }
+            });
             return facilityIssueIdResource.get({
                 program: programId,
                 facility: facilityId,
@@ -140,6 +143,12 @@
         }
 
         function getFacilityIssueIdNumber(programId, facilityId) {
+            var getFacilityIssueIdNumberResource = $resource(openlmisUrlFactory('/api/issuedStockItemsNumber'), {}, {
+                get: {
+                    method: 'GET',
+                    isArray: true
+                }
+            });
             return getFacilityIssueIdNumberResource.get({
                 program: programId,
                 facility: facilityId
