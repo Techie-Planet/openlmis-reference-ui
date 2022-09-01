@@ -1,4 +1,10 @@
 {
+    "cceInventoryItemStatus.functioning": "Functional",
+    "cceInventoryItemStatus.awaitingRepair": "Under Repair",
     "cceInventoryItemStatus.installed": "Installed",
-    "cceInventoryItemStatus.awaitingInstallation": "Awaiting Installation"
+    "cceInventoryItemStatus.awaitingInstallation": "Not Installed",
+    "cceInventoryItemStatus.nonFunctional": "Non Functional",
+    "cceInventoryItemStatus.unserviceable": "Decommissioned",
+    "cceInventoryItemStatus.obsolete": "Obsolete",
+    "cceInventoryItemStatus.replace": "Replace"
 }

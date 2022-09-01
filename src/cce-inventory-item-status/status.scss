@@ -27,6 +27,18 @@
     &.is-awaiting-installation::before {
         color: $gray;
     }
+
+    &.is-non-functional::before {
+        color: $gray;
+    }
+
+    &.is-obsolete::before {
+        color: $gray;
+    }
+
+    &.is-replace::before {
+        color: $gray; 
+    }
 }
 
 .cce-inventory-item-update-status {
