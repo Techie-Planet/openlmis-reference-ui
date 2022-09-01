@@ -35,6 +35,9 @@
                 UNSERVICEABLE: 'UNSERVICEABLE',
                 INSTALLED: 'INSTALLED',
                 AWAITING_INSTALLATION: 'AWAITING_INSTALLATION',
+                NON_FUNCTIONAL: 'NON_FUNCTIONAL',
+                OBSOLETE: 'OBSOLETE',
+                REPLACE: 'REPLACE',
                 getLabel: getLabel,
                 getStatuses: getStatuses,
                 getClass: getClass
@@ -44,7 +47,10 @@
                 AWAITING_REPAIR: 'cceInventoryItemStatus.awaitingRepair',
                 UNSERVICEABLE: 'cceInventoryItemStatus.unserviceable',
                 INSTALLED: 'cceInventoryItemStatus.installed',
-                AWAITING_INSTALLATION: 'cceInventoryItemStatus.awaitingInstallation'
+                AWAITING_INSTALLATION: 'cceInventoryItemStatus.awaitingInstallation',
+                NON_FUNCTIONAL: 'cceInventoryItemStatus.nonFunctional',
+                OBSOLETE: 'cceInventoryItemStatus.obsolete',
+                REPLACE: 'cceInventoryItemStatus.replace'
             };
 
         return FUNCTIONAL_STATUS;
@@ -86,7 +92,10 @@
                 FUNCTIONAL_STATUS.AWAITING_REPAIR,
                 FUNCTIONAL_STATUS.UNSERVICEABLE,
                 FUNCTIONAL_STATUS.INSTALLED,
-                FUNCTIONAL_STATUS.AWAITING_INSTALLATION
+                FUNCTIONAL_STATUS.AWAITING_INSTALLATION,
+                FUNCTIONAL_STATUS.NON_FUNCTIONAL,
+                FUNCTIONAL_STATUS.OBSOLETE,
+                FUNCTIONAL_STATUS.REPLACE 
             ];
         }
 
@@ -119,6 +128,15 @@
                 break;
             case FUNCTIONAL_STATUS.AWAITING_INSTALLATION:
                 statusClass = 'is-awaiting-installation';
+                break;
+            case FUNCTIONAL_STATUS.NON_FUNCTIONAL:
+                statusClass = 'is-non-functional';
+                break;
+            case FUNCTIONAL_STATUS.OBSOLETE:
+                statusClass = 'is-obsolete';
+                break;
+            case FUNCTIONAL_STATUS.REPLACE:
+                statusClass = 'is-replace';
                 break;
             default:
                 throw 'Invalid status';
