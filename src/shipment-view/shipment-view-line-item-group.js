@@ -171,7 +171,9 @@
     }
 
     function fillByVVMStatus(lineItems, quantityToFill) {
-        var sortedLineItems = lineItems.sort((a,b) => (a.vvmStatus > b.vvmStatus ? 1 : -1));
+        var sortedLineItems = lineItems.sort((a,b) => {
+            a.vvmStatus > b.vvmStatus ? 1 : -1
+        });
 
         for(var i = 0; i < sortedLineItems.length; i++) {
             var lineItem = sortedLineItems[i];
@@ -195,7 +197,9 @@
     }
 
     function fillByExpiryDate(lineItems, quantityToFill) {
-        var sortedLineItems = lineItems.sort((a,b) => (a.expirationDate > b.expirationDate ? 1 : -1));
+        var sortedLineItems = lineItems.sort((a,b) => {
+            a.expirationDate > b.expirationDate ? 1 : -1
+        });
 
         for(var i = 0; i < sortedLineItems.length; i++) {
             var lineItem = sortedLineItems[i];

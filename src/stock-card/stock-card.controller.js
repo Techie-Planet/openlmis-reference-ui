@@ -89,7 +89,7 @@
         }
 
         function convertVVMStatusToRoman(vvmStatus) {
-            if (!vvmStatus) { return ''; }
+            if (!vvmStatus) return '';
             var stageArr = vvmStatus.split('_');
             var stageInt = Number.parseInt(stageArr[1]);
             var romanNumeral = convertToRoman(stageInt);
@@ -98,8 +98,8 @@
 
         function convertToRoman(num) {
             if (num < 1) {
-                return ''; }
-            if (num >= 9) {
+                return ''; 
+            } if (num >= 9) {
                 return 'IX' + convertToRoman(num - 9);
             }
             if (num >= 5) {
