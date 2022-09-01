@@ -66,7 +66,6 @@
          * @return {string} VVM status in roman numeral
          */
         function getProductVVM(stockCard) {
-            console.log(JSON.stringify(stockCard));
             return stockCard.extraData && stockCard.extraData.vvmStatus
                 ? convertVVMStatusToRoman(stockCard.extraData.vvmStatus)
                 : '';
