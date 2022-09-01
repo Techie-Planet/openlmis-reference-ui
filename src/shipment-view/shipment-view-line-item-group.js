@@ -37,7 +37,8 @@
         ShipmentViewLineItemGroup.prototype.getAvailableSoh = getAvailableSoh;
         ShipmentViewLineItemGroup.prototype.getFillQuantity = getFillQuantity;
         ShipmentViewLineItemGroup.prototype.getOrderQuantity = getOrderQuantity;
-        ShipmentViewLineItemGroup.prototype.setGroupShipmentLinesShippedQuantities = setGroupShipmentLinesShippedQuantities;
+        ShipmentViewLineItemGroup.prototype.setGroupShipmentLinesShippedQuantities
+        = setGroupShipmentLinesShippedQuantities;
 
         return ShipmentViewLineItemGroup;
 
@@ -118,16 +119,15 @@
             return this.recalculateQuantity(this.orderQuantity, inDoses);
         }
 
-
         /**
          * @ngdoc method
          * @methodOf shipment-view.ShipmentViewLineItemGroup
          * @name setGroupShipmentLinesShippedQuantities
          *
          * @description
-         * Set the quantity shipped for each ShipementLineItem of 
+         * Set the quantity shipped for each ShipementLineItem of
          * a commodity type group: ShipmentViewLineItemGroup
-         * 
+         *
          * Calculate the fill quantities per batch.
          * This method considers the following (in order):
          * 1. Batch Use By Status - pending implementatin
@@ -136,17 +136,18 @@
          *
          * @param  {boolean} inDoses flag defining whether the returned value should be returned in
          *                           doses or in packs
-         * @return none          
+         * @return none
          */
-        function setGroupShipmentLinesShippedQuantities(inDoses) {
-            var quantityToFill = this.groupQuantityShipped;
-
-            if (!this.isMainGroup) return;
+        function setGroupShipmentLinesShippedQuantities() {
+            if (!this.isMainGroup) {
+                return;
+            }
 
             var lineItems = getLineItemsHavingShipments(this.lineItems);
             lineItems = decorateVVM(lineItems);
-            
+
             if (lineItems.length > 0) {
+                var quantityToFill = this.groupQuantityShipped;
                 quantityToFill = fillByVVMStatus(lineItems, quantityToFill);
                 quantityToFill = fillByExpiryDate(lineItems, quantityToFill);
             }
@@ -160,8 +161,8 @@
             if (lineItem.shipmentLineItem === undefined || lineItem.shipmentLineItem === null) {
                 return;
             }
- 
-            if (lineItem.shipmentLineItem.quantityShipped === undefined || 
+
+            if (lineItem.shipmentLineItem.quantityShipped === undefined ||
                 lineItem.shipmentLineItem.quantityShipped === null) {
                 return;
             }
@@ -171,18 +172,25 @@
     }
 
     function fillByVVMStatus(lineItems, quantityToFill) {
-        var sortedLineItems = lineItems.sort(function(a,b) {
+        var sortedLineItems = lineItems.sort(function(a, b) {
             return a.vvmStatus > b.vvmStatus ? 1 : -1;
         });
 
-        for(var i = 0; i < sortedLineItems.length; i++) {
+        for (var i = 0; i < sortedLineItems.length; i++) {
             var lineItem = sortedLineItems[i];
 
-            if (quantityToFill <= 0) break;
-            if (!lineItem.vvmStatus) continue;
-            
+            if (quantityToFill <= 0) {
+                break;
+            }
+
+            if (!lineItem.vvmStatus) {
+                continue;
+            }
+
             var stockOnHand = lineItem.shipmentLineItem.stockOnHand;
-            if (stockOnHand == 0) continue;
+            if (stockOnHand === 0) {
+                continue;
+            }
 
             if (stockOnHand >= quantityToFill) {
                 lineItem.shipmentLineItem.quantityShipped = quantityToFill;
@@ -197,18 +205,26 @@
     }
 
     function fillByExpiryDate(lineItems, quantityToFill) {
-        var sortedLineItems = lineItems.sort(function(a,b) {
-            return a.expirationDate > b.expirationDate ? 1 : -1;
+        var sortedLineItems = lineItems.sort(function(a, b) {
+            a.expirationDate > b.expirationDate ? 1 : -1;
         });
 
-        for(var i = 0; i < sortedLineItems.length; i++) {
+        for (var i = 0; i < sortedLineItems.length; i++) {
             var lineItem = sortedLineItems[i];
 
-            if (quantityToFill <= 0) break;
-            if (!lineItem.isLot) continue;
-            
+            if (quantityToFill <= 0) {
+                break;
+            }
+
+            if (!lineItem.isLot) {
+                continue;
+            }
+
             var stockOnHand = lineItem.shipmentLineItem.stockOnHand;
-            if (stockOnHand == 0) continue;
+
+            if (stockOnHand === 0) {
+                continue;
+            }
 
             if (stockOnHand >= quantityToFill) {
                 lineItem.shipmentLineItem.quantityShipped = quantityToFill;
@@ -224,24 +240,27 @@
 
     function decorateVVM(lineItems) {
         return lineItems.map(function(lineItem) {
-            if (!lineItem.vvmStatus) return lineItem;
+            if (!lineItem.vvmStatus) {
+                return lineItem;
+            }
+
             var vvm = lineItem.vvmStatus.split('_')[1];
 
-            switch(vvm) {
-                case 1:
-                    lineItem.vvmStatus = "I"; 
-                    break;
-                case 2:
-                    lineItem.vvmStatus = "II"; 
-                    break;
-                case 3:
-                    lineItem.vvmStatus = "III"; 
-                    break;
-                case 4:
-                    lineItem.vvmStatus = "IV"; 
-                    break;
-                default:
-                    break;
+            switch (vvm) {
+            case 1:
+                lineItem.vvmStatus = 'I';
+                break;
+            case 2:
+                lineItem.vvmStatus = 'II';
+                break;
+            case 3:
+                lineItem.vvmStatus = 'III';
+                break;
+            case 4:
+                lineItem.vvmStatus = 'IV';
+                break;
+            default:
+                break;
             }
 
             return lineItem;
