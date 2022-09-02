@@ -66,7 +66,6 @@
          * @return {string} VVM status in roman numeral
          */
         function getProductVVM(stockCard) {
-            console.log(JSON.stringify(stockCard));
             return stockCard.extraData && stockCard.extraData.vvmStatus
                 ? convertVVMStatusToRoman(stockCard.extraData.vvmStatus)
                 : '';
@@ -90,7 +89,9 @@
         }
 
         function convertVVMStatusToRoman(vvmStatus) {
-            if (!vvmStatus) { return ''; }
+            if (!vvmStatus) {
+                return '';
+            }
             var stageArr = vvmStatus.split('_');
             var stageInt = Number.parseInt(stageArr[1]);
             var romanNumeral = convertToRoman(stageInt);
@@ -99,7 +100,8 @@
 
         function convertToRoman(num) {
             if (num < 1) {
-                return ''; }
+                return '';
+            } 
             if (num >= 9) {
                 return 'IX' + convertToRoman(num - 9);
             }

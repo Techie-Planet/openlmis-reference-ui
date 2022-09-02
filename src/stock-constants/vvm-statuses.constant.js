@@ -52,13 +52,15 @@
         function getDisplayName(status) {
             var displayName;
             if (status === VVM_STATUS.STAGE_1) {
-                displayName = 'stockConstants.stage1'; } 
-            else if (status === VVM_STATUS.STAGE_2) {
-                displayName = 'stockConstants.stage2'; }
-            else if (status === VVM_STATUS.STAGE_3) {
-                displayName = 'stockConstants.stage3'; }
-            else if (status === VVM_STATUS.STAGE_4) {
-                displayName = 'stockConstants.stage4'; }
+                displayName = 'stockConstants.stage1';
+            } else if (status === VVM_STATUS.STAGE_2) {
+                displayName = 'stockConstants.stage2';
+            } else if (status === VVM_STATUS.STAGE_3) {
+                displayName = 'stockConstants.stage3';
+            } else if (status === VVM_STATUS.STAGE_4) {
+                displayName = 'stockConstants.stage4';
+            }
+
             return displayName;
         }
     }
