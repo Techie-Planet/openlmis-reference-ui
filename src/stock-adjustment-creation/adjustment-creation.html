@@ -1,7 +1,9 @@
 <h2>
     {{vm.key('title') | message:{'facilityCode': vm.facility.code, 'facilityName': vm.facility.name, 'program': vm.program.name} }}
 </h2>
-
+<div style="width: '100';">
+    <span ng-if="vm.newIssueId">Transaction ID: {{vm.newIssueId}}</span>
+</div>
 <div class="stock-adjustment-creation">
     <section class="openlmis-table-container">
         <form ng-submit="vm.search()">
@@ -14,6 +16,14 @@
         </form>
         <section class="is-primary">
             <form class="form-inline" ng-submit="vm.addProduct()" name="productForm">
+                <div>
+                    <select ng-if="vm.isReceiveState" id="issueIdSelect" ng-model="vm.issueId" 
+                        placeholder="Transaction ID"
+                        no-auto-select="false"
+                        ng-options="issueId for issueId in vm.issueIds"
+                        ng-change="vm.issueIdSelectionChange()">
+                    </select>
+                </div>
                 <div>
                     <label for="productSelect">{{vm.key('product') | message}}</label>
                     <select id="productSelect" ng-model="vm.selectedOrderableGroup"
