@@ -1,0 +1,15 @@
+{
+    "openlmisLogin.appHeader": " NPHCDA Logistics Management Information System",
+    "openlmisResetPassword.changePassword": "Change password",
+    "openlmisResetPassword.newPassword": "New password",
+    "openlmisResetPassword.passwordMismatch": "Passwords do not match",
+    "openlmisResetPassword.passwordMustContainNumber": "Password must contain at least 1 number",
+    "openlmisResetPassword.passwordRequirements": "A password must contain at least 8 characters and 1 number.",
+    "openlmisResetPassword.passwordReset.failure": "Failed to change password.",
+    "openlmisResetPassword.passwordReset.label": "Reset password",
+    "openlmisResetPassword.passwordReset.success": "Password has been reset successfully",
+    "openlmisResetPassword.passwordTooShort": "Password is too short. It must have at least 8 characters.",
+    "openlmisResetPassword.poweredBy": "Powered by ${openlmis}",
+    "openlmisResetPassword.reenterPassword": "Re-enter new password",
+    "openlmisResetPassword.showPassword": "Show password"
+}
