@@ -95,7 +95,7 @@
                 FUNCTIONAL_STATUS.AWAITING_INSTALLATION,
                 FUNCTIONAL_STATUS.NON_FUNCTIONAL,
                 FUNCTIONAL_STATUS.OBSOLETE,
-                FUNCTIONAL_STATUS.REPLACE 
+                FUNCTIONAL_STATUS.REPLACE
             ];
         }
 
