@@ -56,11 +56,4 @@
         placeholder="{{'openlmisFacilityProgramSelect.selectFacility' | message}}"
         required></select>
 
-    <label for="supervisedFacilityName">{{'openlmisFacilityProgramSelect.facility' | message}}</label>
-    <select id="supervisedFacilityName"
-        ng-model="vm.facility"
-        ng-options="facility as facility.name for facility in vm.facilities | unique:'id' | orderBy:'name' track by facility.id"
-        placeholder="{{'openlmisFacilityProgramSelect.selectFacility' | message}}"
-        required></select>
-
 </fieldset>
