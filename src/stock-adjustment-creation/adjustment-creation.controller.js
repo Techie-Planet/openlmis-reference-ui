@@ -183,14 +183,20 @@
             } else {
                 defaultDate = dateUtils.toStringDate(new Date());
             }
-
+            var defaultReason = previousAdded.reason;
+            if (adjustmentType.state === ADJUSTMENT_TYPE.KIT_UNPACK.state) {
+                defaultReason = {
+                    id: UNPACK_REASONS.KIT_UNPACK_REASON_ID
+                };
+            } else if (adjustmentType.state === ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state) {
+                defaultReason = vm.reasons.find(function(reason) {
+                    return reason.tags.includes('p2p') && reason.reasonType === 'DEBIT';
+                });
+            }
             return {
                 assignment: previousAdded.assignment,
                 srcDstFreeText: previousAdded.srcDstFreeText,
-                reason: (adjustmentType.state === ADJUSTMENT_TYPE.KIT_UNPACK.state)
-                    ? {
-                        id: UNPACK_REASONS.KIT_UNPACK_REASON_ID
-                    } : previousAdded.reason,
+                reason: defaultReason,
                 reasonFreeText: previousAdded.reasonFreeText,
                 occurredDate: defaultDate
             };
@@ -266,7 +272,8 @@
          */
         vm.validateAssignment = function(lineItem) {
             if (adjustmentType.state !== ADJUSTMENT_TYPE.ADJUSTMENT.state &&
-                adjustmentType.state !== ADJUSTMENT_TYPE.KIT_UNPACK.state) {
+                adjustmentType.state !== ADJUSTMENT_TYPE.KIT_UNPACK.state &&
+                adjustmentType.state !== ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state) {
                 lineItem.$errors.assignmentInvalid = isEmpty(lineItem.assignment);
             }
             return lineItem;
@@ -490,10 +497,22 @@
                         });
                         return addedLineItems;
                     });
-
-                    stockAdjustmentCreationService.submitAdjustments(
+                    var adjustments = [stockAdjustmentCreationService.submitAdjustments(
                         program.id, facility.id, addedLineItems, adjustmentType, vm.newIssueId
-                    )
+                    )];
+                    if (adjustmentType.state === ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state && vm.programTo) {
+                        var creditReason = vm.reasons.find(function(reason) {
+                            return reason.tags.includes('p2p') && reason.reasonType === 'CREDIT';
+                        });
+                        var creditAddedLineItems = angular.copy(addedLineItems);
+                        creditAddedLineItems.forEach(function(item) {
+                            item.reason = creditReason;
+                        });
+                        adjustments.push(stockAdjustmentCreationService.submitAdjustments(
+                            vm.programTo.id, facility.id, creditAddedLineItems, adjustmentType, vm.newIssueId
+                        ));
+                    }
+                    $q.all(adjustments)
                         .then(function() {
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
@@ -616,6 +635,7 @@
             $stateParams.displayItems = displayItems;
             vm.displayItems = $stateParams.displayItems || [];
             vm.keyword = $stateParams.keyword;
+            vm.programTo = $stateParams.programTo;
 
             vm.orderableGroups = orderableGroups;
             vm.hasLot = false;

@@ -1,0 +1,28 @@
+<h2 ng-show="vm.facility">{{ vm.key('title') | message: {'facility': vm.facility.name} }}</h2>
+<p class="alert is-offline" ng-if="vm.offline() && vm.offlineStockEvents()">
+    {{ vm.key('offline1') | message}}<br>
+    {{ vm.key('offline2') | message}}
+    <a ng-click="vm.goToPendingOfflineEventsPage()">{{ vm.key('pendingOfflineEvents') | message}}</a>
+    {{ vm.key('offline3') | message}}<br>
+</p>
+
+<form class="sidebar" ng-submit="vm.startProgramTransfer()" name="Program Transfer">
+    <div>
+        <label for="transferFrom">Program to transfer from</label>
+        <select id="transferFrom" ng-model="vm.programTransferFrom" 
+            placeholder="Select Program From"
+            no-auto-select="false"
+            ng-options="program.name for program in vm.programs">
+        </select>
+        <br/>
+        <label for="transferTo">Program to transfer to</label>
+        <select id="transferTo" ng-model="vm.programTransferTo" 
+            placeholder="Select Program To"
+            no-auto-select="false"
+            ng-options="program.name for program in vm.programs">
+        </select>
+        <br/>
+        <br/>
+        <input type="submit" value="Create Transfer"/>
+    </div>
+</form>

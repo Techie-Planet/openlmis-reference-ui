@@ -65,6 +65,7 @@
                     <th ng-show="vm.hasLot">{{vm.key('lotCode') | message}}</th>
                     <th ng-show="vm.hasLot">{{vm.key('expiryDate') | message}}</th>
                     <th>{{vm.key('soh') | message}}</th>
+                    <th ng-show="vm.programTo">Program Transfer To</th>
                     <th ng-show="vm.srcDstAssignments">{{vm.key('srcDstLabel') | message}}</th>
                     <th ng-if="vm.showReasonDropdown">{{vm.key('reason') | message}}</th>
                     <th ng-if="vm.showReasonDropdown">{{vm.key('reasonComments') | message}}</th>
@@ -92,6 +93,7 @@
                     </td>
                     <td ng-show="vm.hasLot">{{lineItem.lot.expirationDate | openlmisDate}}</td>
                     <td align="right">{{lineItem.$previewSOH}}</td>
+                    <td ng-show="vm.programTo">{{vm.programTo.name}}</td>
                     <td ng-show="vm.srcDstAssignments" openlmis-invalid="{{lineItem.$errors.assignmentInvalid ? 'openlmisForm.required' : '' | message}}">
                         <select ng-model="lineItem.assignment"
                             ng-change="vm.validateAssignment(lineItem);vm.clearFreeText(lineItem, 'srcDstFreeText')"
@@ -101,7 +103,9 @@
                     <td ng-if="vm.showReasonDropdown" openlmis-invalid="{{lineItem.$errors.reasonInvalid ? 'openlmisForm.required' : '' | message}}" class="digit-cell">
                         <select ng-model="lineItem.reason"
                             ng-change="vm.validateReason(lineItem);vm.clearFreeText(lineItem, 'reasonFreeText')"
-                            ng-options="reason.name for reason in vm.reasons track by reason.id" autofocus>
+                            ng-options="reason.name for reason in vm.reasons track by reason.id" 
+                            ng-disabled="vm.programTo"
+                            autofocus>
                         </select>
                     </td>
                     <td ng-if="vm.showReasonDropdown">
