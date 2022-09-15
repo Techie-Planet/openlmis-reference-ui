@@ -10,7 +10,7 @@
   "stockProgramTransferCreation.add": "Add",
   "stockProgramTransferCreation.noProducts": "Add a product to make program transfer. You have not added any products yet.",
   "stockProgramTransferCreation.productCode": "Product Code",
-  "stockProgramTransferCreation.lotCode": "Lot Code",
+  "stockProgramTransferCreation.lotCode": "Lot Code/Batch Number",
   "stockProgramTransferCreation.expiryDate": "Expiry Date",
   "stockProgramTransferCreation.noLotDefined": "No lot defined",
   "stockProgramTransferCreation.productHasNoLots": "No lot defined",
