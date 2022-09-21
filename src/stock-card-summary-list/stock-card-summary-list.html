@@ -83,8 +83,7 @@
                 <td>{{fulfills.orderable.extraData.productManufacturer}}</td>
                 <td>{{fulfills.lot ? fulfills.lot.lotCode : ('stockCardSummaryList.noLotDefined' | message)}}</td>
                 <td>{{(fulfills.extraData && fulfills.extraData.vvmStatus) 
-                    ? vm.convertVVMStatusToRoman(fulfills.extraData.vvmStatus) : 
-                    ''}}
+                    ? vm.convertVVMStatusToRoman(fulfills.extraData.vvmStatus) : ''}}
                 </td>
                 <td>{{fulfills.lot ? (fulfills.lot.expirationDate | openlmisDate) : ''}}</td>
                 <td>{{fulfills.occurredDate | openlmisDate}}</td>
