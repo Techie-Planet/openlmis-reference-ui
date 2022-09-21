@@ -80,8 +80,7 @@
          * @type {String}
          *
          */
-         vm.vvmStatus = $stateParams.vvmStatus;
-
+        vm.vvmStatus = $stateParams.vvmStatus;
 
         /**
          * @ngdoc property
