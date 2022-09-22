@@ -8,9 +8,9 @@
     <label for="vvmStatus" class="checkbox">
         <input id="vvmStatus" type="checkbox" 
                 ng-model="vm.orderable.extraData.useVVM" 
-                ng-init="vm.orderable.extraData.useVVM=='true'" 
-                ng-true-value="vm.orderable.extraData.useVVM=='true'" 
-                ng-false-value="vm.orderable.extraData.useVVM=='false'"/>
+                ng-init="vm.orderable.extraData.useVVM"
+                ng-true-value="'true'" 
+                ng-false-value="'false'"/>
         {{'adminOrderableEdit.useVVM' | message}}
     </label>
     <label for="description">{{'adminOrderableEdit.description' | message}}</label>
