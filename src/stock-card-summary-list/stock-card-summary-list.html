@@ -42,7 +42,11 @@
             <input id="lotCode" type="text" ng-model="vm.lotCode"/>
 
             <label for="vvmStatus">{{'stockCardSummaryList.vvmStatus' | message}}</label>
-            <input id="vvmStatus" type="text" ng-model="vm.vvmStatus"/>
+            <select id="vvmStatus"
+                ng-model="vm.vvmStatus"
+                ng-options="status as vm.getStatusDisplay(status) for status in vm.vvmStatuses"
+                placeholder="{{'stockCardSummaryList.selectStatus' | message}}">
+            </select>
 
             <input type="submit" value="{{'stockCardSummaryList.search' | message}}"/>
         </fieldset>
@@ -82,7 +86,7 @@
                 <td>{{fulfills.orderable.fullProductName}}</td>
                 <td>{{fulfills.orderable.extraData.productManufacturer}}</td>
                 <td>{{fulfills.lot ? fulfills.lot.lotCode : ('stockCardSummaryList.noLotDefined' | message)}}</td>
-                <td>{{(fulfills.extraData && fulfills.extraData.vvmStatus) 
+                <td align="center">{{(fulfills.extraData && fulfills.extraData.vvmStatus) 
                     ? vm.convertVVMStatusToRoman(fulfills.extraData.vvmStatus) : ''}}
                 </td>
                 <td>{{fulfills.lot ? (fulfills.lot.expirationDate | openlmisDate) : ''}}</td>

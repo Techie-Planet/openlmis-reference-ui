@@ -30,11 +30,11 @@
 
     controller.$inject = [
         'loadingModalService', '$state', '$stateParams', 'StockCardSummaryRepositoryImpl', 'stockCardSummaries',
-        'offlineService', '$scope', 'STOCKCARD_STATUS', 'messageService', 'paginationService'
+        'offlineService', '$scope', 'STOCKCARD_STATUS', 'VVM_STATUS', 'messageService', 'paginationService'
     ];
 
     function controller(loadingModalService, $state, $stateParams, StockCardSummaryRepositoryImpl, stockCardSummaries,
-                        offlineService, $scope, STOCKCARD_STATUS, messageService, paginationService) {
+                        offlineService, $scope, STOCKCARD_STATUS, VVM_STATUS, messageService, paginationService) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -81,6 +81,18 @@
          *
          */
         vm.vvmStatus = $stateParams.vvmStatus;
+
+        /**
+         * @ngdoc property
+         * @propertyOf stock-summary-list.controller:StockCardSummaryListController
+         * @name vvmStatuses
+         * @type {Object}
+         *
+         * @description
+         * Holds list of VVM statuses.
+         */
+         vm.vvmStatuses = VVM_STATUS;
+
 
         /**
          * @ngdoc property
@@ -246,6 +258,21 @@
                 }
             });
         }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-summary-list.controller:StockCardSummaryListController
+         * @name getStatusDisplay
+         *
+         * @description
+         * Returns VVM status display.
+         *
+         * @param  {String} status VVM status
+         * @return {String}        VVM status display name
+         */
+         vm.getStatusDisplay = function(status) {
+            return messageService.get(VVM_STATUS.$getDisplayName(status));
+        };
 
         /**
          * @ngdoc method
