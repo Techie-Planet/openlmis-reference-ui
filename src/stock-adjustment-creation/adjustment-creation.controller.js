@@ -183,20 +183,14 @@
             } else {
                 defaultDate = dateUtils.toStringDate(new Date());
             }
-            var defaultReason = previousAdded.reason;
-            if (adjustmentType.state === ADJUSTMENT_TYPE.KIT_UNPACK.state) {
-                defaultReason = {
-                    id: UNPACK_REASONS.KIT_UNPACK_REASON_ID
-                };
-            } else if (adjustmentType.state === ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state) {
-                defaultReason = vm.reasons.find(function(reason) {
-                    return reason.tags.includes('p2p') && reason.reasonType === 'DEBIT';
-                });
-            }
+
             return {
                 assignment: previousAdded.assignment,
                 srcDstFreeText: previousAdded.srcDstFreeText,
-                reason: defaultReason,
+                reason: (adjustmentType.state === ADJUSTMENT_TYPE.KIT_UNPACK.state)
+                    ? {
+                        id: UNPACK_REASONS.KIT_UNPACK_REASON_ID
+                    } : previousAdded.reason,
                 reasonFreeText: previousAdded.reasonFreeText,
                 occurredDate: defaultDate
             };
@@ -272,8 +266,7 @@
          */
         vm.validateAssignment = function(lineItem) {
             if (adjustmentType.state !== ADJUSTMENT_TYPE.ADJUSTMENT.state &&
-                adjustmentType.state !== ADJUSTMENT_TYPE.KIT_UNPACK.state &&
-                adjustmentType.state !== ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state) {
+                adjustmentType.state !== ADJUSTMENT_TYPE.KIT_UNPACK.state) {
                 lineItem.$errors.assignmentInvalid = isEmpty(lineItem.assignment);
             }
             return lineItem;
@@ -293,6 +286,21 @@
             if (adjustmentType.state === 'adjustment') {
                 lineItem.$errors.reasonInvalid = isEmpty(lineItem.reason);
             }
+            return lineItem;
+        };
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name validateVVMStatus
+         *
+         * @description
+         * Validate line item VVM Status and returns self.
+         *
+         * @param {Object} lineItem line item to be validated.
+         */
+         vm.validateVVMStatus = function(lineItem) {
+            lineItem.$errors.vvmStatusInvalid = isEmpty(lineItem.vvmStatus);
             return lineItem;
         };
 
@@ -413,6 +421,7 @@
                 vm.validateDate(item);
                 vm.validateAssignment(item);
                 vm.validateReason(item);
+                vm.validateVVMStatus(item);
             });
             return _.chain(vm.addedLineItems)
                 .groupBy(function(item) {
@@ -477,8 +486,16 @@
                     })
                     .catch(function(response) {
                         if (response.data.messageKey ===
-                            'referenceData.error.lot.lotCode.mustBeUnique') {
-                            errorLots.push(lot.lotCode);
+                            'referenceData.error.lot.lotCode.mustBeUnique' ||
+                            response.data.messageKey ===
+                            'referenceData.error.lot.tradeItem.required') {
+                            errorLots.push({
+                                lotCode: lot.lotCode,
+                                error: response.data.messageKey ===
+                                'referenceData.error.lot.lotCode.mustBeUnique' ?
+                                    'stockPhysicalInventoryDraft.lotCodeMustBeUnique' :
+                                    'stockPhysicalInventoryDraft.tradeItemRequuiredToAddLotCode'
+                            });
                         }
                     }));
             });
@@ -497,22 +514,10 @@
                         });
                         return addedLineItems;
                     });
-                    var adjustments = [stockAdjustmentCreationService.submitAdjustments(
-                        program.id, facility.id, addedLineItems, adjustmentType, vm.newIssueId
-                    )];
-                    if (adjustmentType.state === ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state && vm.programTo) {
-                        var creditReason = vm.reasons.find(function(reason) {
-                            return reason.tags.includes('p2p') && reason.reasonType === 'CREDIT';
-                        });
-                        var creditAddedLineItems = angular.copy(addedLineItems);
-                        creditAddedLineItems.forEach(function(item) {
-                            item.reason = creditReason;
-                        });
-                        adjustments.push(stockAdjustmentCreationService.submitAdjustments(
-                            vm.programTo.id, facility.id, creditAddedLineItems, adjustmentType, vm.newIssueId
-                        ));
-                    }
-                    $q.all(adjustments)
+
+                    stockAdjustmentCreationService.submitAdjustments(
+                        program.id, facility.id, addedLineItems, adjustmentType
+                    )
                         .then(function() {
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
@@ -532,8 +537,17 @@
                 .catch(function(errorResponse) {
                     loadingModalService.close();
                     if (errorLots) {
-                        alertService.error('stockPhysicalInventoryDraft.lotCodeMustBeUnique',
-                            errorLots.join(', '));
+                        var errorLotsReduced = errorLots.reduce(function(result, currentValue) {
+                            if (currentValue.error in result) {
+                                result[currentValue.error].push(currentValue.lotCode);
+                            } else {
+                                result[currentValue.error] = [currentValue.lotCode];
+                            }
+                            return result;
+                        }, {});
+                        for (var error in errorLotsReduced) {
+                            alertService.error(error, errorLotsReduced[error].join(', '));
+                        }
                         vm.selectedOrderableGroup = undefined;
                         vm.selectedLot = undefined;
                         vm.lotChanged();
@@ -635,7 +649,6 @@
             $stateParams.displayItems = displayItems;
             vm.displayItems = $stateParams.displayItems || [];
             vm.keyword = $stateParams.keyword;
-            vm.programTo = $stateParams.programTo;
 
             vm.orderableGroups = orderableGroups;
             vm.hasLot = false;
@@ -646,17 +659,6 @@
             vm.hasPermissionToAddNewLot = hasPermissionToAddNewLot;
             vm.canAddNewLot = false;
             initiateNewLotObject();
-
-            if (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
-                vm.isReceiveState = true;
-                vm.issueId = null;
-                vm.issueIdSelectionChange = issueIdSelectionChange;
-                fetchIssueIds();
-            }
-
-            if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state) {
-                vm.newIssueId = 'A-' + Math.floor(Math.random() * (999999999 - 100000000) + 100000000);
-            }
         }
 
         function initiateNewLotObject() {
@@ -784,58 +786,6 @@
                     }
                 });
             }
-        }
-
-        function issueIdSelectionChange() {
-            stockAdjustmentCreationService.getFacilityIssueId(program.id,
-                facility.id,
-                vm.issueId).then(function(results) {
-                vm.addedLineItems.length = 0;
-                results.forEach(function(item) {
-                    vm.orderableGroups.forEach(function(array) {
-                        array.forEach(function(arrayItem) {
-                            var isOrderable = arrayItem.orderable.id ===  item.orderableId;
-                            var isLot = arrayItem.lot === item.lotId
-                                        || (arrayItem.lot !==  null && arrayItem.lot.id === item.lotId);
-                            if (isOrderable && isLot) {
-                                var selectedItem  = orderableGroupService
-                                    .findByLotInOrderableGroup(array, arrayItem.lot);
-                                selectedItem.stockOnHand = array.stockOnHand;
-                                var lineItem = _.extend({
-                                    $errors: {},
-                                    $previewSOH: selectedItem.stockOnHand,
-                                    extraData: item.extraData
-                                },
-                                selectedItem, copyDefaultValue());
-                                lineItem.quantity = item.quantity;
-                                if (item.extraData !== null) {
-                                    lineItem.vvmStatus = item.extraData.vvmStatus;
-                                }
-                                vm.srcDstAssignments.forEach(function(assignment) {
-                                    if (assignment.node.referenceId === item.supplyingFacilityId) {
-                                        lineItem.assignment = assignment;
-                                    }
-                                });
-                                vm.reasons.forEach(function(reason) {
-                                    if (reason.name === 'Transfer In') {
-                                        lineItem.reason = reason;
-                                    }
-                                });
-                                vm.addedLineItems.unshift(lineItem);
-                            }
-                        });
-                    });
-                });
-            });
-        }
-
-        function fetchIssueIds() {
-            $scope.$evalAsync(function() {
-                stockAdjustmentCreationService.getFacilityIssueIdNumber(program.id,
-                    facility.id).then(function(result) {
-                    vm.issueIds = result;
-                });
-            });
         }
 
         onInit();
