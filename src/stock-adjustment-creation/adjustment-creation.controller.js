@@ -299,6 +299,22 @@
         /**
          * @ngdoc method
          * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name validateVVMStatus
+         *
+         * @description
+         * Validate line item VVM Status and returns self.
+         *
+         * @param {Object} lineItem line item to be validated.
+         */
+        vm.validateVVMStatus = function(lineItem) {
+            lineItem.$errors.vvmStatusInvalid = isEmpty(lineItem.vvmStatus);
+            return lineItem;
+        };
+
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
          * @name lotChanged
          *
          * @description
@@ -413,6 +429,7 @@
                 vm.validateDate(item);
                 vm.validateAssignment(item);
                 vm.validateReason(item);
+                vm.validateVVMStatus(item);
             });
             return _.chain(vm.addedLineItems)
                 .groupBy(function(item) {
