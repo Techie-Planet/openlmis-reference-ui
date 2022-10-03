@@ -116,7 +116,7 @@
                             ng-class="{'error': lineItem.$errors.quantityInvalid}"
                             ng-change="vm.validateQuantity(lineItem)" ng-blur="vm.validateQuantity(lineItem)" positive-integer/>
                     </td>
-                    <td ng-if="vm.showVVMStatusColumn"  openlmis-invalid="{{lineItem.$errors.vvmStatusInvalid ? 'openlmisForm.required' : '' | message}}">
+                    <td ng-if="vm.showVVMStatusColumn"  openlmis-invalid="{{lineItem.orderable.extraData.useVVM == 'true' && lineItem.$errors.vvmStatusInvalid ? 'openlmisForm.required' : '' | message}}">
                         <select ng-if="lineItem.orderable.extraData.useVVM == 'true'"
                             ng-model="lineItem.vvmStatus"
                             ng-options="status as vm.getStatusDisplay(status) for status in vm.vvmStatuses"
