@@ -307,7 +307,9 @@
          * @param {Object} lineItem line item to be validated.
          */
         vm.validateVVMStatus = function(lineItem) {
-            lineItem.$errors.vvmStatusInvalid = isEmpty(lineItem.vvmStatus);
+            if (lineItem.orderable.extraData.useVVM == 'true') {
+                lineItem.$errors.vvmStatusInvalid = isEmpty(lineItem.vvmStatus);
+            }
             return lineItem;
         };
 
