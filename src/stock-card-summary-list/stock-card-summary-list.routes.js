@@ -28,7 +28,7 @@
             isOffline: true,
             url: '/stockCardSummaries'
                 + '?facility&program&supervised&page&size&includeInactive'
-                + '&productCode&productName&lotCode&vvmStatus',
+                + '&hideZeroItems&productCode&productName&lotCode&vvmStatus',
             label: 'stockCardSummaryList.stockOnHand',
             priority: 1,
             showInNavigation: true,
@@ -54,6 +54,7 @@
                     paramsCopy.facilityId = $stateParams.facility;
                     paramsCopy.programId = $stateParams.program;
                     paramsCopy.includeInactive = $stateParams.includeInactive;
+                    paramsCopy.hideZeroItems = $stateParams.hideZeroItems;
 
                     paramsCopy.orderableCode = $stateParams.productCode;
                     paramsCopy.orderableName = $stateParams.productName;

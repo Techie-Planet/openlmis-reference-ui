@@ -32,6 +32,16 @@
                 {{'stockPhysicalInventoryDraft.includeInactiveItems' | message}}
             </label>
 
+            <label for="hideZeroItems">
+                <input id="hideZeroItems"
+                       type="checkbox"
+                       name="hideZeroItems"
+                       ng-true-value="'true'"
+                       ng-false-value="'false'"
+                       ng-model="vm.hideZeroItems"/>
+                {{'stockCardSummaryList.hideZeroItems' | message}}
+            </label>
+
             <label for="productCode">{{'stockCardSummaryList.productCode' | message}}</label>
             <input id="productCode" type="text" ng-model="vm.productCode"/>
 

@@ -128,6 +128,17 @@
         vm.includeInactive = $stateParams.includeInactive;
 
         /**
+         * @ngdoc property
+         * @propertyOf stock-card-summary-list.controller:StockCardSummaryListController
+         * @name hideZeroItems
+         * @type {Boolean}
+         *
+         * @description
+         * When true, hides stock items with zero values
+         */
+         vm.hideZeroItems = $stateParams.hideZeroItems;
+
+        /**
          * @ngdoc method
          * @methodOf stock-card-summary-list.controller:StockCardSummaryListController
          * @name getStockSummaries
@@ -218,6 +229,7 @@
             stateParams.program = vm.program.id;
             stateParams.supervised = vm.isSupervised;
             stateParams.includeInactive = vm.includeInactive;
+            stateParams.hideZeroItems = vm.hideZeroItems;
             stateParams.productCode = vm.productCode;
             stateParams.productName = vm.productName;
             stateParams.lotCode = vm.lotCode;
