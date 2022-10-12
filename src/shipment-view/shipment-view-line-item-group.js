@@ -173,7 +173,7 @@
 
     function fillByVVMStatus(lineItems, quantityToFill) {
         var sortedLineItems = lineItems.sort(function(a, b) {
-            return a.vvmStatus > b.vvmStatus ? 1 : -1;
+            return a.vvmStatus > b.vvmStatus ? -1 : 1;
         });
 
         for (var i = 0; i < sortedLineItems.length; i++) {

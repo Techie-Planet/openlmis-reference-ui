@@ -1,7 +1,9 @@
 <h2>
     {{vm.key('title') | message:{'facilityCode': vm.facility.code, 'facilityName': vm.facility.name, 'program': vm.program.name} }}
 </h2>
-
+<div style="width: '100';">
+    <span ng-if="vm.newIssueId">Transaction ID: {{vm.newIssueId}}</span>
+</div>
 <div class="stock-adjustment-creation">
     <section class="openlmis-table-container">
         <form ng-submit="vm.search()">
@@ -14,6 +16,14 @@
         </form>
         <section class="is-primary">
             <form class="form-inline" ng-submit="vm.addProduct()" name="productForm">
+                <div>
+                    <select ng-if="vm.isReceiveState" id="issueIdSelect" ng-model="vm.issueId" 
+                        placeholder="Transaction ID"
+                        no-auto-select="false"
+                        ng-options="issueId for issueId in vm.issueIds"
+                        ng-change="vm.issueIdSelectionChange()">
+                    </select>
+                </div>
                 <div>
                     <label for="productSelect">{{vm.key('product') | message}}</label>
                     <select id="productSelect" ng-model="vm.selectedOrderableGroup"
@@ -55,6 +65,7 @@
                     <th ng-show="vm.hasLot">{{vm.key('lotCode') | message}}</th>
                     <th ng-show="vm.hasLot">{{vm.key('expiryDate') | message}}</th>
                     <th>{{vm.key('soh') | message}}</th>
+                    <th ng-show="vm.programTo">Program Transfer To</th>
                     <th ng-show="vm.srcDstAssignments">{{vm.key('srcDstLabel') | message}}</th>
                     <th ng-if="vm.showReasonDropdown">{{vm.key('reason') | message}}</th>
                     <th ng-if="vm.showReasonDropdown">{{vm.key('reasonComments') | message}}</th>
@@ -82,6 +93,7 @@
                     </td>
                     <td ng-show="vm.hasLot">{{lineItem.lot.expirationDate | openlmisDate}}</td>
                     <td align="right">{{lineItem.$previewSOH}}</td>
+                    <td ng-show="vm.programTo">{{vm.programTo.name}}</td>
                     <td ng-show="vm.srcDstAssignments" openlmis-invalid="{{lineItem.$errors.assignmentInvalid ? 'openlmisForm.required' : '' | message}}">
                         <select ng-model="lineItem.assignment"
                             ng-change="vm.validateAssignment(lineItem);vm.clearFreeText(lineItem, 'srcDstFreeText')"
@@ -91,7 +103,9 @@
                     <td ng-if="vm.showReasonDropdown" openlmis-invalid="{{lineItem.$errors.reasonInvalid ? 'openlmisForm.required' : '' | message}}" class="digit-cell">
                         <select ng-model="lineItem.reason"
                             ng-change="vm.validateReason(lineItem);vm.clearFreeText(lineItem, 'reasonFreeText')"
-                            ng-options="reason.name for reason in vm.reasons track by reason.id" autofocus>
+                            ng-options="reason.name for reason in vm.reasons track by reason.id" 
+                            ng-disabled="vm.programTo"
+                            autofocus>
                         </select>
                     </td>
                     <td ng-if="vm.showReasonDropdown">
@@ -102,10 +116,11 @@
                             ng-class="{'error': lineItem.$errors.quantityInvalid}"
                             ng-change="vm.validateQuantity(lineItem)" ng-blur="vm.validateQuantity(lineItem)" positive-integer/>
                     </td>
-                    <td ng-if="vm.showVVMStatusColumn">
+                    <td ng-if="vm.showVVMStatusColumn"  openlmis-invalid="{{lineItem.orderable.extraData.useVVM == 'true' && lineItem.$errors.vvmStatusInvalid ? 'openlmisForm.required' : '' | message}}">
                         <select ng-if="lineItem.orderable.extraData.useVVM == 'true'"
                             ng-model="lineItem.vvmStatus"
                             ng-options="status as vm.getStatusDisplay(status) for status in vm.vvmStatuses"
+                            ng-change="vm.validateVVMStatus(lineItem)"
                             placeholder="{{'stockAdjustmentCreation.selectStatus' | message}}">
                         </select>
                     </td>

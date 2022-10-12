@@ -90,12 +90,13 @@
                         openlmis-invalid="{{lineItem.quantityInvalid ? lineItem.quantityInvalid : ''}}"
                         positive-integer/>
                 </td>
-                <td ng-if="vm.showVVMStatusColumn" class="digit-cell">
+                <td ng-if="vm.showVVMStatusColumn" class="digit-cell" 
+                    openlmis-invalid="{{lineItem.orderable.extraData.useVVM == 'true' && lineItem.vvmStatusInvalid ? 'openlmisForm.required' : '' | message}}">
                     <select ng-if="lineItem.orderable.extraData.useVVM == 'true'"
                         ng-model="lineItem.vvmStatus"
                         ng-options="status as vm.getStatusDisplay(status) for status in vm.vvmStatuses"
                         placeholder="{{'stockPhysicalInventoryDraft.selectStatus' | message}}"
-                        ng-change="vm.cacheDraft()">
+                        ng-change="vm.validateVVMStatus(lineItem);vm.cacheDraft()">
                     </select>
                 </td>
                 <td class="reasons-cell" >

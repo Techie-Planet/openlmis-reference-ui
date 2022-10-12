@@ -1,0 +1,12 @@
+{
+  "stockProgramTransfer.programTransfer": "Program Transfer",
+  "stockProgramTransfer.proceed": "Make Program Transfer",
+  "stockProgramTransfer.program": "Program",
+  "stockProgramTransfer.action": "Action",
+  "stockProgramTransfer.title": "Create Transfer for ${facility}",
+  "stockProgramTransfer.noProgramAvailable": "There are no programs for this facility. Please contact the Admin.",
+  "stockProgramTransfer.offline1": "You are offline. There are Program Transfer events pending. They will be synchronized automatically when the internet connection returns.",
+  "stockProgramTransfer.offline2": "Please check ",
+  "stockProgramTransfer.pendingOfflineEvents": "Pending offline events",
+  "stockProgramTransfer.offline3": " for details."
+}
