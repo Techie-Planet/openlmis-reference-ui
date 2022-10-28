@@ -547,24 +547,25 @@
                                     $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
                                 })
+                                .finally(function() {
+                                    $state.go('openlmis.stockmanagement.stockCardSummaries', {
+                                        facility: facility.id,
+                                        program: program.id,
+                                        active: STOCKCARD_STATUS.ACTIVE
+                                    });
+                                })
                             }
-                            // $state.go('openlmis.stockmanagement.stockCardSummaries', {
-                            //     facility: facility.id,
-                            //     program: program.id,
-                            //     active: STOCKCARD_STATUS.ACTIVE
-                            // });
+                            $state.go('openlmis.stockmanagement.stockCardSummaries', {
+                                facility: facility.id,
+                                program: program.id,
+                                active: STOCKCARD_STATUS.ACTIVE
+                            });
                         }, function(errorResponse) {
                             loadingModalService.close();
                             alertService.error(errorResponse.data.message);
                         });
                 })
-                .finally(function() {
-                    $state.go('openlmis.stockmanagement.stockCardSummaries', {
-                        facility: facility.id,
-                        program: program.id,
-                        active: STOCKCARD_STATUS.ACTIVE
-                    });
-                })
+                
                 .catch(function(errorResponse) {
                     loadingModalService.close();
                     if (errorLots) {
@@ -730,6 +731,7 @@
          * @return {String} the prepared URL
          */
          function getPrintUrl(id, type) {
+            console.log(type)
             return stockmanagementUrlFactory('/api' 
             + type === "issue" ? '/issueSummary' : '/issueReceive' 
             + '/print/?stockEventId=' + id 
