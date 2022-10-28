@@ -4,5 +4,8 @@
     "stockAdjustmentCreation.noLotDefined": "No Lot/Batch Number defined",
     "stockAdjustmentCreation.productHasNoLots": "No Lot/Batch Number defined",
     "stockAdjustmentCreation.reasonComments": "Comments",
-    "stockAdjustmentCreation.manufacturer": "Manufacturer"
+    "stockAdjustmentCreation.manufacturer": "Manufacturer",
+    "stockAdjustmentCreation.printModal.label": "Do you want to print this stock adjustment?",
+    "stockAdjustmentCreation.printModal.yes": "Print",
+    "stockAdjustmentCreation.printModal.no": "No"
 }

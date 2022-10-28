@@ -538,6 +538,16 @@
                             } else {
                                 notificationService.success(vm.key('submitted'));
                             }
+                            if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state 
+                                || adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
+                                confirmService.confirm('stockAdjustmentCreation.printModal.label',
+                                'stockAdjustmentCreation.printModal.yes',
+                                'stockAdjustmentCreation.printModal.no')
+                                .then(function(response) {
+                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
+                                        '_blank');
+                                })
+                            }
                             $state.go('openlmis.stockmanagement.stockCardSummaries', {
                                 facility: facility.id,
                                 program: program.id,
@@ -700,6 +710,24 @@
                 return totalPages > 0 ? totalPages - 1 : 0;
             }
             return pageNumber;
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name getPrintUrl
+         *
+         * @description
+         * Prepares a print URL for the given stock adjustment.
+         *
+         * @return {String} the prepared URL
+         */
+         function getPrintUrl(id, type) {
+            return stockmanagementUrlFactory('/api' 
+            + type === "issue" ? '/issueSummary' : '/issueReceive' 
+            + '/print/?stockEventId=' + id 
+            + '&program=' + program.id 
+            + '&facility=' + facility.id);
         }
 
         /**
