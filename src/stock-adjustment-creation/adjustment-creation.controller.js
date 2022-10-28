@@ -548,15 +548,22 @@
                                         '_blank');
                                 })
                             }
-                            $state.go('openlmis.stockmanagement.stockCardSummaries', {
-                                facility: facility.id,
-                                program: program.id,
-                                active: STOCKCARD_STATUS.ACTIVE
-                            });
+                            // $state.go('openlmis.stockmanagement.stockCardSummaries', {
+                            //     facility: facility.id,
+                            //     program: program.id,
+                            //     active: STOCKCARD_STATUS.ACTIVE
+                            // });
                         }, function(errorResponse) {
                             loadingModalService.close();
                             alertService.error(errorResponse.data.message);
                         });
+                })
+                .finally(function() {
+                    $state.go('openlmis.stockmanagement.stockCardSummaries', {
+                        facility: facility.id,
+                        program: program.id,
+                        active: STOCKCARD_STATUS.ACTIVE
+                    });
                 })
                 .catch(function(errorResponse) {
                     loadingModalService.close();
