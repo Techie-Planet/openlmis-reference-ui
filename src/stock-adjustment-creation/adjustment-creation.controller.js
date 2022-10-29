@@ -33,7 +33,7 @@
         'orderableGroups', 'reasons', 'confirmService', 'messageService', 'user', 'adjustmentType',
         'srcDstAssignments', 'stockAdjustmentCreationService', 'notificationService', 'offlineService',
         'orderableGroupService', 'MAX_INTEGER_VALUE', 'VVM_STATUS', 'loadingModalService', 'alertService',
-        'dateUtils', 'displayItems', 'ADJUSTMENT_TYPE', 'UNPACK_REASONS', 'REASON_TYPES', 'STOCKCARD_STATUS',
+        'dateUtils', 'displayItems',  'accessTokenFactory', '$window', 'ADJUSTMENT_TYPE', 'UNPACK_REASONS', 'REASON_TYPES', 'STOCKCARD_STATUS',
         'hasPermissionToAddNewLot', 'LotResource', '$q', 'editLotModalService', 'moment'
     ];
 
@@ -41,7 +41,7 @@
                         facility, orderableGroups, reasons, confirmService, messageService, user,
                         adjustmentType, srcDstAssignments, stockAdjustmentCreationService, notificationService,
                         offlineService, orderableGroupService, MAX_INTEGER_VALUE, VVM_STATUS, loadingModalService,
-                        alertService, dateUtils, displayItems, ADJUSTMENT_TYPE, UNPACK_REASONS, REASON_TYPES,
+                        alertService, dateUtils, displayItems, accessTokenFactory, $window, ADJUSTMENT_TYPE, UNPACK_REASONS, REASON_TYPES,
                         STOCKCARD_STATUS, hasPermissionToAddNewLot, LotResource, $q, editLotModalService, moment) {
         var vm = this,
             previousAdded = {};
@@ -547,13 +547,13 @@
                                     $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
                                 })
-                                .finally(function() {
-                                    $state.go('openlmis.stockmanagement.stockCardSummaries', {
-                                        facility: facility.id,
-                                        program: program.id,
-                                        active: STOCKCARD_STATUS.ACTIVE
-                                    });
-                                })
+                                // .finally(function() {
+                                //     $state.go('openlmis.stockmanagement.stockCardSummaries', {
+                                //         facility: facility.id,
+                                //         program: program.id,
+                                //         active: STOCKCARD_STATUS.ACTIVE
+                                //     });
+                                // })
                             }
                             $state.go('openlmis.stockmanagement.stockCardSummaries', {
                                 facility: facility.id,
