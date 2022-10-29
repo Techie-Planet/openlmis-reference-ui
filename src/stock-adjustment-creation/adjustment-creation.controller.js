@@ -541,6 +541,7 @@
                             }
                             if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state 
                                 || adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
+                                    console.log(response + " before print")
                                 confirmService.confirm('stockAdjustmentCreation.printModal.label',
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
