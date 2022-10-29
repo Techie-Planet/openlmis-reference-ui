@@ -532,7 +532,7 @@
                         ));
                     }
                     $q.all(adjustments)
-                        .then(function() {
+                        .then(function(response) {
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
                             } else {
@@ -543,7 +543,7 @@
                                 confirmService.confirm('stockAdjustmentCreation.printModal.label',
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
-                                .then(function(response) {
+                                .then(function() {
                                     $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
                                 })
