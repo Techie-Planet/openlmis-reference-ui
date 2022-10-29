@@ -533,6 +533,7 @@
                     }
                     $q.all(adjustments)
                         .then(function(response) {
+                            console.log(response + " after call")
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
                             } else {
@@ -546,6 +547,7 @@
                                 .then(function() {
                                     $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
+                                        console.log(response + " after print");
                                 })
                                 // .finally(function() {
                                 //     $state.go('openlmis.stockmanagement.stockCardSummaries', {
