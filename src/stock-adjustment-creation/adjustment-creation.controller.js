@@ -532,7 +532,7 @@
                             vm.programTo.id, facility.id, creditAddedLineItems, adjustmentType, vm.newIssueId
                         ));
                     }
-                    console.log(responses)
+                    console.log(responses) 
                     $q.all(adjustments)
                         .then(function(response) {
                             console.log(response + " after call")
