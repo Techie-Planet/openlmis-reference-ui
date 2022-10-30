@@ -532,10 +532,9 @@
                             vm.programTo.id, facility.id, creditAddedLineItems, adjustmentType, vm.newIssueId
                         ));
                     }
-                    console.log(responses) 
                     $q.all(adjustments)
-                        .then(function(response) {
-                            console.log(response + " after call")
+                        .then(function() {
+                            console.log(" after call")
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
                             } else {
@@ -543,16 +542,17 @@
                             }
                             if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state 
                                 || adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
-                                    console.log(response + " before print")
+                                    console.log(" before print")
                                 confirmService.confirm('stockAdjustmentCreation.printModal.label',
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
-                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
+                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(adjustmentType.state)),
                                         '_blank');
                                     // $window.open("google.com",
                                     //     '_blank');
-                                        console.log(response + " after print");
+                                        console.log(responses);
+                                        console.log("after print")
                                 })
                                 // .finally(function() {
                                 //     $state.go('openlmis.stockmanagement.stockCardSummaries', {
@@ -737,7 +737,7 @@
          *
          * @return {String} the prepared URL
          */
-         function getPrintUrl(id, type) {
+         function getPrintUrl(type) {
             console.log(type)
             let url;
             if(type === "issue"){
@@ -747,7 +747,7 @@
                 + '&facility=' + facility.id;
             } else{
                 url =  '/api/receiveSummary'
-                + '/print?stockEventId=' + id 
+                + '/print?stockEventId=123'
                 + '&program=' + program.id 
                 + '&facility=' + facility.id;
             }
