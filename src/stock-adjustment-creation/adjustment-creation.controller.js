@@ -468,7 +468,7 @@
 
         function confirmSubmit() {
             loadingModalService.open();
-            conaole.log("confirm submit started")
+            console.log("confirm submit started")
 
             var addedLineItems = angular.copy(vm.addedLineItems);
 
