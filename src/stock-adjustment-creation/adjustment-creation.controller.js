@@ -468,6 +468,7 @@
 
         function confirmSubmit() {
             loadingModalService.open();
+            conaole.log("confirm submit started")
 
             var addedLineItems = angular.copy(vm.addedLineItems);
 
@@ -531,6 +532,7 @@
                             vm.programTo.id, facility.id, creditAddedLineItems, adjustmentType, vm.newIssueId
                         ));
                     }
+                    console.log(responses)
                     $q.all(adjustments)
                         .then(function(response) {
                             console.log(response + " after call")
