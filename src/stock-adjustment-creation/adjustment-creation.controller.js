@@ -468,7 +468,6 @@
 
         function confirmSubmit() {
             loadingModalService.open();
-            console.log("confirm submit started")
 
             var addedLineItems = angular.copy(vm.addedLineItems);
 
@@ -533,8 +532,8 @@
                         ));
                     }
                     $q.all(adjustments)
-                        .then(function() {
-                            console.log(" after call")
+                        .then(function(response) {
+                            console.log(response + " after call")
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
                             } else {
@@ -542,17 +541,16 @@
                             }
                             if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state 
                                 || adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
-                                    console.log(" before print")
+                                    console.log(response + " before print")
                                 confirmService.confirm('stockAdjustmentCreation.printModal.label',
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
-                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(adjustmentType.state)),
+                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
                                     // $window.open("google.com",
                                     //     '_blank');
-                                        console.log(responses);
-                                        console.log("after print")
+                                        console.log(response + " after print");
                                 })
                                 // .finally(function() {
                                 //     $state.go('openlmis.stockmanagement.stockCardSummaries', {
