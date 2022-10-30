@@ -548,10 +548,10 @@
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
-                                    // $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
-                                    //     '_blank');
-                                    $window.open("google.com",
+                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
+                                    // $window.open("google.com",
+                                    //     '_blank');
                                         console.log(response + " after print");
                                 })
                                 // .finally(function() {
@@ -739,11 +739,20 @@
          */
          function getPrintUrl(id, type) {
             console.log(type)
-            return stockmanagementUrlFactory('/api' 
-            + type === "issue" ? '/issueSummary' : '/issueReceive' 
-            + '/print/?stockEventId=' + id 
-            + '&program=' + program.id 
-            + '&facility=' + facility.id);
+            let url;
+            if(type === "issue"){
+                url =  '/api/issueSummary'
+                + '/print?stockEventId=' + id 
+                + '&program=' + program.id 
+                + '&facility=' + facility.id;
+            } else{
+                url =  '/api/receiveSummary'
+                + '/print?stockEventId=' + id 
+                + '&program=' + program.id 
+                + '&facility=' + facility.id;
+            }
+            console.log(url);
+            return stockmanagementUrlFactory(url);
         }
 
         /**
