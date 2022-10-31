@@ -550,7 +550,7 @@
                                 .then(function() {
                                     // $window.open(getPrintUrl(adjustmentType.state),
                                     //     '_blank');
-                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(adjustmentType.state)),
+                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
                                     // $window.open("google.com",
                                     //     '_blank');
@@ -739,17 +739,17 @@
          *
          * @return {String} the prepared URL
          */
-         function getPrintUrl(type) {
+         function getPrintUrl(id, type) {
             console.log(type)
             let url;
             if(type === "issue"){
                 url =  '/api/issueSummary'
-                + '/print?stockEventId=123'
+                + '/print?stockEventId=' + id
                 + '&program=' + program.id 
                 + '&facility=' + facility.id;
             } else{
                 url =  '/api/receiveSummary'
-                + '/print?stockEventId=123'
+                + '/print?stockEventId='  + id
                 + '&program=' + program.id 
                 + '&facility=' + facility.id;
             }
