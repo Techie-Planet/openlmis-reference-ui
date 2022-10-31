@@ -103,8 +103,9 @@
             return repository.create(event)
                 .then(function(response) {
                     $rootScope.$emit('openlmis-referencedata.offline-events-indicator');
+                    console.log(response)
                     // return response;
-                    return Object.values(response[0]).join("");
+                    return Object.values(response).join("");
                 });
         }
 
