@@ -532,8 +532,9 @@
                         ));
                     }
                     $q.all(adjustments)
-                        .then(function() {
-                            console.log(" after call")
+                        .then(function(response) {
+                            console.log (response)
+                            // console.log(" after call")
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
                             } else {
@@ -550,7 +551,7 @@
                                         '_blank');
                                     // $window.open("google.com",
                                     //     '_blank');
-                                        console.log(response + " after print");
+                                        console.log(" after print");
                                 })
                                 // .finally(function() {
                                 //     $state.go('openlmis.stockmanagement.stockCardSummaries', {
