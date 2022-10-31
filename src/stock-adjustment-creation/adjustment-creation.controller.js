@@ -504,6 +504,7 @@
 
             return $q.all(lotPromises)
                 .then(function(responses) {
+                    console.log(responses)
                     if (errorLots !== undefined && errorLots.length > 0) {
                         return $q.reject();
                     }
