@@ -104,7 +104,7 @@
                 .then(function(response) {
                     $rootScope.$emit('openlmis-referencedata.offline-events-indicator');
                     // return response;
-                    return Object.values(response[0][0]).join("");
+                    return Object.values(response[0]).join("");
                 });
         }
 
