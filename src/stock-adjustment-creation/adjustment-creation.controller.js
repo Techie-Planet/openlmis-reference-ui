@@ -547,8 +547,10 @@
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
-                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(adjustmentType.state)),
+                                    $window.open(getPrintUrl(adjustmentType.state),
                                         '_blank');
+                                    // $window.open(accessTokenFactory.addAccessToken(getPrintUrl(adjustmentType.state)),
+                                    //     '_blank');
                                     // $window.open("google.com",
                                     //     '_blank');
                                         console.log(" after print");
