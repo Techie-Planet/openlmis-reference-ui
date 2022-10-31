@@ -740,7 +740,7 @@
             let url;
             if(type === "issue"){
                 url =  '/api/issueSummary'
-                + '/print?stockEventId=' + id 
+                + '/print?stockEventId=123'
                 + '&program=' + program.id 
                 + '&facility=' + facility.id;
             } else{
