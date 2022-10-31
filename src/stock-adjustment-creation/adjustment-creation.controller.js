@@ -33,7 +33,7 @@
         'orderableGroups', 'reasons', 'confirmService', 'messageService', 'user', 'adjustmentType',
         'srcDstAssignments', 'stockAdjustmentCreationService', 'notificationService', 'offlineService',
         'orderableGroupService', 'MAX_INTEGER_VALUE', 'VVM_STATUS', 'loadingModalService', 'alertService',
-        'dateUtils', 'displayItems',  'accessTokenFactory', '$window', 'ADJUSTMENT_TYPE', 'UNPACK_REASONS', 'REASON_TYPES', 'STOCKCARD_STATUS',
+        'dateUtils', 'displayItems',  'accessTokenFactory', 'stockmanagementUrlFactory', '$window', 'ADJUSTMENT_TYPE', 'UNPACK_REASONS', 'REASON_TYPES', 'STOCKCARD_STATUS',
         'hasPermissionToAddNewLot', 'LotResource', '$q', 'editLotModalService', 'moment'
     ];
 
@@ -41,7 +41,7 @@
                         facility, orderableGroups, reasons, confirmService, messageService, user,
                         adjustmentType, srcDstAssignments, stockAdjustmentCreationService, notificationService,
                         offlineService, orderableGroupService, MAX_INTEGER_VALUE, VVM_STATUS, loadingModalService,
-                        alertService, dateUtils, displayItems, accessTokenFactory, $window, ADJUSTMENT_TYPE, UNPACK_REASONS, REASON_TYPES,
+                        alertService, dateUtils, displayItems, accessTokenFactory, stockmanagementUrlFactory, $window, ADJUSTMENT_TYPE, UNPACK_REASONS, REASON_TYPES,
                         STOCKCARD_STATUS, hasPermissionToAddNewLot, LotResource, $q, editLotModalService, moment) {
         var vm = this,
             previousAdded = {};
@@ -547,10 +547,10 @@
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
-                                    $window.open(getPrintUrl(adjustmentType.state),
-                                        '_blank');
-                                    // $window.open(accessTokenFactory.addAccessToken(getPrintUrl(adjustmentType.state)),
+                                    // $window.open(getPrintUrl(adjustmentType.state),
                                     //     '_blank');
+                                    $window.open(accessTokenFactory.addAccessToken(getPrintUrl(adjustmentType.state)),
+                                        '_blank');
                                     // $window.open("google.com",
                                     //     '_blank');
                                         console.log(" after print");
