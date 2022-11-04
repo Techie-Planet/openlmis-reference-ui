@@ -307,12 +307,11 @@
          * @param {Object} lineItem line item to be validated.
          */
         vm.validateVVMStatus = function(lineItem) {
-            if (lineItem.orderable.extraData.useVVM == 'true') {
+            if (lineItem.orderable.extraData.useVVM === 'true') {
                 lineItem.$errors.vvmStatusInvalid = isEmpty(lineItem.vvmStatus);
             }
             return lineItem;
         };
-
 
         /**
          * @ngdoc method
@@ -516,9 +515,26 @@
                         });
                         return addedLineItems;
                     });
+
+                    //Add p2p extra info
+                    if (adjustmentType.state === ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state) {
+                        addedLineItems.forEach(function(lineItem) {
+                            if (lineItem.extraData === null) {
+                                lineItem.extraData = {};
+                            }
+                            lineItem.extraData.programFromId = program.id;
+                            lineItem.extraData.programFromName = program.name;
+                            lineItem.extraData.programToId = vm.programTo.id;
+                            lineItem.extraData.programToName = vm.programTo.name;
+                            lineItem.extraData.p2p = true;
+                        });
+                    }
+
+                    var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
                     var adjustments = [stockAdjustmentCreationService.submitAdjustments(
-                        program.id, facility.id, addedLineItems, adjustmentType, vm.newIssueId
+                        program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
                     )];
+
                     if (adjustmentType.state === ADJUSTMENT_TYPE.PROGRAM_TRANSFER.state && vm.programTo) {
                         var creditReason = vm.reasons.find(function(reason) {
                             return reason.tags.includes('p2p') && reason.reasonType === 'CREDIT';
@@ -528,7 +544,7 @@
                             item.reason = creditReason;
                         });
                         adjustments.push(stockAdjustmentCreationService.submitAdjustments(
-                            vm.programTo.id, facility.id, creditAddedLineItems, adjustmentType, vm.newIssueId
+                            vm.programTo.id, facility.id, creditAddedLineItems, adjustmentType, eventIssueId
                         ));
                     }
                     $q.all(adjustments)
@@ -666,9 +682,10 @@
             vm.canAddNewLot = false;
             initiateNewLotObject();
 
+            vm.issueId = null;
+            vm.newIssueId = null;
             if (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
                 vm.isReceiveState = true;
-                vm.issueId = null;
                 vm.issueIdSelectionChange = issueIdSelectionChange;
                 fetchIssueIds();
             }
