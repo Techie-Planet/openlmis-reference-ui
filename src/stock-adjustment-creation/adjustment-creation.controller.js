@@ -535,7 +535,7 @@
                     $q.all(adjustments)
                         .then(function(response) {
                             console.log (response)
-                            // console.log(" after call")
+                            console.log(" after call")
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
                             } else {
@@ -548,21 +548,12 @@
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
-                                    // $window.open(getPrintUrl(adjustmentType.state),
-                                    //     '_blank');
                                     $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
                                     // $window.open("google.com",
                                     //     '_blank');
                                         console.log(" after print");
                                 })
-                                // .finally(function() {
-                                //     $state.go('openlmis.stockmanagement.stockCardSummaries', {
-                                //         facility: facility.id,
-                                //         program: program.id,
-                                //         active: STOCKCARD_STATUS.ACTIVE
-                                //     });
-                                // })
                             }
                             $state.go('openlmis.stockmanagement.stockCardSummaries', {
                                 facility: facility.id,
@@ -740,20 +731,11 @@
          * @return {String} the prepared URL
          */
          function getPrintUrl(id, type) {
-            console.log(type)
-            let url;
-            if(type === "issue"){
-                url =  '/api/issueSummary'
+            const url =  '/api/issueSummary'
                 + '/print?stockEventId=' + id
                 + '&program=' + program.id 
-                + '&facility=' + facility.id;
-            } else{
-                url =  '/api/receiveSummary'
-                + '/print?stockEventId='  + id
-                + '&program=' + program.id 
-                + '&facility=' + facility.id;
-            }
-            console.log(url);
+                + '&facility=' + facility.id
+                + '&stockEventType=' + type
             return stockmanagementUrlFactory(url);
         }
 
