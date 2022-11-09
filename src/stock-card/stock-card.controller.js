@@ -163,15 +163,24 @@
          * @return {object} message for reason
          */
         function getReason(lineItem) {
+            var p2p = '';
+            if (lineItem.extraData !== null && lineItem.extraData.p2p === 'true') {
+                if (lineItem.reason.reasonType === 'CREDIT') {
+                    p2p = lineItem.extraData.programFromName;
+                } else {
+                    p2p = lineItem.extraData.programToName;
+                }
+                p2p = ' - ' + p2p;
+            }
             if (lineItem.reasonFreeText) {
                 return messageService.get('stockCard.reasonAndFreeText', {
                     name: lineItem.reason.name,
                     freeText: lineItem.reasonFreeText
-                });
+                }) + p2p;
             }
             return lineItem.reason.isPhysicalReason()
                 ? messageService.get('stockCard.physicalInventory')
-                : lineItem.reason.name;
+                : lineItem.reason.name + p2p;
         }
 
     }

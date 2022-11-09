@@ -109,7 +109,9 @@
         }
 
         function buildSourceDestinationInfo(item, adjustmentType) {
-            var res = {};
+            var res = {
+                extraData: item.extraData
+            };
             if (adjustmentType.state === 'receive') {
                 res.sourceId = item.assignment.node.id;
                 res.sourceFreeText = item.srcDstFreeText;
