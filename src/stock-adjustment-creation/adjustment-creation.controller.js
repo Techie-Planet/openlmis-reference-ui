@@ -503,7 +503,6 @@
 
             return $q.all(lotPromises)
                 .then(function(responses) {
-                    console.log(responses)
                     if (errorLots !== undefined && errorLots.length > 0) {
                         return $q.reject();
                     }
@@ -550,8 +549,6 @@
                     }
                     $q.all(adjustments)
                         .then(function(response) {
-                            console.log (response)
-                            console.log(" after call")
                             if (offlineService.isOffline()) {
                                 notificationService.offline(vm.key('submittedOffline'));
                             } else {
@@ -559,16 +556,12 @@
                             }
                             if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state 
                                 || adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
-                                    console.log(" before print")
                                 confirmService.confirm('stockAdjustmentCreation.printModal.label',
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
                                     $window.open(accessTokenFactory.addAccessToken(getPrintUrl(response, adjustmentType.state)),
                                         '_blank');
-                                    // $window.open("google.com",
-                                    //     '_blank');
-                                        console.log(" after print");
                                 })
                             }
                             $state.go('openlmis.stockmanagement.stockCardSummaries', {
