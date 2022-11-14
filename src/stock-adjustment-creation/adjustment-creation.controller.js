@@ -556,7 +556,7 @@
                             }
                             if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state 
                                 || adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state) {
-                                confirmService.confirm('stockAdjustmentCreation.printModal.label',
+                                confirmService.confirm(getPrintText(),
                                 'stockAdjustmentCreation.printModal.yes',
                                 'stockAdjustmentCreation.printModal.no')
                                 .then(function() {
@@ -748,6 +748,26 @@
                 + '&stockEventType=' + type
             return stockmanagementUrlFactory(url);
         }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name getPrintText
+         *
+         * @description
+         * Returns the print modal text.
+         *
+         * @return {String} the prepared URL
+         */
+         function getPrintText() {
+             if(adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state){
+                return 'stockAdjustmentCreation.printModal.label.receive';
+            } else{
+                return 'stockAdjustmentCreation.printModal.label.issue';
+            }
+        }
+
+        
 
         /**
          * @ngdoc method
