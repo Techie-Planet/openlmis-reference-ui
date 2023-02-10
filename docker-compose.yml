@@ -46,7 +46,7 @@ services:
     volumes:
       - '/openlmis-referencedata-ui'
   report-ui:
-    image: openlmis/report-ui:5.2.8
+    image: olmisng/report-ui-ri:superset-reports
     volumes:
       - '/openlmis-report-ui'
   requisition-ui:
