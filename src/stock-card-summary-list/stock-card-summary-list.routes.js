@@ -79,11 +79,11 @@
                     StockCardSummaryRepositoryImpl, $stateParams, offlineService, params, productList) {
                     if (offlineService.isOffline() && $stateParams.program) {
                         return paginationService.registerList(null, $stateParams, function() {
-                            return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
+                            const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
-                                .then(function(items) {
-                                    return items.content;
-                                });
+                            Array.prototype.push.apply(productList, stockCardSummaryData)
+                            return stockCardSummaryData;
+                                
                         });
                     }
                     return paginationService.registerUrl($stateParams, function(stateParams) {
@@ -91,7 +91,7 @@
 
                             const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
-                            productList = stockCardSummaryData;
+                            Array.prototype.push.apply(productList, stockCardSummaryData)
                             return stockCardSummaryData;
                         }
                         return undefined;
