@@ -46,12 +46,11 @@
                     if ($stateParams.program) {
                         console.log($stateParams);
                         debugger;
-                        var productList = [];
                         console.log("in product list");
-                        return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
+                        var productList = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                     .query({facilityId: $stateParams.facility, programId: $stateParams.program})
                         
-                        //return productList;
+                        return productList.content;
                     }
                 },
                 facilityProgramData: function(facilityProgramCacheService, offlineService, $q) {
