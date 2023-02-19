@@ -163,7 +163,7 @@
         function onInit() {
             console.log(stockCardSummaries);
             console.log(productList);
-            vm.productList = productList;
+            vm.productList = productList?.content;
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();

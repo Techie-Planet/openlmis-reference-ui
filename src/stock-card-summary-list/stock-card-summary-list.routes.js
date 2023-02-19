@@ -50,7 +50,7 @@
                         var productList = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                     .query({facilityId: $stateParams.facility, programId: $stateParams.program})
                         
-                        return productList.content;
+                        return productList;
                     }
                 },
                 facilityProgramData: function(facilityProgramCacheService, offlineService, $q) {
