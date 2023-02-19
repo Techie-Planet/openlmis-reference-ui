@@ -125,7 +125,7 @@
          * @description
          * Holds list of Products.
          */
-        vm.productList = undefined;
+        vm.productList = productList;
 
         /**
          * @ngdoc property
@@ -158,7 +158,7 @@
          * Initialization method for StockCardSummaryListController.
          */
         function onInit() {
-            vm.productList = productList;
+            // vm.productList = productList;
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();
