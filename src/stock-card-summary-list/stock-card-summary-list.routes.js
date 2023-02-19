@@ -89,11 +89,10 @@
                     return paginationService.registerUrl($stateParams, function(stateParams) {
                         if (stateParams.program) {
 
-                            return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
+                            const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
-                                .then(function(items) {
-                                    productList = items.content;
-                                });
+                            productList = stockCardSummaryData;
+                            return stockCardSummaryData;
                         }
                         return undefined;
                     }, {
