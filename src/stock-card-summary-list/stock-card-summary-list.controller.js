@@ -321,7 +321,7 @@
         /**
          * @ngdoc method
          * @methodOf stock-summary-list.controller:StockCardSummaryListController
-         * @name getProductName
+         * @name getProductCode
          *
          * @description
          * Returns the product code from a stockcardSummary.
@@ -329,7 +329,7 @@
          * @param  {Object} summary stock card summary
          * @return {String}        Product Code
          */
-        vm.getProductName = function(summary) {
+        vm.getProductCode = function(summary) {
             return summary.orderable.productCode;
         };
 
