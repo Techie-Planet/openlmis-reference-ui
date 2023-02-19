@@ -90,7 +90,10 @@
                         if (stateParams.program) {
 
                             return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
-                                .query(params);
+                                .query(params)
+                                .then(function(items) {
+                                    productList = items.content;
+                                });
                         }
                         return undefined;
                     }, {
