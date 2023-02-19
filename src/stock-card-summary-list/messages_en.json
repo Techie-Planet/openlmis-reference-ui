@@ -5,6 +5,7 @@
     "stockCardSummaryList.productHasNoLots": "No Lot/Batch Number defined",
     "stockCardSummaryList.manufacturer": "Manufacturer",
     "stockCardSummaryList.selectStatus": "Select status",
+    "stockCardSummaryList.selectProduct": "Select Product",
     "stockCardSummaryList.vvmStatus": "VVM Status",
     "stockCardSummaryList.noVVMStatus": "",
     "stockCardSummaryList.hideZeroItems": "Hide Zero Items"

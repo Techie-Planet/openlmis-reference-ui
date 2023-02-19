@@ -41,6 +41,10 @@
             },
             accessRights: [STOCKMANAGEMENT_RIGHTS.STOCK_CARDS_VIEW],
             resolve: {
+                productList: function() {
+                    var productList = []; 
+                    return productList;
+                },
                 facilityProgramData: function(facilityProgramCacheService, offlineService, $q) {
                     if (offlineService.isOffline()) {
                         return facilityProgramCacheService
@@ -70,12 +74,15 @@
                     return paramsCopy;
                 },
                 stockCardSummaries: function(paginationService, StockCardSummaryRepository,
-                    StockCardSummaryRepositoryImpl, $stateParams, offlineService, params) {
+                    StockCardSummaryRepositoryImpl, $stateParams, offlineService, params, productlist) {
                     if (offlineService.isOffline() && $stateParams.program) {
                         return paginationService.registerList(null, $stateParams, function() {
+                            debugger;
                             return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
-                                .query(params)
-                                .then(function(items) {
+                            .query(params)
+                            .then(function(items) {
+                                    productlist.length = 0; // clear the existing productlist
+                                    Array.prototype.push.apply(productlist, items.content); // add the new items to the productlist
                                     return items.content;
                                 });
                         });
@@ -83,8 +90,16 @@
                     return paginationService.registerUrl($stateParams, function(stateParams) {
                         if (stateParams.program) {
 
+                            debugger;
                             return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
-                                .query(params);
+                            .query(params)
+                            .then(function(items) {
+                                productlist.length = 0; // clear the existing productlist
+                                Array.prototype.push.apply(productlist, items.content); // add the new items to the productlist
+                                return items.content;
+                            });
+                            // return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
+                            //     .query(params);
                         }
                         return undefined;
                     }, {

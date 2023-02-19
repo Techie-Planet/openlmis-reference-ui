@@ -29,11 +29,11 @@
         .controller('StockCardSummaryListController', controller);
 
     controller.$inject = [
-        'loadingModalService', '$state', '$stateParams', 'StockCardSummaryRepositoryImpl', 'stockCardSummaries',
+        'loadingModalService', '$state', '$stateParams', 'StockCardSummaryRepositoryImpl', 'stockCardSummaries', 'productList',
         'offlineService', '$scope', 'STOCKCARD_STATUS', 'VVM_STATUS', 'messageService', 'paginationService'
     ];
 
-    function controller(loadingModalService, $state, $stateParams, StockCardSummaryRepositoryImpl, stockCardSummaries,
+    function controller(loadingModalService, $state, $stateParams, StockCardSummaryRepositoryImpl, stockCardSummaries, productList,
                         offlineService, $scope, STOCKCARD_STATUS, VVM_STATUS, messageService, paginationService) {
         var vm = this;
 
@@ -118,6 +118,17 @@
 
         /**
          * @ngdoc property
+         * @propertyOf stock-summary-list.controller:StockCardSummaryListController
+         * @name productList
+         * @type {Array}
+         *
+         * @description
+         * Holds list of Products.
+         */
+        vm.productList = undefined;
+
+        /**
+         * @ngdoc property
          * @propertyOf stock-card-summary-list.controller:StockCardSummaryListController
          * @name includeInactive
          * @type {Boolean}
@@ -147,6 +158,7 @@
          * Initialization method for StockCardSummaryListController.
          */
         function onInit() {
+            vm.productList = productList;
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();
@@ -284,6 +296,22 @@
          */
          vm.getStatusDisplay = function(status) {
             return messageService.get(VVM_STATUS.$getDisplayName(status));
+        };
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-summary-list.controller:StockCardSummaryListController
+         * @name getProductName
+         *
+         * @description
+         * Returns the product name from a stockcardSummary.
+         *
+         * @param  {Object} summary stock card summary
+         * @return {String}        Product Name
+         */
+        vm.getProductName = function(summary) {
+            debugger;
+            return summary.orderable.fullProductName;
         };
 
         /**

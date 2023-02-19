@@ -46,7 +46,12 @@
             <input id="productCode" type="text" ng-model="vm.productCode"/>
 
             <label for="productName">{{'stockCardSummaryList.productName' | message}}</label>
-            <input id="productName" type="text" ng-model="vm.productName"/>
+            <!-- <input id="productName" type="text" ng-model="vm.productName"/> -->
+            <select id="productName"
+                ng-model="vm.productName"
+                ng-options="productName as vm.getProductName(summary) for summary in vm.productList"
+                placeholder="{{'stockCardSummaryList.selectProduct' | message}}">
+            </select>
 
             <label for="lotCode">{{'stockCardSummaryList.lotCode' | message}}</label>
             <input id="lotCode" type="text" ng-model="vm.lotCode"/>
