@@ -29,11 +29,11 @@
         .controller('StockCardSummaryListController', controller);
 
     controller.$inject = [
-        'loadingModalService', '$state', '$stateParams', 'StockCardSummaryRepositoryImpl', 'stockCardSummaries', 'productList',
+        'loadingModalService', '$state', '$stateParams', 'StockCardSummaryRepositoryImpl', 'productList', 'stockCardSummaries',
         'offlineService', '$scope', 'STOCKCARD_STATUS', 'VVM_STATUS', 'messageService', 'paginationService'
     ];
 
-    function controller(loadingModalService, $state, $stateParams, StockCardSummaryRepositoryImpl, stockCardSummaries, productList,
+    function controller(loadingModalService, $state, $stateParams, StockCardSummaryRepositoryImpl, productList, stockCardSummaries,
                         offlineService, $scope, STOCKCARD_STATUS, VVM_STATUS, messageService, paginationService) {
         var vm = this;
 
@@ -125,7 +125,7 @@
          * @description
          * Holds list of Products.
          */
-        vm.productList = productList;
+        vm.productList = undefined;
 
         /**
          * @ngdoc property
@@ -158,7 +158,7 @@
          * Initialization method for StockCardSummaryListController.
          */
         function onInit() {
-            // vm.productList = productList;
+            vm.productList = productList;
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();
