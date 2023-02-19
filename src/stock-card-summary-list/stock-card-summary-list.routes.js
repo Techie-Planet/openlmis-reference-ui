@@ -91,6 +91,8 @@
 
                             const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
+                            console.log(stockCardSummaryData);
+                            console.log(productList);
                             Array.prototype.push.apply(productList, stockCardSummaryData)
                             return stockCardSummaryData;
                         }

@@ -46,6 +46,9 @@
         vm.goToPendingOfflineEventsPage = goToPendingOfflineEventsPage;
         vm.convertVVMStatusToRoman = convertVVMStatusToRoman;
 
+        console.log(productList);
+        console.log(typeof productList);
+
         /**
          * @ngdoc property
          * @propertyOf stock-card-summary-list.controller:StockCardSummaryListController
