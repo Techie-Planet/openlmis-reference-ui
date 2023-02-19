@@ -158,6 +158,8 @@
          * Initialization method for StockCardSummaryListController.
          */
         function onInit() {
+            console.log(stockCardSummaries);
+            console.log(productList);
             vm.productList = productList;
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
