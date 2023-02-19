@@ -44,11 +44,12 @@
                 productList: function(StockCardSummaryRepository,
                     StockCardSummaryRepositoryImpl, $stateParams) {
                     if ($stateParams.program) {
+                        console.log($stateParams);
                         debugger;
                         var productList = [];
                         console.log("in product list");
                         return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
-                                    .query({facilityId: $stateParams.facilityId, programId: $stateParams.programId})
+                                    .query({facilityId: $stateParams.facility, programId: $stateParams.program})
                         
                         //return productList;
                     }
