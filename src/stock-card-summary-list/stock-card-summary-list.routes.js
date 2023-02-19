@@ -45,6 +45,7 @@
                     debugger;
                     var productList = [];
                     console.log("in product list");
+                    {facilityId: $stateParams.facilityId, programId: $stateParams.programId}
                     return productList;
                 },
                 facilityProgramData: function(facilityProgramCacheService, offlineService, $q) {
@@ -81,7 +82,7 @@
                         return paginationService.registerList(null, $stateParams, function() {
                             const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
-                            Array.prototype.push.apply(productList, stockCardSummaryData)
+                            // Array.prototype.push.apply(productList, stockCardSummaryData)
                             return stockCardSummaryData;
                                 
                         });
@@ -92,8 +93,8 @@
                             const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
                             console.log(stockCardSummaryData);
-                            console.log(productList);
                             Array.prototype.push.apply(productList, stockCardSummaryData)
+                            console.log(productList);
                             return stockCardSummaryData;
                         }
                         return undefined;
