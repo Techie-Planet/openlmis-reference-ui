@@ -43,13 +43,15 @@
             resolve: {
                 productList: function(StockCardSummaryRepository,
                     StockCardSummaryRepositoryImpl, $stateParams) {
-                    debugger;
-                    var productList = [];
-                    console.log("in product list");
-                    return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
-                                .query({facilityId: $stateParams.facilityId, programId: $stateParams.programId})
-                    
-                    //return productList;
+                    if ($stateParams.program) {
+                        debugger;
+                        var productList = [];
+                        console.log("in product list");
+                        return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
+                                    .query({facilityId: $stateParams.facilityId, programId: $stateParams.programId})
+                        
+                        //return productList;
+                    }
                 },
                 facilityProgramData: function(facilityProgramCacheService, offlineService, $q) {
                     if (offlineService.isOffline()) {
