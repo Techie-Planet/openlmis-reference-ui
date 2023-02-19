@@ -6,6 +6,7 @@
     "stockCardSummaryList.manufacturer": "Manufacturer",
     "stockCardSummaryList.selectStatus": "Select status",
     "stockCardSummaryList.selectProduct": "Select Product",
+    "stockCardSummaryList.selectProductCode": "Select Product Code",
     "stockCardSummaryList.vvmStatus": "VVM Status",
     "stockCardSummaryList.noVVMStatus": "",
     "stockCardSummaryList.hideZeroItems": "Hide Zero Items"

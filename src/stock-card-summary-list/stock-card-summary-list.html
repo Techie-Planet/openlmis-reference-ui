@@ -43,7 +43,12 @@
             </label>
 
             <label for="productCode">{{'stockCardSummaryList.productCode' | message}}</label>
-            <input id="productCode" type="text" ng-model="vm.productCode"/>
+            <!-- <input id="productCode" type="text" ng-model="vm.productCode"/> -->
+            <select id="productCode"
+                ng-model="vm.productCode"
+                ng-options="productCode as vm.getProductCode(summary) for summary in vm.productList"
+                placeholder="{{'stockCardSummaryList.selectProductCode' | message}}">
+            </select>
 
             <label for="productName">{{'stockCardSummaryList.productName' | message}}</label>
             <!-- <input id="productName" type="text" ng-model="vm.productName"/> -->

@@ -163,7 +163,7 @@
         function onInit() {
             console.log(stockCardSummaries);
             console.log(productList);
-            vm.productList = productList;
+            vm.productList = productList.content;
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();
@@ -315,8 +315,22 @@
          * @return {String}        Product Name
          */
         vm.getProductName = function(summary) {
-            debugger;
             return summary.orderable.fullProductName;
+        };
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-summary-list.controller:StockCardSummaryListController
+         * @name getProductName
+         *
+         * @description
+         * Returns the product code from a stockcardSummary.
+         *
+         * @param  {Object} summary stock card summary
+         * @return {String}        Product Code
+         */
+        vm.getProductName = function(summary) {
+            return summary.orderable.productCode;
         };
 
         /**
