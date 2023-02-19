@@ -41,7 +41,8 @@
             },
             accessRights: [STOCKMANAGEMENT_RIGHTS.STOCK_CARDS_VIEW],
             resolve: {
-                productList: function() {
+                productList: function(StockCardSummaryRepository,
+                    StockCardSummaryRepositoryImpl, $stateParams) {
                     debugger;
                     var productList = [];
                     console.log("in product list");
