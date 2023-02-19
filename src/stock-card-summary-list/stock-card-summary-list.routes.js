@@ -45,7 +45,7 @@
                     debugger;
                     var productList = [];
                     console.log("in product list");
-                    {facilityId: $stateParams.facilityId, programId: $stateParams.programId}
+                    // {facilityId: $stateParams.facilityId, programId: $stateParams.programId}
                     return productList;
                 },
                 facilityProgramData: function(facilityProgramCacheService, offlineService, $q) {
