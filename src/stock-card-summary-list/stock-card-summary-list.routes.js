@@ -76,7 +76,7 @@
                     return paramsCopy;
                 },
                 stockCardSummaries: function(paginationService, StockCardSummaryRepository,
-                    StockCardSummaryRepositoryImpl, $stateParams, offlineService, params) {
+                    StockCardSummaryRepositoryImpl, $stateParams, offlineService, params, productList) {
                     if (offlineService.isOffline() && $stateParams.program) {
                         return paginationService.registerList(null, $stateParams, function() {
                             return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
