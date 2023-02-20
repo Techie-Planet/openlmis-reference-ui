@@ -10,7 +10,7 @@
     {{ 'stockCardSummaryList.offline4' | message}}
 </p>
 
-<form ng-submit="vm.loadStockCardSummaries()" class="sidebar">
+<form ng-submit="vm.search()" class="sidebar">
     <openlmis-facility-program-select
         is-supervised="vm.isSupervised"
         facility="vm.facility"

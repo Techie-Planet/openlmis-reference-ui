@@ -241,7 +241,7 @@
          */
         function search() {
             var stateParams = angular.copy($stateParams);
-
+            
             stateParams.facility = vm.facility.id;
             stateParams.program = vm.program.id;
             stateParams.supervised = vm.isSupervised;
@@ -254,7 +254,9 @@
             
             stateParams.page = 0;
             stateParams.size = 10;
-
+            
+            console.log("logging stateParams");
+            console.log(stateParams);
             $state.go('openlmis.stockmanagement.stockCardSummaries', stateParams, {
                 reload: true
             });
