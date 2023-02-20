@@ -52,10 +52,13 @@
 
             <label for="productName">{{'stockCardSummaryList.productName' | message}}</label>
             <!-- <input id="productName" type="text" ng-model="vm.productName"/> -->
+            <!-- ng-options="productName as vm.getProductName(summary) for summary in vm.productList" -->
             <select id="productName"
                 ng-model="vm.productName"
-                ng-options="productName as vm.getProductName(summary) for summary in vm.productList"
                 placeholder="{{'stockCardSummaryList.selectProduct' | message}}">
+                <option ng-repeat="summary in vm.productList" value="{{ vm.getProductName(summary) }}">
+                    {{ vm.getProductName(summary) }}
+                  </option>
             </select>
 
             <label for="lotCode">{{'stockCardSummaryList.lotCode' | message}}</label>
