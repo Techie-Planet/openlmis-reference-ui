@@ -46,9 +46,6 @@
         vm.goToPendingOfflineEventsPage = goToPendingOfflineEventsPage;
         vm.convertVVMStatusToRoman = convertVVMStatusToRoman;
 
-        console.log(productList);
-        console.log(typeof productList);
-
         /**
          * @ngdoc property
          * @propertyOf stock-card-summary-list.controller:StockCardSummaryListController
@@ -241,6 +238,7 @@
          */
         function search() {
             var stateParams = angular.copy($stateParams);
+            console.log(vm);
             
             stateParams.facility = vm.facility.id;
             stateParams.program = vm.program.id;
