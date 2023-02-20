@@ -325,7 +325,7 @@
          * @param  {Object} summary stock card summary
          * @return {String}        Product Name
          */
-        vm.getProductName = function(summary) {
+        function getProductName(summary) {
             console.log(summary);
             return summary.orderable.fullProductName;
         };
@@ -341,7 +341,7 @@
          * @param  {Object} summary stock card summary
          * @return {String}        Product Code
          */
-        vm.getProductCode = function(summary) {
+        function getProductCode(summary) {
             return summary.orderable.productCode;
         };
 
