@@ -170,8 +170,8 @@
          */
         function onInit() {
             console.log(productList);
-            vm.productNameArray = productList?.content?.map((each)=>{getProductName(each)});
-            vm.productCodeArray = productList?.content?.map((each)=>{getProductCode(each)});
+            vm.productNameArray = productList?.content?.map(vm.getProductName);
+            vm.productCodeArray = productList?.content?.map(vm.getProductCode);
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();
@@ -325,7 +325,7 @@
          * @param  {Object} summary stock card summary
          * @return {String}        Product Name
          */
-        function getProductName(summary) {
+        vm.getProductName = function (summary) {
             console.log(summary);
             return summary.orderable.fullProductName;
         };
@@ -341,7 +341,7 @@
          * @param  {Object} summary stock card summary
          * @return {String}        Product Code
          */
-        function getProductCode(summary) {
+        vm.getProductCode = function(summary) {
             return summary.orderable.productCode;
         };
 
