@@ -119,13 +119,24 @@
         /**
          * @ngdoc property
          * @propertyOf stock-summary-list.controller:StockCardSummaryListController
-         * @name productList
+         * @name productNameArray
          * @type {Array}
          *
          * @description
-         * Holds list of Products.
+         * Holds list of Product Names.
          */
-        vm.productList = undefined;
+        vm.productNameArray = undefined;
+
+        /**
+         * @ngdoc property
+         * @propertyOf stock-summary-list.controller:StockCardSummaryListController
+         * @name productCodeArray
+         * @type {Array}
+         *
+         * @description
+         * Holds list of Product Codes.
+         */
+        vm.productCodeArray = undefined;
 
         /**
          * @ngdoc property
@@ -158,9 +169,9 @@
          * Initialization method for StockCardSummaryListController.
          */
         function onInit() {
-            console.log(stockCardSummaries);
             console.log(productList);
-            vm.productList = productList?.content;
+            vm.productNameArray = productList?.content?.map((each)=>{getProductName(each)});
+            vm.productCodeArray = productList?.content?.map((each)=>{getProductCode(each)});
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();
@@ -315,6 +326,7 @@
          * @return {String}        Product Name
          */
         vm.getProductName = function(summary) {
+            console.log(summary);
             return summary.orderable.fullProductName;
         };
 

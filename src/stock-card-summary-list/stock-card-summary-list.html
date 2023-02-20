@@ -46,7 +46,7 @@
             <!-- <input id="productCode" type="text" ng-model="vm.productCode"/> -->
             <select id="productCode"
                 ng-model="vm.productCode"
-                ng-options="productCode as vm.getProductCode(summary) for summary in vm.productList"
+                ng-options="productCode as productCode for productCode in vm.productCodeArray"
                 placeholder="{{'stockCardSummaryList.selectProductCode' | message}}">
             </select>
 
@@ -54,7 +54,7 @@
             <!-- <input id="productName" type="text" ng-model="vm.productName"/> -->
             <select id="productName"
                 ng-model="vm.productName"
-                ng-options="summary as vm.getProductName(summary) for summary in vm.productList"
+                ng-options="productName as productName for productName in vm.productNameArray"
                 placeholder="{{'stockCardSummaryList.selectProduct' | message}}">
                 
             </select>
