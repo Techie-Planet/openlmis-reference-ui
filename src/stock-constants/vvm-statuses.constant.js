@@ -59,6 +59,8 @@
                 displayName = 'stockConstants.stage3';
             } else if (status === VVM_STATUS.STAGE_4) {
                 displayName = 'stockConstants.stage4';
+            } else if (status === "noVVM") {
+                displayName = 'stockConstants.noVVM';
             }
 
             return displayName;

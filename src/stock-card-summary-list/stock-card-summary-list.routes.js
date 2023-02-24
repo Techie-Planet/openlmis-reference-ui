@@ -45,7 +45,6 @@
                     StockCardSummaryRepositoryImpl, $stateParams) {
                     if ($stateParams.program) {
                         console.log($stateParams);
-                        debugger;
                         console.log("in product list");
                         var productList = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                     .query({facilityId: $stateParams.facility, programId: $stateParams.program})

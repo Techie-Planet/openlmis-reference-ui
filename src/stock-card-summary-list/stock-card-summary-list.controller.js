@@ -187,6 +187,7 @@
                     vm.displayStockCardSummaries = newList;
                 }
             }, true);
+            vm.vvmStatus.push("noVVM")
         }
 
         /**
