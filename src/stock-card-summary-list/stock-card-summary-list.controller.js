@@ -169,9 +169,9 @@
          * Initialization method for StockCardSummaryListController.
          */
         function onInit() {
-            console.log(productList);
-            vm.productNameArray = productList?.content?.map(vm.getProductName);
-            vm.productCodeArray = productList?.content?.map(vm.getProductCode);
+            const filteredProductList = filterNotEmptyProducts(productList?.content);
+            vm.productNameArray = filteredProductList?.map(vm.getProductName);
+            vm.productCodeArray = filteredProductList?.map(vm.getProductCode);
             vm.stockCardSummaries = stockCardSummaries;
             vm.displayStockCardSummaries = angular.copy(stockCardSummaries);
             checkCanFulFillIsEmpty();
@@ -250,7 +250,6 @@
          */
         function search() {
             var stateParams = angular.copy($stateParams);
-            console.log(vm);
             
             stateParams.facility = vm.facility.id;
             stateParams.program = vm.program.id;
@@ -265,8 +264,6 @@
             stateParams.page = 0;
             stateParams.size = 10;
             
-            console.log("logging stateParams");
-            console.log(stateParams);
             $state.go('openlmis.stockmanagement.stockCardSummaries', stateParams, {
                 reload: true
             });
@@ -302,6 +299,25 @@
 
         /**
          * @ngdoc method
+         * @methodOf stock-card-summary-list.controller:StockCardSummaryListController
+         * @name filterNotEmptyProducts
+         *
+         * @description
+         * Filters only not empty products.
+         * 
+         * @param  {String} productList product list
+         * @return {String}        filtered product list
+         */
+        function filterNotEmptyProducts(productList) {
+            return productList.filter(function(summary) {
+                if (summary.canFulfillForMe.length !== 0) {
+                    return summary;
+                }
+            });
+        }
+
+        /**
+         * @ngdoc method
          * @methodOf stock-summary-list.controller:StockCardSummaryListController
          * @name getStatusDisplay
          *
@@ -327,7 +343,6 @@
          * @return {String}        Product Name
          */
         vm.getProductName = function (summary) {
-            console.log(summary);
             return summary.orderable.fullProductName;
         };
 
