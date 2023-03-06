@@ -44,10 +44,12 @@
                 productList: function(StockCardSummaryRepository,
                     StockCardSummaryRepositoryImpl, $stateParams) {
                     if ($stateParams.program) {
-                        console.log($stateParams);
-                        console.log("in product list");
                         var productList = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
-                                    .query({facilityId: $stateParams.facility, programId: $stateParams.program})
+                                    .query({
+                                        facilityId: $stateParams.facility, 
+                                        programId: $stateParams.program,
+                                        nonEmptyOnly: true
+                                    })
                         
                         return productList;
                     }
@@ -86,7 +88,6 @@
                         return paginationService.registerList(null, $stateParams, function() {
                             const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
-                            // Array.prototype.push.apply(productList, stockCardSummaryData)
                             return stockCardSummaryData;
                                 
                         });
@@ -96,9 +97,6 @@
 
                             const stockCardSummaryData = new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
                                 .query(params)
-                            console.log(stockCardSummaryData);
-                            // Array.prototype.push.apply(productList, stockCardSummaryData)
-                            // console.log(productList);
                             return stockCardSummaryData;
                         }
                         return undefined;
@@ -109,35 +107,6 @@
                     });
                 },
                 
-                // productListParams: function($stateParams) {
-                //     var paramsCopy = angular.copy($stateParams);
-
-                //     paramsCopy.facilityId = $stateParams.facility;
-                //     paramsCopy.programId = $stateParams.program;
-
-                //     delete paramsCopy.facility;
-                //     delete paramsCopy.program;
-                //     delete paramsCopy.includeInactive;
-                //     delete paramsCopy.hideZeroItems;
-                //     delete paramsCopy.orderableCode;
-                //     delete paramsCopy.orderableName;
-                //     delete paramsCopy.lotCode;
-                //     delete paramsCopy.vvmStatus;
-                //     delete paramsCopy.nonEmptyOnly;
-
-                //     console.log(paramsCopy)
-
-                //     return paramsCopy;
-                // },
-                // productList: function (StockCardSummaryRepository,
-                //     StockCardSummaryRepositoryImpl, $stateParams, productListParams) {
-                //         if ($stateParams.program) {
-
-                //             return new StockCardSummaryRepository(new StockCardSummaryRepositoryImpl())
-                //                 .query(productListParams);
-                //         }
-                //         return undefined;
-                // },
             }
         });
     }
