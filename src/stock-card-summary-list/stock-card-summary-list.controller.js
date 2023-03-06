@@ -309,7 +309,7 @@
          * @return {String}        filtered product list
          */
         function filterNotEmptyProducts(productList) {
-            return productList.filter(function(summary) {
+            return productList?.filter(function(summary) {
                 if (summary.canFulfillForMe.length !== 0) {
                     return summary;
                 }
