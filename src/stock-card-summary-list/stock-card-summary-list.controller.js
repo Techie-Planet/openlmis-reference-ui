@@ -93,6 +93,16 @@
          */
          vm.vvmStatuses = VVM_STATUS;
 
+         /**
+         * @ngdoc property
+         * @propertyOf stock-summary-list.controller:StockCardSummaryListController
+         * @name vvmStatusesSOHFilter
+         * @type {Object}
+         *
+         * @description
+         * Holds list of VVM statuses used in the SOH filter.
+         */
+         vm.vvmStatusesSOHFilter = VVM_STATUS;
 
         /**
          * @ngdoc property
@@ -187,7 +197,7 @@
                     vm.displayStockCardSummaries = newList;
                 }
             }, true);
-            // vm.vvmStatuses.noVVM = "noVVM"
+            vm.vvmStatusesSOHFilter.noVVM = "noVVM"
         }
 
         /**
