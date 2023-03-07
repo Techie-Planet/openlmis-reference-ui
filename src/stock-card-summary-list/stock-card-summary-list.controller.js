@@ -102,7 +102,7 @@
          * @description
          * Holds list of VVM statuses used in the SOH filter.
          */
-         vm.vvmStatusesSOHFilter = VVM_STATUS;
+         vm.vvmStatusesSOHFilter = angular.copy(VVM_STATUS);
 
         /**
          * @ngdoc property
