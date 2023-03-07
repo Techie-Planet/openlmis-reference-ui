@@ -65,7 +65,7 @@
             <label for="vvmStatus">{{'stockCardSummaryList.vvmStatus' | message}}</label>
             <select id="vvmStatus"
                 ng-model="vm.vvmStatus"
-                ng-options="status as vm.getStatusDisplay(status) for status in vm.vvmStatuses"
+                ng-options="status as vm.getStatusDisplay(status) for status in {...vm.vvmStatuses, 'noVVM': 'noVVM'}"
                 placeholder="{{'stockCardSummaryList.selectStatus' | message}}">
             </select>
 
