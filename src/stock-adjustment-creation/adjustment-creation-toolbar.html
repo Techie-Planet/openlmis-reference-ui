@@ -3,7 +3,7 @@
     <button class="danger" ng-disabled="!vm.addedLineItems.length" ng-click="vm.removeDisplayItems()">
       {{vm.key('clear') | message}}
     </button>
-    <button class="primary" ng-disabled="!vm.addedLineItems.length" ng-click="vm.printIssueDraft()" ng-show="vm.showPrintIssueDraftButton">
+    <button class="primary" ng-disabled="!vm.addedLineItems.length" ng-click="vm.printIssueDraft()" ng-show="vm.showPrintIssueDraftButton()">
       {{vm.key('printIssueDraft') | message}}
     </button>
   </div>

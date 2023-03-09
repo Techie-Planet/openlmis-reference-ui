@@ -622,6 +622,7 @@
         }
 
         function confirmPrint() {
+            console.log("starting print")
             loadingModalService.open();
 
             var addedLineItems = angular.copy(vm.addedLineItems);
@@ -633,12 +634,15 @@
             var distinctLots = [];
             var lotResource = new LotResource();
             addedLineItems.forEach(function(lineItem) {
+                console.log("adding lot")
                 if (lineItem.lot && lineItem.$isNewItem && _.isUndefined(lineItem.lot.id) &&
                 !listContainsTheSameLot(distinctLots, lineItem.lot)) {
                     distinctLots.push(lineItem.lot);
                 }
             });
+            console.log("added lots to lineitems")
             distinctLots.forEach(function(lot) {
+                console.log("distinct lot")
                 lotPromises.push(lotResource.create(lot)
                     .then(function(createResponse) {
                         console.log(createResponse)
@@ -661,6 +665,7 @@
 
             return $q.all(lotPromises)
                 .then(function(responses) {
+                    console.log("lots done")
                     if (errorLots !== undefined && errorLots.length > 0) {
                         return $q.reject();
                     }
