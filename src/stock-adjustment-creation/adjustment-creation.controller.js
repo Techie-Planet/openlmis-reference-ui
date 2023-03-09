@@ -635,6 +635,7 @@
             var lotResource = new LotResource();
             addedLineItems.forEach(function(lineItem) {
                 console.log("adding lot")
+                console.log(lineItem);
                 if (lineItem.lot && lineItem.$isNewItem && _.isUndefined(lineItem.lot.id) &&
                 !listContainsTheSameLot(distinctLots, lineItem.lot)) {
                     console.log("condition true")
@@ -667,6 +668,7 @@
             return $q.all(lotPromises)
                 .then(function(responses) {
                     console.log("lots done")
+                    console.log(lotPromises)
                     if (errorLots !== undefined && errorLots.length > 0) {
                         return $q.reject();
                     }
