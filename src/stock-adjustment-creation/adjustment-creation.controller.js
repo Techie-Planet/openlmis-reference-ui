@@ -637,6 +637,7 @@
                 console.log("adding lot")
                 if (lineItem.lot && lineItem.$isNewItem && _.isUndefined(lineItem.lot.id) &&
                 !listContainsTheSameLot(distinctLots, lineItem.lot)) {
+                    console.log("condition true")
                     distinctLots.push(lineItem.lot);
                 }
             });
