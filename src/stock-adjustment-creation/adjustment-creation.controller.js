@@ -636,7 +636,7 @@
             addedLineItems.forEach(function(lineItem) {
                 console.log("adding lot")
                 console.log(lineItem);
-                if (lineItem.lot && lineItem.$isNewItem && _.isUndefined(lineItem.lot.id) &&
+                if (lineItem.lot && lineItem.$isNewItem &&
                 !listContainsTheSameLot(distinctLots, lineItem.lot)) {
                     console.log("condition true")
                     distinctLots.push(lineItem.lot);
