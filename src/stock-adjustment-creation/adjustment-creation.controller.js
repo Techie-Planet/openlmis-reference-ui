@@ -641,6 +641,7 @@
             distinctLots.forEach(function(lot) {
                 lotPromises.push(lotResource.create(lot)
                     .then(function(createResponse) {
+                        console.log(createResponse)
                         vm.addedLineItems.forEach(function(item) {
                             if (item.lot.lotCode === lot.lotCode) {
                                 item.$isNewItem = false;
@@ -650,6 +651,7 @@
                         return createResponse;
                     })
                     .catch(function(response) {
+                        console.log(response);
                         if (response.data.messageKey ===
                             'referenceData.error.lot.lotCode.mustBeUnique') {
                             errorLots.push(lot.lotCode);
