@@ -1,0 +1,13 @@
+<div class="openlmis-toolbar">
+  <div class="button-group">
+    <button class="danger" ng-disabled="!vm.addedLineItems.length" ng-click="vm.removeDisplayItems()">
+      {{vm.key('clear') | message}}
+    </button>
+    <button class="primary" ng-disabled="!vm.addedLineItems.length" ng-click="vm.printIssueDraft()" ng-show="vm.showPrintIssueDraftButton">
+      {{vm.key('printIssueDraft') | message}}
+    </button>
+  </div>
+  <button class="primary" ng-class="{'is-offline':vm.offline()}" ng-disabled="!vm.addedLineItems.length" ng-click="vm.submit()">
+    {{(vm.offline() ? vm.key('submitOffline') : vm.key('submit')) | message}}
+  </button>
+</div>

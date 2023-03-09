@@ -108,6 +108,33 @@
                 });
         }
 
+        function printAdjustments(programId, facilityId, lineItems, adjustmentType, newIssueId) {
+            var event = {
+                programId: programId,
+                facilityId: facilityId,
+                documentNumber: newIssueId ? newIssueId : ''
+            };
+            event.lineItems = _.map(lineItems, function(item) {
+                return angular.merge({
+                    orderableId: item.orderable.id,
+                    lotId: item.lot ? item.lot.id : null,
+                    quantity: item.quantity,
+                    extraData: {
+                        vvmStatus: item.vvmStatus
+                    },
+                    occurredDate: item.occurredDate,
+                    reasonId: item.reason ? item.reason.id : null,
+                    reasonFreeText: item.reasonFreeText
+                }, buildSourceDestinationInfo(item, adjustmentType));
+            });
+            return repository.printIssue(event)
+                .then(function(response) {
+                    // $rootScope.$emit('openlmis-referencedata.offline-events-indicator');
+                    return response;
+                    // return Object.values(response).slice(0,36).join("");
+                });
+        }
+
         function buildSourceDestinationInfo(item, adjustmentType) {
             var res = {
                 extraData: item.extraData

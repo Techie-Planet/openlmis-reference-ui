@@ -75,6 +75,16 @@
         /**
          * @ngdoc property
          * @propertyOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name showReasonDropdown
+         * @type {boolean}
+         */
+        vm.showPrintIssueDraftButton = function() {
+            return adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state;
+        };
+
+        /**
+         * @ngdoc property
+         * @propertyOf stock-adjustment-creation.controller:StockAdjustmentCreationController
          * @name showVVMStatusColumn
          * @type {boolean}
          *
@@ -383,6 +393,28 @@
         /**
          * @ngdoc method
          * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name printIssueDraft
+         *
+         * @description
+         * Print draft of all added items.
+         */
+        vm.printIssueDraft = function() {
+            // $scope.$broadcast('openlmis-form-submit');
+            if (validateAllAddedItems()) {
+                confirmService.confirm(getPrintIssueDraftText(),
+                    'stockAdjustmentCreation.printModal.yes',
+                    'stockAdjustmentCreation.printModal.no').then(confirmPrint);
+                
+            } else {
+                vm.keyword = null;
+                reorderItems();
+                alertService.error('stockAdjustmentCreation.submitInvalid');
+            }
+        };
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
          * @name orderableSelectionChanged
          *
          * @description
@@ -589,6 +621,87 @@
                 });
         }
 
+        function confirmPrint() {
+            loadingModalService.open();
+
+            var addedLineItems = angular.copy(vm.addedLineItems);
+
+            generateKitConstituentLineItem(addedLineItems);
+
+            var lotPromises = [],
+                errorLots = [];
+            var distinctLots = [];
+            var lotResource = new LotResource();
+            addedLineItems.forEach(function(lineItem) {
+                if (lineItem.lot && lineItem.$isNewItem && _.isUndefined(lineItem.lot.id) &&
+                !listContainsTheSameLot(distinctLots, lineItem.lot)) {
+                    distinctLots.push(lineItem.lot);
+                }
+            });
+            distinctLots.forEach(function(lot) {
+                lotPromises.push(lotResource.create(lot)
+                    .then(function(createResponse) {
+                        vm.addedLineItems.forEach(function(item) {
+                            if (item.lot.lotCode === lot.lotCode) {
+                                item.$isNewItem = false;
+                                addItemToOrderableGroups(item);
+                            }
+                        });
+                        return createResponse;
+                    })
+                    .catch(function(response) {
+                        if (response.data.messageKey ===
+                            'referenceData.error.lot.lotCode.mustBeUnique') {
+                            errorLots.push(lot.lotCode);
+                        }
+                    }));
+            });
+
+            return $q.all(lotPromises)
+                .then(function(responses) {
+                    if (errorLots !== undefined && errorLots.length > 0) {
+                        return $q.reject();
+                    }
+                    responses.forEach(function(lot) {
+                        addedLineItems.forEach(function(lineItem) {
+                            if (lineItem.lot && lineItem.lot.lotCode === lot.lotCode
+                                && lineItem.lot.tradeItemId === lot.tradeItemId) {
+                                lineItem.lot = lot;
+                            }
+                        });
+                        return addedLineItems;
+                    });
+
+
+                    var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
+                    var adjustments = stockAdjustmentCreationService.printAdjustments(
+                        program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
+                    );
+
+                    $q.all(adjustments)
+                        .then(function(response) {
+                            $window.open(response,
+                                    '_blank');
+                        }, function(errorResponse) {
+                            loadingModalService.close();
+                            alertService.error(errorResponse.data.message);
+                        });
+                })
+                
+                .catch(function(errorResponse) {
+                    loadingModalService.close();
+                    if (errorLots) {
+                        alertService.error('stockPhysicalInventoryDraft.lotCodeMustBeUnique',
+                            errorLots.join(', '));
+                        vm.selectedOrderableGroup = undefined;
+                        vm.selectedLot = undefined;
+                        vm.lotChanged();
+                        return $q.reject(errorResponse.data.message);
+                    }
+                    alertService.error(errorResponse.data.message);
+                });
+        }
+
         function addItemToOrderableGroups(item) {
             vm.orderableGroups.forEach(function(array) {
                 if (array[0].orderable.id === item.orderable.id) {
@@ -766,6 +879,20 @@
                 return 'stockAdjustmentCreation.printModal.label.issue';
             }
         }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name getPrintIssueDraftText
+         *
+         * @description
+         * Returns the print issue draft modal text.
+         *
+         * @return {String} the prepared URL
+         */
+        function getPrintIssueDraftText() {
+            return 'stockAdjustmentCreation.printModal.label.issueDraft';
+       }
 
         
 
