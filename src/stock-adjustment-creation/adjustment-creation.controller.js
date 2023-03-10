@@ -622,7 +622,30 @@
         }
 
         function confirmPrint() {
-            console.log("starting print")
+            console.log("starting print");
+
+            loadingModalService.open();
+
+            var addedLineItems = angular.copy(vm.addedLineItems);
+            console.log(addedLineItems);
+
+            generateKitConstituentLineItem(addedLineItems);
+            var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
+            var adjustments = stockAdjustmentCreationService.printAdjustments(
+                program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
+            );
+
+            $q.all(adjustments)
+                .then(function(response) {
+                    $window.open(response,
+                            '_blank');
+                }, function(errorResponse) {
+                    loadingModalService.close();
+                    alertService.error(errorResponse.data.message);
+                });
+
+            //  PREVIOUS METHOD
+
             // loadingModalService.open();
 
             // var addedLineItems = angular.copy(vm.addedLineItems);

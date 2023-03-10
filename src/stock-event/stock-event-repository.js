@@ -34,6 +34,7 @@
     function StockEventRepository(StockEventRepositoryImpl) {
 
         StockEventRepository.prototype.create = create;
+        StockEventRepository.prototype.printIssue = printIssue;
 
         return StockEventRepository;
 
@@ -59,7 +60,7 @@
         /**
          * @ngdoc method
          * @methodOf stock-event.StockEventRepository
-         * @name create
+         * @name printIssue
          *
          * @description
          * Prints stock issue event on the OpenLMIS server.
@@ -67,8 +68,8 @@
          * @param  {Object}  event the JSON representation of the stock event
          * @return {Promise} the promise resolving to JSON representation of the created event
          */
-        function create(event) {
-            return this.impl.print(event);
+        function printIssue(event) {
+            return this.impl.printIssue(event);
         }
     }
 })();

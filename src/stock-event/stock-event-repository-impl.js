@@ -34,6 +34,7 @@
     function StockEventRepositoryImpl(StockEventResource, StockIssuePrint, stockEventCacheService, offlineService, currentUserService) {
 
         StockEventRepositoryImpl.prototype.create = create;
+        StockEventRepositoryImpl.prototype.printIssue = printIssue;
 
         return StockEventRepositoryImpl;
 
@@ -76,7 +77,7 @@
         /**
          * @ngdoc method
          * @methodOf stock-event.StockEventRepositoryImpl
-         * @name create
+         * @name printIssue
          *
          * @description
          * Prints stock issue event on the OpenLMIS server.

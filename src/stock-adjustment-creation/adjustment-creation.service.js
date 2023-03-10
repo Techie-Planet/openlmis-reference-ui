@@ -42,6 +42,7 @@
         this.search = search;
 
         this.submitAdjustments = submitAdjustments;
+        this.printAdjustments = printAdjustments;
 
         this.getFacilityIssueId = getFacilityIssueId;
         this.getFacilityIssueIdNumber = getFacilityIssueIdNumber;
@@ -109,6 +110,7 @@
         }
 
         function printAdjustments(programId, facilityId, lineItems, adjustmentType, newIssueId) {
+            console.log("printing",programId, facilityId, lineItems, adjustmentType, newIssueId);
             var event = {
                 programId: programId,
                 facilityId: facilityId,
