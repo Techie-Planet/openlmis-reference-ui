@@ -637,7 +637,9 @@
 
             $q.all(adjustments)
                 .then(function(response) {
-                    $window.open(response,
+                    var pdfData = atob(response);
+                    var blob = new Blob([pdfData], { type: 'application/pdf' });
+                    $window.open(URL.createObjectURL(blob),
                             '_blank');
                 }, function(errorResponse) {
                     loadingModalService.close();
