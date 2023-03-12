@@ -635,12 +635,15 @@
                 program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
             );
 
-            $q.all(adjustments)
+            $q.resolve(adjustments)
                 .then(function(response) {
                     var pdfData = atob(response);
                     var blob = new Blob([pdfData], { type: 'application/pdf' });
+                    console.log("pdf data created");
                     $window.open(URL.createObjectURL(blob),
                             '_blank');
+                    console.log("pdf opened");
+                    loadingModalService.close();
                 }, function(errorResponse) {
                     loadingModalService.close();
                     alertService.error(errorResponse.data.message);
