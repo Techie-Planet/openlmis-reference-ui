@@ -131,9 +131,7 @@
             });
             return repository.printIssue(event)
                 .then(function(response) {
-                    // $rootScope.$emit('openlmis-referencedata.offline-events-indicator');
                     return response;
-                    // return Object.values(response).slice(0,36).join("");
                 });
         }
 
