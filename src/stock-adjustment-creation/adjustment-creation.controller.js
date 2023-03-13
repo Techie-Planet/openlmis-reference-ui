@@ -641,7 +641,7 @@
                     var blob = new Blob([response], { type: 'application/pdf' });
                     console.log("pdf data created");
                     var url = URL.createObjectURL(blob);
-                    $window.open(url,
+                    window.open(url,
                             '_blank');
                     console.log("pdf opened");
                     loadingModalService.close();
