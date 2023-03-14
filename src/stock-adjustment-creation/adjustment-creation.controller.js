@@ -640,8 +640,9 @@
                     console.log("creating pdf blob");
                     console.log(response);
                     
-                    console.log("pdf data created");
                     var file = new Blob([response], { type: 'application/pdf' });
+                    console.log(file);
+                    console.log("pdf data created");
                     var fileURL = URL.createObjectURL(file);
                     window.open(fileURL);
                     

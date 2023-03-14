@@ -28,10 +28,10 @@
         .module('stock-event')
         .factory('StockEventRepositoryImpl', StockEventRepositoryImpl);
 
-    StockEventRepositoryImpl.inject = ['StockEventResource', 'StockIssuePrint', 'stockEventCacheService',
+    StockEventRepositoryImpl.inject = ['$http','StockEventResource', 'StockIssuePrint', 'stockEventCacheService',
         'offlineService', 'currentUserService'];
 
-    function StockEventRepositoryImpl(StockEventResource, StockIssuePrint, stockEventCacheService, offlineService, currentUserService) {
+    function StockEventRepositoryImpl($http, StockEventResource, StockIssuePrint, stockEventCacheService, offlineService, currentUserService) {
 
         StockEventRepositoryImpl.prototype.create = create;
         StockEventRepositoryImpl.prototype.printIssue = printIssue;
@@ -93,7 +93,13 @@
                         return event;
                     });
             }
-            return this.stockIssuePrint.create(event);
+            // return this.stockIssuePrint.create(event);
+            $http.post('http://3.93.150.198/api/issueSummaryBeforeSubmission/print', event, {responseType: 'arraybuffer'})
+            .then(function(response) {
+                return response;
+            }
+                
+                );
         }
     }
 })();
