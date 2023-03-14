@@ -671,10 +671,12 @@
         function arrayBufferToBase64( buffer ) {
 			var binary = '';
 			var bytes = new Uint8Array( buffer );
+            console.log(bytes);
 			var len = bytes.byteLength;
 			for (var i = 0; i < len; i++) {
 				binary += String.fromCharCode( bytes[ i ] );
 			}
+            console.log(binary);
 			return window.btoa( binary );
 
 		}
