@@ -639,9 +639,11 @@
                 .then(function(response) {
                     console.log("creating pdf blob");
                     console.log(response);
-                    var pdfData = Object.values(response).join("");
+                    var binaryData = new Uint8Array(response); // convert to binary data
+                    var base64Data = window.btoa(String.fromCharCode.apply(null, binaryData));
+                    // var pdfData = Object.values(response).join("");
                     console.log("pdf data created");
-                    var pdfUrl = "data:application/pdf;base64," + pdfData; // data URL for the PDF
+                    var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
                     window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
                     console.log("pdf opened");
                     loadingModalService.close();
