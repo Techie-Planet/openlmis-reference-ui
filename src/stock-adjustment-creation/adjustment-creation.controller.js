@@ -638,11 +638,11 @@
             $q.resolve(adjustments)
                 .then(function(response) {
                     console.log("creating pdf blob");
-                    var blob = new Blob([window.atob(response)], { type: 'application/pdf' });
+                    var decodedData = Buffer.from(response, 'base64').toString('binary');
+                    var blob = new Blob([decodedData], { type: 'application/pdf' });
                     console.log("pdf data created");
                     var url = URL.createObjectURL(blob);
-                    window.open(url,
-                            '_blank');
+                    window.open(url, '_blank');
                     console.log("pdf opened");
                     loadingModalService.close();
                 }, function(errorResponse) {
