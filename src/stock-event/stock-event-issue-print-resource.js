@@ -38,7 +38,8 @@
 
         function StockIssuePrint() {
             this.super('/api/issueSummaryBeforeSubmission/print', {
-                paginated: false
+                paginated: false,
+                responseType: 'arraybuffer'
             });
         }
     }

@@ -640,11 +640,14 @@
                     console.log("creating pdf blob");
                     console.log(response);
                     
-                    var base64Data = arrayBufferToBase64(response)
-                    console.log(base64Data);
                     console.log("pdf data created");
-                    var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
-                    window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
+                    var file = new Blob([response], { type: 'application/pdf' });
+                    var fileURL = URL.createObjectURL(file);
+                    window.open(fileURL);
+                    
+                    // var base64Data = arrayBufferToBase64(response)
+                    // var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
+                    // window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
                     // var binaryData = new Uint8Array(response); // convert to binary data
                     // var base64Data = window.btoa(String.fromCharCode.apply(null, binaryData));
                     // // var pdfData = Object.values(response).join("");
@@ -653,6 +656,8 @@
                     // window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
                     console.log("pdf opened");
                     loadingModalService.close();
+
+
                     // console.log("creating pdf blob");
                     // atob(response)
                     // var decodedData = Buffer.from(response, 'base64').toString('binary');
@@ -662,6 +667,8 @@
                     // window.open(url, '_blank');
                     // console.log("pdf opened");
                     // loadingModalService.close();
+
+
                 }, function(errorResponse) {
                     loadingModalService.close();
                     alertService.error(errorResponse.data.message);
