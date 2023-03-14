@@ -638,7 +638,7 @@
             $q.resolve(adjustments)
                 .then(function(response) {
                     console.log("creating pdf blob");
-                    var blob = new Blob([atob(response)], { type: 'application/pdf' });
+                    var blob = new Blob([window.atob(response)], { type: 'application/pdf' });
                     console.log("pdf data created");
                     var url = URL.createObjectURL(blob);
                     window.open(url,
@@ -649,96 +649,6 @@
                     loadingModalService.close();
                     alertService.error(errorResponse.data.message);
                 });
-
-            //  PREVIOUS METHOD
-
-            // loadingModalService.open();
-
-            // var addedLineItems = angular.copy(vm.addedLineItems);
-
-            // generateKitConstituentLineItem(addedLineItems);
-
-            // var lotPromises = [],
-            //     errorLots = [];
-            // var distinctLots = [];
-            // var lotResource = new LotResource();
-            // addedLineItems.forEach(function(lineItem) {
-            //     console.log("adding lot")
-            //     console.log(lineItem);
-            //     if (lineItem.lot && lineItem.$isNewItem && _.isUndefined(lineItem.lot.id) &&
-            //     !listContainsTheSameLot(distinctLots, lineItem.lot)) {
-            //         console.log("condition true")
-            //         distinctLots.push(lineItem.lot);
-            //     }
-            // });
-            // console.log("added lots to lineitems")
-            // distinctLots.forEach(function(lot) {
-            //     console.log("distinct lot")
-            //     lotPromises.push(lotResource.create(lot)
-            //         .then(function(createResponse) {
-            //             console.log(createResponse)
-            //             vm.addedLineItems.forEach(function(item) {
-            //                 if (item.lot.lotCode === lot.lotCode) {
-            //                     item.$isNewItem = false;
-            //                     addItemToOrderableGroups(item);
-            //                 }
-            //             });
-            //             return createResponse;
-            //         })
-            //         .catch(function(response) {
-            //             console.log(response);
-            //             if (response.data.messageKey ===
-            //                 'referenceData.error.lot.lotCode.mustBeUnique') {
-            //                 errorLots.push(lot.lotCode);
-            //             }
-            //         }));
-            // });
-
-            // return $q.all(lotPromises)
-            //     .then(function(responses) {
-            //         console.log("lots done")
-            //         console.log(lotPromises)
-            //         if (errorLots !== undefined && errorLots.length > 0) {
-            //             return $q.reject();
-            //         }
-            //         responses.forEach(function(lot) {
-            //             addedLineItems.forEach(function(lineItem) {
-            //                 if (lineItem.lot && lineItem.lot.lotCode === lot.lotCode
-            //                     && lineItem.lot.tradeItemId === lot.tradeItemId) {
-            //                     lineItem.lot = lot;
-            //                 }
-            //             });
-            //             return addedLineItems;
-            //         });
-
-
-            //         var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
-            //         var adjustments = stockAdjustmentCreationService.printAdjustments(
-            //             program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
-            //         );
-
-            //         $q.all(adjustments)
-            //             .then(function(response) {
-            //                 $window.open(response,
-            //                         '_blank');
-            //             }, function(errorResponse) {
-            //                 loadingModalService.close();
-            //                 alertService.error(errorResponse.data.message);
-            //             });
-            //     })
-                
-            //     .catch(function(errorResponse) {
-            //         loadingModalService.close();
-            //         if (errorLots) {
-            //             alertService.error('stockPhysicalInventoryDraft.lotCodeMustBeUnique',
-            //                 errorLots.join(', '));
-            //             vm.selectedOrderableGroup = undefined;
-            //             vm.selectedLot = undefined;
-            //             vm.lotChanged();
-            //             return $q.reject(errorResponse.data.message);
-            //         }
-            //         alertService.error(errorResponse.data.message);
-            //     });
         }
 
         function addItemToOrderableGroups(item) {
