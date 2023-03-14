@@ -639,12 +639,21 @@
                 .then(function(response) {
                     console.log("creating pdf blob");
                     console.log(response);
-                    var binaryData = new Uint8Array(response); // convert to binary data
-                    var base64Data = window.btoa(String.fromCharCode.apply(null, binaryData));
-                    // var pdfData = Object.values(response).join("");
+                    var byteArray = new Uint8Array(response); // byte array data
+                    var binaryString = "";
+                    for (var i = 0; i < byteArray.length; i++) {
+                        binaryString += String.fromCharCode(byteArray[i]);
+                    }
+                    var base64Data = btoa(binaryString); // convert to base64
                     console.log("pdf data created");
                     var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
                     window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
+                    // var binaryData = new Uint8Array(response); // convert to binary data
+                    // var base64Data = window.btoa(String.fromCharCode.apply(null, binaryData));
+                    // // var pdfData = Object.values(response).join("");
+                    // console.log("pdf data created");
+                    // var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
+                    // window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
                     console.log("pdf opened");
                     loadingModalService.close();
                     // console.log("creating pdf blob");
