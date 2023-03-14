@@ -638,10 +638,10 @@
             $q.resolve(adjustments)
                 .then(function(response) {
                     console.log("creating pdf blob");
-                    var blob = new Blob([response], { type: 'application/pdf' });
+                    var blob = new Blob([atob(response)], { type: 'application/pdf' });
                     console.log("pdf data created");
                     var url = URL.createObjectURL(blob);
-                    window.open(url,
+                    $window.open(url,
                             '_blank');
                     console.log("pdf opened");
                     loadingModalService.close();
