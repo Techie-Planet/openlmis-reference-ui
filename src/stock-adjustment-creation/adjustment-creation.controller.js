@@ -639,12 +639,9 @@
                 .then(function(response) {
                     console.log("creating pdf blob");
                     console.log(response);
-                    var byteArray = new Uint8Array(response); // byte array data
-                    var binaryString = "";
-                    for (var i = 0; i < byteArray.length; i++) {
-                        binaryString += String.fromCharCode(byteArray[i]);
-                    }
-                    var base64Data = window.btoa(binaryString); // convert to base64
+                    
+                    var base64Data = arrayBufferToBase64(response)
+                    console.log(base64Data);
                     console.log("pdf data created");
                     var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
                     window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
@@ -670,6 +667,18 @@
                     alertService.error(errorResponse.data.message);
                 });
         }
+
+        function arrayBufferToBase64( buffer ) {
+			var binary = '';
+			var bytes = new Uint8Array( buffer );
+			var len = bytes.byteLength;
+			for (var i = 0; i < len; i++) {
+				binary += String.fromCharCode( bytes[ i ] );
+			}
+			return window.btoa( binary );
+
+		}
+
 
         function addItemToOrderableGroups(item) {
             vm.orderableGroups.forEach(function(array) {
