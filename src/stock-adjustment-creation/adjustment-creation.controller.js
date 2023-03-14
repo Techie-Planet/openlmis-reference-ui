@@ -638,9 +638,10 @@
             $q.resolve(adjustments)
                 .then(function(response) {
                     console.log("creating pdf blob");
-                    var pdfData = response;
+                    console.log(response);
+                    // var pdfData = response;
                     console.log("pdf data created");
-                    var pdfUrl = "data:application/pdf;base64," + pdfData; // data URL for the PDF
+                    var pdfUrl = "data:application/pdf;base64," + response; // data URL for the PDF
                     window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
                     console.log("pdf opened");
                     loadingModalService.close();
