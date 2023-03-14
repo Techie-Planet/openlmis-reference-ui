@@ -638,13 +638,21 @@
             $q.resolve(adjustments)
                 .then(function(response) {
                     console.log("creating pdf blob");
-                    var decodedData = Buffer.from(response, 'base64').toString('binary');
-                    var blob = new Blob([decodedData], { type: 'application/pdf' });
+                    var pdfData = response;
                     console.log("pdf data created");
-                    var url = URL.createObjectURL(blob);
-                    window.open(url, '_blank');
+                    var pdfUrl = "data:application/pdf;base64," + pdfData; // data URL for the PDF
+                    window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
                     console.log("pdf opened");
                     loadingModalService.close();
+                    // console.log("creating pdf blob");
+                    // atob(response)
+                    // var decodedData = Buffer.from(response, 'base64').toString('binary');
+                    // var blob = new Blob([decodedData], { type: 'application/pdf' });
+                    // console.log("pdf data created");
+                    // var url = URL.createObjectURL(blob);
+                    // window.open(url, '_blank');
+                    // console.log("pdf opened");
+                    // loadingModalService.close();
                 }, function(errorResponse) {
                     loadingModalService.close();
                     alertService.error(errorResponse.data.message);
