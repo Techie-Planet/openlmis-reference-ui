@@ -644,7 +644,7 @@
                     for (var i = 0; i < byteArray.length; i++) {
                         binaryString += String.fromCharCode(byteArray[i]);
                     }
-                    var base64Data = btoa(binaryString); // convert to base64
+                    var base64Data = window.btoa(binaryString); // convert to base64
                     console.log("pdf data created");
                     var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
                     window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
