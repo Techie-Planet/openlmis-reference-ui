@@ -639,9 +639,9 @@
                 .then(function(response) {
                     console.log("creating pdf blob");
                     console.log(response);
-                    // var pdfData = response;
+                    var pdfData = Object.values(response).join("");
                     console.log("pdf data created");
-                    var pdfUrl = "data:application/pdf;base64," + response; // data URL for the PDF
+                    var pdfUrl = "data:application/pdf;base64," + pdfData; // data URL for the PDF
                     window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
                     console.log("pdf opened");
                     loadingModalService.close();
