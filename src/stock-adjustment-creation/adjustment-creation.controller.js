@@ -640,11 +640,22 @@
                     console.log("creating pdf blob");
                     console.log(response);
                     
-                    var file = new Blob([response], { type: 'application/pdf' });
-                    console.log(file);
+                    // var file = new Blob([response], { type: 'application/pdf' });
+                    // console.log(file);
+                    // console.log("pdf data created");
+                    // var fileURL = URL.createObjectURL(file);
+                    // window.open(fileURL);
+
                     console.log("pdf data created");
-                    var fileURL = URL.createObjectURL(file);
-                    window.open(fileURL);
+                    var byteArray = new Uint8Array([response]); // byte array data
+                    var binaryString = "";
+                    for (var i = 0; i < byteArray.length; i++) {
+                        binaryString += String.fromCharCode(byteArray[i]);
+                    }
+                    var base64Data = btoa(unescape(encodeURIComponent(binaryString))); // convert to base64
+                    console.log("base64data created");
+                    var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
+                    window.open(pdfUrl, '_blank');
                     
                     // var base64Data = arrayBufferToBase64(response)
                     // var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF

@@ -93,13 +93,13 @@
                         return event;
                     });
             }
-            // return this.stockIssuePrint.create(event);
-            $http.post('http://3.93.150.198/api/issueSummaryBeforeSubmission/print', event, {responseType: 'arraybuffer'})
-            .then(function(response) {
-                return response;
-            }
+            return this.stockIssuePrint.create(event);
+            // $http.post('http://3.93.150.198/api/issueSummaryBeforeSubmission/print', event, {responseType: 'arraybuffer'})
+            // .then(function(response) {
+            //     return response;
+            // }
                 
-                );
+                // );
         }
     }
 })();
