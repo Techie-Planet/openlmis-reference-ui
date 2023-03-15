@@ -652,7 +652,7 @@
                 }
 
                 // Convert the string to a base64-encoded string
-                var base64String = btoa(pdfString);
+                var base64String = window.btoa(pdfString);
                 console.log("logging base64String");
                 console.log(base64String);
 
