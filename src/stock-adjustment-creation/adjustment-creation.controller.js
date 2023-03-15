@@ -630,12 +630,15 @@
             console.log(addedLineItems);
 
             generateKitConstituentLineItem(addedLineItems);
-            var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
-            var adjustments = stockAdjustmentCreationService.printAdjustments(
-                program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
-            );
+            // var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
+            // var adjustments = stockAdjustmentCreationService.printAdjustments(
+            //     program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
+            // );
 
-            $q.resolve(adjustments)
+            // $q.resolve(adjustments)
+            stockAdjustmentCreationService.printAdjustments(
+                program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
+            )
             .then(function(response) {
                 console.log("creating pdf blob here");
                 console.log(response);
