@@ -642,13 +642,28 @@
             .then(function(response) {
                 console.log("creating pdf blob here");
                 console.log(response);
-                console.log(atob(response));
-                return new Blob([response], { type: 'application/pdf' })
+                
+                console.log("converting to pdfString");
+                var pdfString = '';
+
+                // Iterate over the byte array and concatenate each character to a string
+                for (var i = 0; i < response.length; i++) {
+                  pdfString += String.fromCharCode(response[i]);
+                }
+
+                // Convert the string to a base64-encoded string
+                var base64String = btoa(pdfString);
+                console.log("logging base64String");
+                console.log(base64String);
+
+                // Create a data URL with the base64-encoded string
+                var dataUrl = 'data:application/pdf;base64,' + base64String;
+
+                return dataUrl;
             })
             .then(function(blob) {
                 console.log("pdf data created");
-                var url = URL.createObjectURL(blob);
-                window.open(url, '_blank');
+                window.open(blob, '_blank');
                 console.log("pdf opened");
                 loadingModalService.close();
             })
