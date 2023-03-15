@@ -630,7 +630,7 @@
             console.log(addedLineItems);
 
             generateKitConstituentLineItem(addedLineItems);
-            // var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
+            var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
             // var adjustments = stockAdjustmentCreationService.printAdjustments(
             //     program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
             // );
