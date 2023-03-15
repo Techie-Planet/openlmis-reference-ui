@@ -646,15 +646,23 @@
                     // var fileURL = URL.createObjectURL(file);
                     // window.open(fileURL);
 
-                    var byteArray = new Uint8Array(response); // replace with actual byte data
-                    var binaryString = "";
-                    for (var i = 0; i < byteArray.length; i++) {
-                        binaryString += String.fromCharCode(byteArray[i]);
-                    }
-                    var base64Data = btoa(Array.from(new Uint8Array(binaryString)).map(b => String.fromCharCode(b)).join(''));
+                    console.log("decoding Base64 data");
+                    const byteArray = new Uint8Array(Object.values(response));
+                    console.log("creating pdf blob");
+                    const blob = new Blob([byteArray], { type: 'application/pdf' });
                     console.log("pdf data created");
-                    var pdfUrl = "data:application/pdf;base64," + base64Data;
-                    window.open(pdfUrl, '_blank');
+                    const url = URL.createObjectURL(blob);
+                    window.open(url, '_blank');
+
+                    // var byteArray = new Uint8Array(response); // replace with actual byte data
+                    // var binaryString = "";
+                    // for (var i = 0; i < byteArray.length; i++) {
+                    //     binaryString += String.fromCharCode(byteArray[i]);
+                    // }
+                    // var base64Data = btoa(Array.from(new Uint8Array(binaryString)).map(b => String.fromCharCode(b)).join(''));
+                    // console.log("pdf data created");
+                    // var pdfUrl = "data:application/pdf;base64," + base64Data;
+                    // window.open(pdfUrl, '_blank');
 
                     // var byteArray = new Uint8Array(response); // byte array data
                     // var binaryString = "";
