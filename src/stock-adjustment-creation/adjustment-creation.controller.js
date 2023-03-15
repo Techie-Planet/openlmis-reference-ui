@@ -646,13 +646,23 @@
                     // var fileURL = URL.createObjectURL(file);
                     // window.open(fileURL);
 
-                    console.log("decoding Base64 data");
-                    const byteArray = new Uint8Array(Object.values(response));
+
                     console.log("creating pdf blob");
-                    const blob = new Blob([byteArray], { type: 'application/pdf' });
+                    var binaryData = new Uint8Array(Object.values(response));
+                    var base64Data = btoa(String.fromCharCode.apply(null, binaryData));
+                    console.log(base64Data);
+                    var pdfUrl = "data:application/pdf;base64," + base64Data;
                     console.log("pdf data created");
-                    const url = URL.createObjectURL(blob);
-                    window.open(url, '_blank');
+                    var newTab = window.open();
+                    newTab.document.write('<iframe src="' + pdfUrl + '" width="100%" height="100%" frameborder="0"></iframe>');
+
+                    // console.log("decoding Base64 data");
+                    // const byteArray = new Uint8Array(Object.values(response));
+                    // console.log("creating pdf blob");
+                    // const blob = new Blob([byteArray], { type: 'application/pdf' });
+                    // console.log("pdf data created");
+                    // const url = URL.createObjectURL(blob);
+                    // window.open(url, '_blank');
 
                     // var byteArray = new Uint8Array(response); // replace with actual byte data
                     // var binaryString = "";
