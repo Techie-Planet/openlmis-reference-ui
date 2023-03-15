@@ -647,7 +647,7 @@
                     // window.open(fileURL);
 
                     console.log("pdf data created");
-                    var byteArray = new Uint8Array([response]); // byte array data
+                    var byteArray = new Uint8Array(response); // byte array data
                     var binaryString = "";
                     for (var i = 0; i < byteArray.length; i++) {
                         binaryString += String.fromCharCode(byteArray[i]);
