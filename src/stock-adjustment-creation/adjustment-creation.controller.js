@@ -636,16 +636,20 @@
             );
 
             $q.resolve(adjustments)
-            .then(response => {
-                    return response.arrayBuffer();
+            .then(function(response) {
+                console.log("creating pdf blob");
+                return response.blob();
             })
-            .then(buffer => {
-                const blob = new Blob([buffer], {type: 'application/pdf'});
-                const url = URL.createObjectURL(blob);
+            .then(function(blob) {
+                console.log("pdf data created");
+                var url = URL.createObjectURL(blob);
                 window.open(url, '_blank');
+                console.log("pdf opened");
+                loadingModalService.close();
             })
-            .catch(error => {
-                console.error(error);
+            .catch(function(errorResponse) {
+                loadingModalService.close();
+                alertService.error(errorResponse.data.message);
             });
                 // .then(function(response) {
                 //     console.log("creating pdf blob");
