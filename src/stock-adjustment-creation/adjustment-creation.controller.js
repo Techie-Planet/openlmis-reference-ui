@@ -637,8 +637,9 @@
 
             $q.resolve(adjustments)
             .then(function(response) {
-                console.log("creating pdf blob");
+                console.log("creating pdf blob here");
                 console.log(response);
+                console.log(atob(response));
                 return new Blob([response], { type: 'application/pdf' })
             })
             .then(function(blob) {
