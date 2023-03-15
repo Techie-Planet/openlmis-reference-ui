@@ -637,11 +637,7 @@
 
             $q.resolve(adjustments)
             .then(response => {
-                if (response.ok) {
                     return response.arrayBuffer();
-                } else {
-                    throw new Error('Unable to retrieve PDF file');
-                }
             })
             .then(buffer => {
                 const blob = new Blob([buffer], {type: 'application/pdf'});
