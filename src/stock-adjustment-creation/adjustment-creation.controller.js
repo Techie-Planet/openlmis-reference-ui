@@ -646,7 +646,7 @@
                 console.log("converting to pdfString");
 
                 // Create a data URL with the base64-encoded string
-                var dataUrl = 'data:application/pdf;base64,' + response;
+                var dataUrl = 'data:application/pdf;base64,' + response.substring(0, response.length - 19);
 
                 return dataUrl;
             })
