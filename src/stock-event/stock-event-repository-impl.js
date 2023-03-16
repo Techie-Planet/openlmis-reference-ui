@@ -93,11 +93,14 @@
                         return event;
                     });
             }
-            // return this.stockIssuePrint.get(event);
+            // return this.stockIssuePrint.create(event);
             $http({
                 method: 'GET',
                 url: accessTokenFactory.addAccessToken(stockmanagementUrlFactory('/api/issueSummaryBeforeSubmission/print')),
                 data: event,
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
                 responseType: 'arraybuffer'
             }).then(function(response) {
                 return response;
