@@ -131,6 +131,8 @@
             });
             return repository.printIssue(event)
                 .then(function(response) {
+                    console.log(response);
+                    console.log("converting to values");
                     return Object.values(response);
                 });
         }
