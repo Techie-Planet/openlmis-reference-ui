@@ -75,11 +75,12 @@
         /**
          * @ngdoc property
          * @propertyOf stock-adjustment-creation.controller:StockAdjustmentCreationController
-         * @name showReasonDropdown
+         * @name showPrintIssueDraftButton
          * @type {boolean}
          */
         vm.showPrintIssueDraftButton = function() {
-            return adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state;
+            return (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state
+                || adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state);
         };
 
         /**
@@ -622,149 +623,29 @@
         }
 
         function confirmPrint() {
-            console.log("starting print");
-
             loadingModalService.open();
-
             var addedLineItems = angular.copy(vm.addedLineItems);
-            console.log(addedLineItems);
 
             generateKitConstituentLineItem(addedLineItems);
             var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
-            // var adjustments = stockAdjustmentCreationService.printAdjustments(
-            //     program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
-            // );
-
-            // $q.resolve(adjustments)
             stockAdjustmentCreationService.printAdjustments(
                 program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
             )
             .then(function(response) {
-                console.log("creating pdf blob here");
                 console.log(response);
-                
-                console.log("converting to pdfString");
-
                 // Create a data URL with the base64-encoded string
                 var dataUrl = 'data:application/pdf;base64,' + response.substring(0, response.length - 19);
-
                 return dataUrl;
             })
-            .then(function(blob) {
-                console.log("pdf data created");
-                window.open(blob, '_blank');
-                console.log("pdf opened");
+            .then(function(url) {
+                window.open(url, 'stock_adjustment_summary');
                 loadingModalService.close();
             })
             .catch(function(errorResponse) {
                 loadingModalService.close();
                 alertService.error(errorResponse.data.message);
             });
-                // .then(function(response) {
-                //     console.log("creating pdf blob");
-                //     console.log(response);
-                    
-                //     // var file = new Blob([response], { type: 'application/pdf' });
-                //     // console.log(file);
-                //     // console.log("pdf data created");
-                //     // var fileURL = URL.createObjectURL(file);
-                //     // window.open(fileURL);
-
-                //     console.log("creating pdf blob");
-                //     var byteCharacters = Object.values(response);
-                //     console.log(byteCharacters);
-                //     var byteNumbers = new Array(byteCharacters.length);
-                //     for (var i = 0; i < byteCharacters.length; i++) {
-                //         byteNumbers[i] = byteCharacters[i].charCodeAt(0);
-                //     }
-                //     console.log(byteNumbers);
-                //     var byteArray = new Uint8Array(byteNumbers);
-                //     var blob = new Blob([byteArray], { type: 'application/pdf' });
-                //     console.log("pdf data created");
-                //     var url = URL.createObjectURL(blob);
-                //     window.open(url, '_blank');
-
-
-                //     // console.log("creating pdf blob");
-                //     // var binaryData = new Uint8Array(Object.values(response));
-                //     // var base64Data = btoa(String.fromCharCode.apply(null, binaryData));
-                //     // console.log(base64Data);
-                //     // var pdfUrl = "data:application/pdf;base64," + base64Data;
-                //     // console.log("pdf data created");
-                //     // var newTab = window.open();
-                //     // newTab.document.write('<iframe src="' + pdfUrl + '" width="100%" height="100%" frameborder="0"></iframe>');
-
-                //     // console.log("decoding Base64 data");
-                //     // const byteArray = new Uint8Array(Object.values(response));
-                //     // console.log("creating pdf blob");
-                //     // const blob = new Blob([byteArray], { type: 'application/pdf' });
-                //     // console.log("pdf data created");
-                //     // const url = URL.createObjectURL(blob);
-                //     // window.open(url, '_blank');
-
-                //     // var byteArray = new Uint8Array(response); // replace with actual byte data
-                //     // var binaryString = "";
-                //     // for (var i = 0; i < byteArray.length; i++) {
-                //     //     binaryString += String.fromCharCode(byteArray[i]);
-                //     // }
-                //     // var base64Data = btoa(Array.from(new Uint8Array(binaryString)).map(b => String.fromCharCode(b)).join(''));
-                //     // console.log("pdf data created");
-                //     // var pdfUrl = "data:application/pdf;base64," + base64Data;
-                //     // window.open(pdfUrl, '_blank');
-
-                //     // var byteArray = new Uint8Array(response); // byte array data
-                //     // var binaryString = "";
-                //     // for (var i = 0; i < byteArray.length; i++) {
-                //     //     binaryString += String.fromCharCode(byteArray[i]);
-                //     // }
-                //     // var base64Data = btoa(unescape(encodeURIComponent(binaryString))); // convert to base64
-                //     // console.log("base64data created");
-                //     // var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
-                //     // window.open(pdfUrl, '_blank');
-                    
-                //     // var base64Data = arrayBufferToBase64(response)
-                //     // var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
-                //     // window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
-                //     // var binaryData = new Uint8Array(response); // convert to binary data
-                //     // var base64Data = window.btoa(String.fromCharCode.apply(null, binaryData));
-                //     // // var pdfData = Object.values(response).join("");
-                //     // console.log("pdf data created");
-                //     // var pdfUrl = "data:application/pdf;base64," + base64Data; // data URL for the PDF
-                //     // window.open(pdfUrl, '_blank'); // open the PDF in a new window/tab
-                //     console.log("pdf opened");
-                //     loadingModalService.close();
-
-
-                //     // console.log("creating pdf blob");
-                //     // atob(response)
-                //     // var decodedData = Buffer.from(response, 'base64').toString('binary');
-                //     // var blob = new Blob([decodedData], { type: 'application/pdf' });
-                //     // console.log("pdf data created");
-                //     // var url = URL.createObjectURL(blob);
-                //     // window.open(url, '_blank');
-                //     // console.log("pdf opened");
-                //     // loadingModalService.close();
-
-
-                // }, function(errorResponse) {
-                //     loadingModalService.close();
-                //     alertService.error(errorResponse.data.message);
-                // });
         }
-
-        function arrayBufferToBase64( buffer ) {
-			var binary = '';
-			var bytes = new Uint8Array( buffer );
-            console.log(bytes);
-			var len = bytes.byteLength;
-			for (var i = 0; i < len; i++) {
-				binary += String.fromCharCode( bytes[ i ] );
-			}
-            console.log(binary);
-			return window.btoa( binary );
-
-		}
-
 
         function addItemToOrderableGroups(item) {
             vm.orderableGroups.forEach(function(array) {

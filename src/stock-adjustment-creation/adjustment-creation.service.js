@@ -110,7 +110,6 @@
         }
 
         function printAdjustments(programId, facilityId, lineItems, adjustmentType, newIssueId) {
-            console.log("printing",programId, facilityId, lineItems, adjustmentType, newIssueId);
             var event = {
                 programId: programId,
                 facilityId: facilityId,
@@ -131,10 +130,7 @@
             });
             return repository.printIssue(event)
                 .then(function(response) {
-                    console.log(response);
-                    console.log("converting to values");
                     return Object.values(response).join("");
-                    // return response;
                 });
         }
 
