@@ -28,10 +28,10 @@
         .module('stock-event')
         .factory('StockEventRepositoryImpl', StockEventRepositoryImpl);
 
-    StockEventRepositoryImpl.inject = ['$http','StockEventResource', 'StockIssuePrint', 'stockEventCacheService',
+    StockEventRepositoryImpl.inject = ['$http', 'accessTokenFactory', 'stockmanagementUrlFactory','StockEventResource', 'StockIssuePrint', 'stockEventCacheService',
         'offlineService', 'currentUserService'];
 
-    function StockEventRepositoryImpl($http, StockEventResource, StockIssuePrint, stockEventCacheService, offlineService, currentUserService) {
+    function StockEventRepositoryImpl($http, accessTokenFactory, stockmanagementUrlFactory, StockEventResource, StockIssuePrint, stockEventCacheService, offlineService, currentUserService) {
 
         StockEventRepositoryImpl.prototype.create = create;
         StockEventRepositoryImpl.prototype.printIssue = printIssue;
@@ -96,7 +96,7 @@
             // return this.stockIssuePrint.get(event);
             $http({
                 method: 'GET',
-                url: 'http://3.93.150.198/api/issueSummaryBeforeSubmission/print',
+                url: accessTokenFactory.addAccessToken(stockmanagementUrlFactory('/api/issueSummaryBeforeSubmission/print')),
                 data: event,
                 responseType: 'arraybuffer'
             }).then(function(response) {
