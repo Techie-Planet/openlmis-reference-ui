@@ -93,18 +93,18 @@
                         return event;
                     });
             }
-            // return this.stockIssuePrint.create(event);
-            $http({
-                method: 'GET',
-                url: accessTokenFactory.addAccessToken(stockmanagementUrlFactory('/api/issueSummaryBeforeSubmission/print')),
-                data: event,
-                headers: {
-                    'Content-Type': 'application/json'
-                  },
-                responseType: 'arraybuffer'
-            }).then(function(response) {
-                return response;
-            })
+            return this.stockIssuePrint.create(event);
+            // $http({
+            //     method: 'GET',
+            //     url: accessTokenFactory.addAccessToken(stockmanagementUrlFactory('/api/issueSummaryBeforeSubmission/print')),
+            //     data: event,
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //       },
+            //     responseType: 'arraybuffer'
+            // }).then(function(response) {
+            //     return response;
+            // })
             // $http.get('http://3.93.150.198/api/issueSummaryBeforeSubmission/print', event, {responseType: 'arraybuffer'})
             // .then(function(response) {
             //     return response;

@@ -133,7 +133,8 @@
                 .then(function(response) {
                     console.log(response);
                     console.log("converting to values");
-                    return Object.values(response);
+                    // return Object.values(response);
+                    return response;
                 });
         }
 
