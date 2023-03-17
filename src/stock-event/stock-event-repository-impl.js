@@ -86,6 +86,7 @@
          * @return {Promise} the promise resolving to JSON representation of the created event
          */
         function printIssue(event) {
+            console.log(event);
             if (offlineService.isOffline()) {
                 return currentUserService.getUserInfo()
                     .then(function(user) {
@@ -94,23 +95,6 @@
                     });
             }
             return this.stockIssuePrint.create(event);
-            // $http({
-            //     method: 'GET',
-            //     url: accessTokenFactory.addAccessToken(stockmanagementUrlFactory('/api/issueSummaryBeforeSubmission/print')),
-            //     data: event,
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //       },
-            //     responseType: 'arraybuffer'
-            // }).then(function(response) {
-            //     return response;
-            // })
-            // $http.get('http://3.93.150.198/api/issueSummaryBeforeSubmission/print', event, {responseType: 'arraybuffer'})
-            // .then(function(response) {
-            //     return response;
-            // }
-                
-            //     );
         }
     }
 })();
