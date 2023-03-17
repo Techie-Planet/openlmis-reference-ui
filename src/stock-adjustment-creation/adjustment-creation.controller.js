@@ -627,9 +627,8 @@
             var addedLineItems = angular.copy(vm.addedLineItems);
 
             generateKitConstituentLineItem(addedLineItems);
-            var eventIssueId = vm.newIssueId ? vm.newIssueId : vm.issueId;
             stockAdjustmentCreationService.printAdjustments(
-                program.id, facility.id, addedLineItems, adjustmentType, eventIssueId
+                program.id, facility.id, addedLineItems, adjustmentType
             )
             .then(function(response) {
                 console.log(response);

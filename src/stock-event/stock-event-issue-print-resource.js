@@ -28,16 +28,16 @@
         .module('stock-event')
         .factory('StockIssuePrint', StockIssuePrint);
 
-    StockIssuePrint.inject = ['adjustmentType', 'OpenlmisResource', 'classExtender'];
+    StockIssuePrint.inject = ['OpenlmisResource', 'classExtender'];
 
-    function StockIssuePrint(adjustmentType, OpenlmisResource, classExtender) {
+    function StockIssuePrint(OpenlmisResource, classExtender) {
 
         classExtender.extend(StockIssuePrint, OpenlmisResource);
 
         return StockIssuePrint;
 
         function StockIssuePrint() {
-            this.super('/api/issueSummaryBeforeSubmission/print?stockEventType=' + adjustmentType.state, {
+            this.super('/api/issueSummaryBeforeSubmission/print', {
                 paginated: false,
                 responseType: 'arraybuffer'
             });

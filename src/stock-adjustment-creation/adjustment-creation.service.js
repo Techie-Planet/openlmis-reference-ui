@@ -109,11 +109,11 @@
                 });
         }
 
-        function printAdjustments(programId, facilityId, lineItems, adjustmentType, newIssueId) {
+        function printAdjustments(programId, facilityId, lineItems, adjustmentType) {
             var event = {
                 programId: programId,
                 facilityId: facilityId,
-                documentNumber: newIssueId ? newIssueId : ''
+                documentNumber: adjustmentType.state
             };
             event.lineItems = _.map(lineItems, function(item) {
                 return angular.merge({
