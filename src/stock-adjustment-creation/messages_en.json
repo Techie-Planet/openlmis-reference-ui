@@ -9,5 +9,6 @@
     "stockAdjustmentCreation.printModal.label.receive": "Do you want to print this stock receive event?",
     "stockAdjustmentCreation.printModal.yes": "Print",
     "stockAdjustmentCreation.printModal.no": "No",
-    "stockAdjustmentCreation.printModal.label.issueDraft": "Do you want to print this stock issue draft?"
+    "stockAdjustmentCreation.printModal.label.issueDraft": "Do you want to print this stock issue draft?",
+    "stockAdjustmentCreation.printModal.label.receiveDraft": "Do you want to print this stock receive draft?"
 }

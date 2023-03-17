@@ -835,7 +835,11 @@
          * @return {String} the prepared URL
          */
         function getPrintIssueDraftText() {
-            return 'stockAdjustmentCreation.printModal.label.issueDraft';
+            if (adjustmentType.state === ADJUSTMENT_TYPE.ISSUE.state){
+                return 'stockAdjustmentCreation.printModal.label.issueDraft';
+            } else if (adjustmentType.state === ADJUSTMENT_TYPE.RECEIVE.state){
+                return 'stockAdjustmentCreation.printModal.label.receiveDraft';
+            }
        }
 
         
