@@ -130,8 +130,7 @@
             });
             return repository.printIssue(event)
                 .then(function(response) {
-                    console.log(response);
-                    return response;
+                    return Object.values(response).join("");
                 });
         }
 

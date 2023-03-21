@@ -632,12 +632,11 @@
             )
             .then(function(response) {
                 // Create a data URL with the base64-encoded string
-                console.log(response);
-                var dataUrl = 'data:application/pdf;base64,' + response;
+                var dataUrl = 'data:application/pdf;base64,' + response.substring(0, response.length - 19);
                 return dataUrl;
             })
             .then(function(url) {
-                $window.open(url, '_blank');
+                window.open(url, 'stock_adjustment_summary');
                 loadingModalService.close();
             })
             .catch(function(errorResponse) {
