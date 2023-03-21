@@ -631,13 +631,15 @@
                 program.id, facility.id, addedLineItems, adjustmentType
             )
             .then(function(response) {
-                console.log(response);
                 // Create a data URL with the base64-encoded string
                 var dataUrl = 'data:application/pdf;base64,' + response.substring(0, response.length - 19);
                 return dataUrl;
             })
             .then(function(url) {
-                window.open(url, 'stock_adjustment_summary');
+                var newTab = window.open(url);
+                newTab.addEventListener('load', function() {
+                    newTab.document.title = 'stock_adjustment_summary.pdf';
+                });
                 loadingModalService.close();
             })
             .catch(function(errorResponse) {

@@ -86,7 +86,6 @@
          * @return {Promise} the promise resolving to JSON representation of the created event
          */
         function printIssue(event) {
-            console.log(event);
             if (offlineService.isOffline()) {
                 return currentUserService.getUserInfo()
                     .then(function(user) {
