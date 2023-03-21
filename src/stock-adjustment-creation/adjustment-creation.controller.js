@@ -636,9 +636,10 @@
                 return dataUrl;
             })
             .then(function(url) {
-                var newTab = window.open(url);
+                var features = 'resizable=yes,scrollbars=yes';
+                var newTab = window.open(url, '_blank', features);
                 newTab.addEventListener('load', function() {
-                    newTab.document.title = 'stock_adjustment_summary.pdf';
+                    newTab.document.title = 'stock_adjustment_summary';
                 });
                 loadingModalService.close();
             })
