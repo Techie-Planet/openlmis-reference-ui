@@ -632,11 +632,14 @@
             )
             .then(function(response) {
                 // Create a data URL with the base64-encoded string
-                var dataUrl = 'data:application/pdf;base64,' + response.substring(0, response.length - 19);
+                // var dataUrl = 'data:application/pdf;base64,' + response.substring(0, response.length - 19);
+                var dataUrl = response.substring(0, response.length - 19);
                 return dataUrl;
             })
             .then(function(url) {
-                window.open(url, 'stock_adjustment_summary');
+                // window.open(url, 'stock_adjustment_summary');
+                var popup = $window.open('', '_blank');
+                popup.document.write(url)
                 loadingModalService.close();
             })
             .catch(function(errorResponse) {
