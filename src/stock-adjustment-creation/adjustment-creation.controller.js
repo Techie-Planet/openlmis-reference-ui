@@ -637,9 +637,15 @@
                 return dataUrl;
             })
             .then(function(url) {
+                var iframe = document.createElement('iframe');
+                iframe.src = 'data:application/pdf;base64,' + url;
+                iframe.style.width = '100%';
+                iframe.style.height = '800px';
+                var popup = window.open();
+                popup.document.body.appendChild(iframe);
                 // window.open(url, 'stock_adjustment_summary');
-                var popup = $window.open('', '_blank');
-                popup.document.write(url)
+                // var popup = $window.open('', '_blank');
+                // popup.document.write(url)
                 loadingModalService.close();
             })
             .catch(function(errorResponse) {
