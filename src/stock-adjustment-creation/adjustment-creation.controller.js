@@ -640,7 +640,7 @@
                 var iframe = document.createElement('iframe');
                 iframe.src = 'data:application/pdf;base64,' + url;
                 iframe.style.width = '100%';
-                iframe.style.height = '800px';
+                iframe.style.height = '100%';
                 var popup = window.open();
                 popup.document.body.appendChild(iframe);
                 // window.open(url, 'stock_adjustment_summary');
