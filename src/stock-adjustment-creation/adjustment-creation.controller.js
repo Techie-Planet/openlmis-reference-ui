@@ -643,9 +643,6 @@
                 iframe.style.height = '100%';
                 var popup = window.open();
                 popup.document.body.appendChild(iframe);
-                // window.open(url, 'stock_adjustment_summary');
-                // var popup = $window.open('', '_blank');
-                // popup.document.write(url)
                 loadingModalService.close();
             })
             .catch(function(errorResponse) {
