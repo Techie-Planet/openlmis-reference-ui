@@ -23,7 +23,7 @@
 
     function routes($stateProvider, ADMINISTRATION_RIGHTS) {
 
-        $stateProvider.state('openlmis.administration.facilities', {
+        $stateProvider.state('openlmis.administration.organizations', {
             showInNavigation: true,
             label: 'adminOrganizationList.organizations',
             url: '/organizations?name&zoneId&page&size',
