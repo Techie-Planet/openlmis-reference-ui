@@ -1,0 +1,14 @@
+{
+    "adminOrganizationList.facilities": "Organizations",
+    "adminOrganizationList.geographicZone": "Geographic zone",
+    "adminOrganizationList.noFacilities": "No organizations found.",
+    "adminOrganizationList.name": "Organization name",
+    "adminOrganizationList.code": "Code",
+    "adminOrganizationList.type": "Type",
+    "adminOrganizationList.active": "Active",
+    "adminOrganizationList.enabled": "Enabled",
+    "adminOrganizationList.actions": "Actions",
+    "adminOrganizationList.search": "Search",
+    "adminOrganizationList.addFacility": "Add Organization",
+    "adminOrganizationList.edit": "Edit"
+}

@@ -1,0 +1,53 @@
+<h2>{{'adminOrganizationList.facilities' | message}}</h2>
+<section class="openlmis-table-container">
+    <button id="add-facility" class="add" ng-click="vm.goToAddOrganizationPage()">
+        {{'adminOrganizationList.addFacility' | message}}
+    </button>
+    <form ng-submit="vm.search()">
+        <fieldset class="form-group">
+            <label for="facilityName">{{'adminOrganizationList.name' | message}}</label>
+            <input type="text" id="facilityName" ng-model="vm.facilityName"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="geographicZone">{{'adminOrganizationList.geographicZone' | message}}</label>
+            <select id="geographicZone" ng-model="vm.geographicZone"
+                    ng-options="zone.id as zone.name for zone in vm.geographicZones">
+            </select>
+        </fieldset>
+        <input type="submit" value="{{'adminOrganizationList.search' | message}}"/>
+    </form>
+    <table>
+        <caption ng-if="!vm.facilities || vm.facilities.length === 0">
+            {{'adminOrganizationList.noFacilities' | message}}
+        </caption>
+        <thead>
+            <tr>
+                <th>{{'adminOrganizationList.name' | message}}</th>
+                <th>{{'adminOrganizationList.code' | message}}</th>
+                <th>{{'adminOrganizationList.geographicZone' | message}}</th>
+                <th>{{'adminOrganizationList.type' | message}}</th>
+                <th>{{'adminOrganizationList.active' | message}}</th>
+                <th>{{'adminOrganizationList.enabled' | message}}</th>
+                <th>{{'adminOrganizationList.actions' | message}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="facility in vm.facilities">
+                <td>{{facility.name}}</td>
+                <td>{{facility.code}}</td>
+                <td>{{facility.geographicZone.name}}</td>
+                <td>{{facility.type.name}}</td>
+                <td>
+                    <i ng-class="{'icon-ok': facility.active}"></i>
+                </td>
+                <td>
+                    <i ng-class="{'icon-ok': facility.enabled}"></i>
+                </td>
+                <td>
+                    <button ui-sref="openlmis.administration.facilities.edit({id: facility.id})">{{'adminOrganizationList.edit' | message}}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <openlmis-pagination/>
+</section>
