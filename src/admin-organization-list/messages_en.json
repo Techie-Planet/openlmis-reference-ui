@@ -1,5 +1,5 @@
 {
-    "adminOrganizationList.facilities": "Organizations",
+    "adminOrganizationList.organizations": "Organizations",
     "adminOrganizationList.geographicZone": "Geographic zone",
     "adminOrganizationList.noFacilities": "No organizations found.",
     "adminOrganizationList.name": "Organization name",
