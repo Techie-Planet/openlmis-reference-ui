@@ -1,18 +1,12 @@
 <h2>{{'adminOrganizationList.organizations' | message}}</h2>
 <section class="openlmis-table-container">
-    <button id="add-facility" class="add" ng-click="vm.goToAddOrganizationPage()">
-        {{'adminOrganizationList.addFacility' | message}}
+    <button id="add-organization" class="add" ng-click="vm.goToAddOrganizationPage()">
+        {{'adminOrganizationList.addOrganization' | message}}
     </button>
     <form ng-submit="vm.search()">
         <fieldset class="form-group">
-            <label for="facilityName">{{'adminOrganizationList.name' | message}}</label>
-            <input type="text" id="facilityName" ng-model="vm.facilityName"/>
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="geographicZone">{{'adminOrganizationList.geographicZone' | message}}</label>
-            <select id="geographicZone" ng-model="vm.geographicZone"
-                    ng-options="zone.id as zone.name for zone in vm.geographicZones">
-            </select>
+            <label for="organizationName">{{'adminOrganizationList.name' | message}}</label>
+            <input type="text" id="organizationName" ng-model="vm.organizationName"/>
         </fieldset>
         <input type="submit" value="{{'adminOrganizationList.search' | message}}"/>
     </form>
@@ -27,9 +21,9 @@
         </thead>
         <tbody>
             <tr ng-repeat="organization in vm.organizations">
-                <td>{{facility.name}}</td>
+                <td>{{organization.name}}</td>
                 <td>
-                    <button ui-sref="openlmis.administration.facilities.edit({id: facility.id})">{{'adminOrganizationList.edit' | message}}</button>
+                    <button ui-sref="openlmis.administration.organizations.edit({id: organization.id})">{{'adminOrganizationList.edit' | message}}</button>
                 </td>
             </tr>
         </tbody>
