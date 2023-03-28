@@ -26,9 +26,6 @@
     function config($stateProvider) {
         $stateProvider.state('openlmis.administration.organizations.organization', {
             abstract: true,
-            resolve: {
-                facility: facilityResolve
-            },
             params: {
                 facility: undefined
             },
@@ -36,12 +33,5 @@
         });
     }
 
-    facilityResolve.$inject = ['$stateParams'];
-    function facilityResolve($stateParams) {
-        if ($stateParams.facility) {
-            return $stateParams.facility;
-        }
-        return {};
-    }
 
 })();

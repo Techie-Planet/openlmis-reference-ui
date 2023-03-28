@@ -32,7 +32,7 @@
             controllerAs: 'vm',
             accessRights: [ADMINISTRATION_RIGHTS.FACILITIES_MANAGE],
             resolve: {
-                facilities: function(paginationService, organizationService, $stateParams) {
+                organizations: function(paginationService, organizationService, $stateParams) {
                     return paginationService.registerUrl($stateParams, function(stateParams) {
                         var params = angular.copy(stateParams),
                             page = stateParams.page,
@@ -41,7 +41,7 @@
                         delete params.page;
                         delete params.size;
 
-                        return organizationService.search({
+                        return organizationService.query({
                             page: page,
                             size: size,
                             sort: 'name,asc'

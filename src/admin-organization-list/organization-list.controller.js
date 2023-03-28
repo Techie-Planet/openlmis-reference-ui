@@ -93,10 +93,8 @@
          * Method that is executed on initiating OrganizationListController.
          */
         function onInit() {
-            vm.facilities = facilities;
-            vm.geographicZones = geographicZones;
-            vm.facilityName = $stateParams.name;
-            vm.geographicZone = $stateParams.zoneId;
+            vm.organizations = organizations;
+            vm.organizationName = $stateParams.name;
         }
 
         /**
@@ -110,10 +108,9 @@
         function search() {
             var stateParams = angular.copy($stateParams);
 
-            stateParams.name = vm.facilityName;
-            stateParams.zoneId = vm.geographicZone;
+            stateParams.name = vm.organizationName;
 
-            $state.go('openlmis.administration.facilities', stateParams, {
+            $state.go('openlmis.administration.organizations', stateParams, {
                 reload: true
             });
         }
