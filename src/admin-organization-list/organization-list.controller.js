@@ -29,10 +29,10 @@
         .controller('OrganizationListController', controller);
 
     controller.$inject = [
-        '$state', '$stateParams', 'facilities', 'geographicZones'
+        '$state', '$stateParams', 'organizations', 'geographicZones'
     ];
 
-    function controller($state, $stateParams, facilities, geographicZones) {
+    function controller($state, $stateParams, organizations, geographicZones) {
 
         var vm = this;
 
@@ -43,13 +43,13 @@
         /**
          * @ngdoc property
          * @propertyOf admin-organization-list.controller:OrganizationListController
-         * @name facilities
+         * @name organizations
          * @type {Array}
          *
          * @description
-         * Contains filtered facilities.
+         * Contains filtered organizations.
          */
-        vm.facilities = undefined;
+        vm.organizations = undefined;
 
         /**
          * @ngdoc property
@@ -69,7 +69,7 @@
          * @type {String}
          *
          * @description
-         * Contains name param for searching facilities.
+         * Contains name param for searching organizations.
          */
         vm.facilityName = undefined;
 
@@ -80,7 +80,7 @@
          * @type {String}
          *
          * @description
-         * Contains geographic zone UUID param for searching facilities.
+         * Contains geographic zone UUID param for searching organizations.
          */
         vm.geographicZone = undefined;
 
@@ -121,7 +121,7 @@
          * @name goToAddOrganizationPage
          *
          * @description
-         * Takes the user to the add facility page.
+         * Takes the user to the add organization page.
          */
         function goToAddOrganizationPage() {
             $state.go('openlmis.administration.organizations.organization.add');
