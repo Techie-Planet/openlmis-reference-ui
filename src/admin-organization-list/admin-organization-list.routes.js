@@ -26,13 +26,13 @@
         $stateProvider.state('openlmis.administration.organizations', {
             showInNavigation: true,
             label: 'adminOrganizationList.organizations',
-            url: '/organizations?name&zoneId&page&size',
+            url: '/organizations?name&page&size',
             controller: 'OrganizationListController',
             templateUrl: 'admin-organization-list/organization-list.html',
             controllerAs: 'vm',
             accessRights: [ADMINISTRATION_RIGHTS.FACILITIES_MANAGE],
             resolve: {
-                facilities: function(paginationService, facilityService, $stateParams) {
+                facilities: function(paginationService, organizationService, $stateParams) {
                     return paginationService.registerUrl($stateParams, function(stateParams) {
                         var params = angular.copy(stateParams),
                             page = stateParams.page,
@@ -41,21 +41,12 @@
                         delete params.page;
                         delete params.size;
 
-                        return facilityService.search({
+                        return organizationService.search({
                             page: page,
                             size: size,
                             sort: 'name,asc'
                         }, params);
                     });
-                },
-                geographicZones: function($q, geographicZoneService) {
-                    var deferred = $q.defer();
-
-                    geographicZoneService.getAll().then(function(response) {
-                        deferred.resolve(response.content);
-                    }, deferred.reject);
-
-                    return deferred.promise;
                 }
             }
         });
