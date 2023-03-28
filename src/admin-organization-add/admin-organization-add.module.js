@@ -13,28 +13,23 @@
  * http://www.gnu.org/licenses.  For additional information contact info@OpenLMIS.org. 
  */
 
-describe('FacilityResource', function() {
+(function() {
 
-    beforeEach(function() {
-        this.OpenlmisResourceMock = jasmine.createSpy('OpenlmisResource');
+    'use strict';
 
-        var OpenlmisResourceMock = this.OpenlmisResourceMock;
-        module('referencedata-facility', function($provide) {
-            $provide.factory('OpenlmisResource', function() {
-                return OpenlmisResourceMock;
-            });
-        });
+    /**
+     * @module admin-organization-add
+     *
+     * @description
+     * Provides a modal for adding new organizations to the OpenLMIS.
+     */
+    angular.module('admin-organization-add', [
+        'referencedata-organization',
+        'admin-organization',
+        'openlmis-modal',
+        'openlmis-templates',
+        'openlmis-state-tracker',
+        'openlmis-modal-state'
+    ]);
 
-        inject(function($injector) {
-            this.FacilityResource = $injector.get('FacilityResource');
-        });
-    });
-
-    it('should extend OpenlmisResource', function() {
-        new this.FacilityResource();
-
-        expect(this.OpenlmisResourceMock).toHaveBeenCalledWith('/api/facilities', {
-            paginated: true
-        });
-    });
-});
+})();

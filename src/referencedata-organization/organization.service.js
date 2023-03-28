@@ -19,13 +19,13 @@
 
     /**
      * @ngdoc service
-     * @name referencedata-facility.organizationService
+     * @name referencedata-organization.organizationService
      *
      * @description
-     * Responsible for retrieving all facility information from server.
+     * Responsible for retrieving all organization information from server.
      */
     angular
-        .module('referencedata-facility')
+        .module('referencedata-organization')
         .service('organizationService', service);
 
     service.$inject = [
@@ -59,7 +59,7 @@
 
         /**
          * @ngdoc method
-         * @methodOf referencedata-facility.organizationService
+         * @methodOf referencedata-organization.organizationService
          * @name get
          *
          * @description
@@ -76,9 +76,9 @@
                 organizationPromise = $q.resolve(angular.fromJson(cachedOrganization));
             } else {
                 organizationPromise = new OrganizationResource().get(organizationId)
-                    .then(function(facility) {
-                        facilitiesOffline.put(facility);
-                        return $q.resolve(facility);
+                    .then(function(organization) {
+                        facilitiesOffline.put(organization);
+                        return $q.resolve(organization);
                     });
             }
 

@@ -1,0 +1,9 @@
+{
+    "adminOrganizationAdd.addOrganization": "Add Organization",
+    "adminOrganizationAdd.organizationName": "Organization Name",
+    "adminOrganizationAdd.description": "Description",
+    "adminOrganizationAdd.cancel": "Cancel",
+    "adminOrganizationAdd.save": "Save",
+    "adminOrganizationAdd.organizationHasBeenSaved": "Organization has been saved!",
+    "adminOrganizationAdd.failedToSaveOrganization": "Failed to save organization!"
+}
