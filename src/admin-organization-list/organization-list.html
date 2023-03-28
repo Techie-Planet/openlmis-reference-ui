@@ -17,32 +17,17 @@
         <input type="submit" value="{{'adminOrganizationList.search' | message}}"/>
     </form>
     <table>
-        <caption ng-if="!vm.facilities || vm.facilities.length === 0">
-            {{'adminOrganizationList.noFacilities' | message}}
+        <caption ng-if="!vm.organizations || vm.organizations.length === 0">
+            {{'adminOrganizationList.noOrganizations' | message}}
         </caption>
         <thead>
             <tr>
                 <th>{{'adminOrganizationList.name' | message}}</th>
-                <th>{{'adminOrganizationList.code' | message}}</th>
-                <th>{{'adminOrganizationList.geographicZone' | message}}</th>
-                <th>{{'adminOrganizationList.type' | message}}</th>
-                <th>{{'adminOrganizationList.active' | message}}</th>
-                <th>{{'adminOrganizationList.enabled' | message}}</th>
-                <th>{{'adminOrganizationList.actions' | message}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="facility in vm.facilities">
+            <tr ng-repeat="organization in vm.organizations">
                 <td>{{facility.name}}</td>
-                <td>{{facility.code}}</td>
-                <td>{{facility.geographicZone.name}}</td>
-                <td>{{facility.type.name}}</td>
-                <td>
-                    <i ng-class="{'icon-ok': facility.active}"></i>
-                </td>
-                <td>
-                    <i ng-class="{'icon-ok': facility.enabled}"></i>
-                </td>
                 <td>
                     <button ui-sref="openlmis.administration.facilities.edit({id: facility.id})">{{'adminOrganizationList.edit' | message}}</button>
                 </td>
