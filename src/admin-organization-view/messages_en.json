@@ -1,0 +1,11 @@
+{
+    "adminOrganizationView.noAssociatedPrograms": "No programs are associated with  ${organization}",
+    "adminOrganizationView.cancel": "Cancel",
+    "adminOrganizationView.editOrganization": "Edit Organization",
+    "adminOrganizationView.edit": "Edit ${organization}",
+    "adminOrganizationView.save": "Save",
+    "adminOrganizationView.saveOrganization.success": "Organization saved successfully!",
+    "adminOrganizationView.saveOrganization.fail": "Failed to save organization!",
+    "adminOrganizationView.organizationInformation": "Organization Information",
+    "adminOrganizationView.add": "Add"
+}

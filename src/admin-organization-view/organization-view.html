@@ -1,0 +1,14 @@
+<h2>{{'adminOrganizationView.edit' | message: {organization: vm.originalOrganizationName} }}</h2>
+<nav class="facility-edit">
+    <ul bs-active-pane="vm.selectedTab" bs-tabs>
+        <li bs-pane data-title="{{'adminOrganizationView.organizationInformation' | message}}">
+            <form id="organization-edit=form" name="organizationEdit" ng-submit="vm.saveOrganizationDetails()">
+                <ng-include src="'admin-organization-add/organization-information.html'"></ng-include>
+                <div class="button-group">
+                    <button class="primary" type"submit">{{'adminOrganizationView.save' | message}}</button>
+                    <button ui-sref="openlmis.administration.organizations" ui-sref-opts="{reload: true}">{{'adminOrganizationView.cancel' | message}}</button>
+                </div>
+            </form>
+        </li>
+    </ul>
+</nav>

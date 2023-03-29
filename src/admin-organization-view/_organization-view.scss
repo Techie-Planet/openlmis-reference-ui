@@ -1,0 +1,19 @@
+nav.organization-edit {
+
+    > ul {
+
+        padding: 0;
+
+        li.tab-pane {
+            padding: 1em;
+        }
+
+        li a {
+            text-decoration: none;
+        }
+    }
+
+    div.button-group {
+        max-width: 440px;
+    }
+}
