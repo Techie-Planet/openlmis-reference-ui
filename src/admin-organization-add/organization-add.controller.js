@@ -30,12 +30,12 @@
         .controller('OrganizationAddController', OrganizationAddController);
 
     OrganizationAddController.$inject = [
-        'organization', 'confirmService',
+         'confirmService',
         'OrganizationRepository', 'stateTrackerService', '$state', 'loadingModalService',
         'notificationService', 'messageService'
     ];
 
-    function OrganizationAddController(organization,
+    function OrganizationAddController(
                                    confirmService, OrganizationRepository, stateTrackerService,
                                    $state, loadingModalService, notificationService,
                                    messageService) {
@@ -54,7 +54,7 @@
          * Initialization method of the OrganizationAddController.
          */
         function onInit() {
-            vm.organization = angular.copy(organization);
+            // vm.organization = angular.copy(organization);
         }
 
         /**
@@ -67,8 +67,8 @@
          */
         function save() {
             return doSave().then(function(response) {
-                $state.go('openlmis.administration.organizations.organization.programs', {
-                    organization: response
+                $state.go('openlmis.administration.organizations.organizations', {
+                    // organization: response
                 });
             });
         }
