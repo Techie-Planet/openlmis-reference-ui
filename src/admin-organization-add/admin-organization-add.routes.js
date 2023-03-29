@@ -30,6 +30,7 @@
             controllerAs: 'vm',
             resolve: {
             },
+            parentResolves: ['organization'],
             templateUrl: 'admin-organization-add/organization-add.html',
             url: '/details'
         });
