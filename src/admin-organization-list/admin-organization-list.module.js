@@ -28,7 +28,7 @@
         'openlmis-pagination',
         'openlmis-rights',
         'openlmis-templates',
-        'referencedata-facility',
+        'referencedata-organization',
         'referencedata-geographic-zone',
         'openlmis-admin',
         'ui.router'

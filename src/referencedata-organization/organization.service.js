@@ -77,7 +77,7 @@
             } else {
                 organizationPromise = new OrganizationResource().get(organizationId)
                     .then(function(organization) {
-                        facilitiesOffline.put(organization);
+                        organizationsOffline.put(organization);
                         return $q.resolve(organization);
                     });
             }
