@@ -29,10 +29,10 @@
         .controller('OrganizationListController', controller);
 
     controller.$inject = [
-        '$state', '$stateParams', 'organizations', 'geographicZones'
+        '$state', '$stateParams', 'organizations'
     ];
 
-    function controller($state, $stateParams, organizations, geographicZones) {
+    function controller($state, $stateParams, organizations) {
 
         var vm = this;
 
@@ -51,16 +51,7 @@
          */
         vm.organizations = undefined;
 
-        /**
-         * @ngdoc property
-         * @propertyOf admin-organization-list.controller:OrganizationListController
-         * @name geographicZones
-         * @type {Array}
-         *
-         * @description
-         * Contains all geographic zones.
-         */
-        vm.geographicZones = undefined;
+       
 
         /**
          * @ngdoc property
@@ -73,16 +64,7 @@
          */
         vm.facilityName = undefined;
 
-        /**
-         * @ngdoc property
-         * @propertyOf admin-organization-list.controller:OrganizationListController
-         * @name geographicZone
-         * @type {String}
-         *
-         * @description
-         * Contains geographic zone UUID param for searching organizations.
-         */
-        vm.geographicZone = undefined;
+    
 
         /**
          * @ngdoc method
