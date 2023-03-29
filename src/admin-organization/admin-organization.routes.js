@@ -27,7 +27,7 @@
         $stateProvider.state('openlmis.administration.organizations.organization', {
             abstract: true,
             params: {
-                facility: undefined
+                organization: undefined
             },
             url: '/new'
         });
