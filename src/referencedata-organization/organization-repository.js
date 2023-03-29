@@ -19,36 +19,36 @@
 
     /**
      * @ngdoc service
-     * @name referencedata-organization.OrganisationRepository
+     * @name referencedata-organization.OrganizationRepository
      * 
      * @description
      * Repository for managing organizations used throughout the system.
      */
     angular
         .module('referencedata-organization')
-        .factory('OrganisationRepository', OrganisationRepository);
+        .factory('OrganizationRepository', OrganizationRepository);
 
-    OrganisationRepository.$inject = ['classExtender', 'OpenlmisRepository', 'Organization', 'OrganizationResource'];
+    OrganizationRepository.$inject = ['classExtender', 'OpenlmisRepository', 'Organization', 'OrganizationResource'];
 
-    function OrganisationRepository(classExtender, OpenlmisRepository, Organization, OrganizationResource) {
+    function OrganizationRepository(classExtender, OpenlmisRepository, Organization, OrganizationResource) {
 
-        classExtender.extend(OrganisationRepository, OpenlmisRepository);
+        classExtender.extend(OrganizationRepository, OpenlmisRepository);
 
-        return OrganisationRepository;
+        return OrganizationRepository;
 
         /**
          * @ngdoc method
-         * @methodOf referencedata-organization.OrganisationRepository
-         * @name OrganisationRepository
+         * @methodOf referencedata-organization.OrganizationRepository
+         * @name OrganizationRepository
          * @constructor
          * 
          * @description
-         * Creates an instance of the OrganisationRepository. If no implementation is given a default one will be used.
+         * Creates an instance of the OrganizationRepository. If no implementation is given a default one will be used.
          * The default implementation is an instance of the OrganizationResource class.
          * 
          * @param {Object} impl the implementation to be used by the repository, defaults to OrganizationResource
          */
-        function OrganisationRepository(impl) {
+        function OrganizationRepository(impl) {
             this.super(Organization, impl || new OrganizationResource());
         }
     }
