@@ -56,13 +56,13 @@
         /**
          * @ngdoc property
          * @propertyOf admin-organization-list.controller:OrganizationListController
-         * @name facilityName
+         * @name organizationName
          * @type {String}
          *
          * @description
          * Contains name param for searching organizations.
          */
-        vm.facilityName = undefined;
+        vm.organizationName = undefined;
 
     
 
