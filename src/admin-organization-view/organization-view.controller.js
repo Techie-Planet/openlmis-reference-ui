@@ -22,7 +22,7 @@
      * @name admin-organization-view.controller:OrganizationViewController
      *
      * @description
-     * Controller for managing facility view screen.
+     * Controller for managing organization view screen.
      */
     angular
         .module('admin-organization-view')
@@ -54,7 +54,7 @@
 
         /**
          * @ngdoc property
-         * @propertyOf admin-facility-view.controller:FacilityViewController
+         * @propertyOf admin-organization-view.controller:OrganizationViewController
          * @name selectedTab
          * @type {String}
          *
@@ -73,7 +73,7 @@
          * Method that is executed on initiating OrganizationViewController.
          */
         function onInit() {
-            vm.originalFacilityName = organization.name;
+            vm.originalOrganizationName = organization.name;
             vm.organization = angular.copy(organization);
 
         }
@@ -107,9 +107,11 @@
         }
 
         function doSave(organization, successMessage, errorMessage) {
+            console.log(organization);
             loadingModalService.open();
             return new OrganizationRepository().update(organization)
                 .then(function(organization) {
+                    console.log(organization);
                     notificationService.success(successMessage);
                     goToOrganizationList();
                     return $q.resolve(organization);
