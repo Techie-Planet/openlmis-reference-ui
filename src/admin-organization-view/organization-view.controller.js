@@ -75,6 +75,7 @@
         function onInit() {
             vm.originalOrganizationName = organization.name;
             vm.organization = angular.copy(organization);
+            console.log();
 
         }
 
@@ -101,7 +102,7 @@
          * Saves organiztion details and redirects to organiztion list screen.
          */
         function saveOrganizationDetails() {
-            doSave(vm.organiztion,
+            doSave(vm.organization,
                 'adminOrganizationView.saveOrganization.success',
                 'adminOrganizationView.saveOrganization.fail');
         }
