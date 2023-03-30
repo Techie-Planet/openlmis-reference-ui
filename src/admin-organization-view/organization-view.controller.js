@@ -75,7 +75,6 @@
         function onInit() {
             vm.originalOrganizationName = organization.name;
             vm.organization = angular.copy(organization);
-            console.log();
 
         }
 
@@ -108,11 +107,9 @@
         }
 
         function doSave(organization, successMessage, errorMessage) {
-            console.log(organization);
             loadingModalService.open();
             return new OrganizationRepository().update(organization)
                 .then(function(organization) {
-                    console.log(organization);
                     notificationService.success(successMessage);
                     goToOrganizationList();
                     return $q.resolve(organization);
