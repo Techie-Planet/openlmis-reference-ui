@@ -130,7 +130,7 @@
                 }, buildSourceDestinationInfo(item, adjustmentType));
             });
 
-            console.log("after", event.lineItems);
+            console.log("after", event);
             return repository.printIssue(event)
                 .then(function(response) {
                     return Object.values(response).join("");
