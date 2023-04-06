@@ -122,7 +122,7 @@
                     lotId: item.lot ? item.lot.id : null,
                     quantity: item.quantity,
                     extraData: {
-                        vvmStatus: item.extraData.vvmStatus
+                        vvmStatus: item.vvmStatus
                     },
                     occurredDate: item.occurredDate,
                     reasonId: item.reason ? item.reason.id : null,
