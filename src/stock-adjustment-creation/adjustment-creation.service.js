@@ -121,13 +121,15 @@
                     lotId: item.lot ? item.lot.id : null,
                     quantity: item.quantity,
                     extraData: {
-                        vvmStatus: item.vvmStatus
+                        vvmStatus: item.extraData.vvmStatus
                     },
                     occurredDate: item.occurredDate,
                     reasonId: item.reason ? item.reason.id : null,
                     reasonFreeText: item.reasonFreeText
                 }, buildSourceDestinationInfo(item, adjustmentType));
             });
+
+            console.log(event.lineItems);
             return repository.printIssue(event)
                 .then(function(response) {
                     return Object.values(response).join("");
