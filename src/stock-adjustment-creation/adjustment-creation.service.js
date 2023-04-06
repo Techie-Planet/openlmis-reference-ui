@@ -117,6 +117,7 @@
                 documentNumber: adjustmentType.state
             };
             event.lineItems = _.map(lineItems, function(item) {
+                console.log("item", item);
                 return angular.merge({
                     orderableId: item.orderable.id,
                     lotId: item.lot ? item.lot.id : null,
