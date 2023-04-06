@@ -140,7 +140,7 @@
 
         function buildSourceDestinationInfo(item, adjustmentType) {
             var res = {
-                extraData: item.extraData
+                extraData: angular.extend(item.extraData, {vvmStatus: item.vvmStatus})
             };
             if (adjustmentType.state === 'receive') {
                 res.sourceId = item.assignment.node.id;
