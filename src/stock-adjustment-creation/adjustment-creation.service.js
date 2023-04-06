@@ -110,6 +110,7 @@
         }
 
         function printAdjustments(programId, facilityId, lineItems, adjustmentType) {
+            console.log("on Print adjustments",lineItems);
             var event = {
                 programId: programId,
                 facilityId: facilityId,
@@ -129,7 +130,7 @@
                 }, buildSourceDestinationInfo(item, adjustmentType));
             });
 
-            console.log(event.lineItems);
+            console.log("after", event.lineItems);
             return repository.printIssue(event)
                 .then(function(response) {
                     return Object.values(response).join("");

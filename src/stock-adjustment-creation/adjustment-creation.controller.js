@@ -626,6 +626,7 @@
         function confirmPrint() {
             loadingModalService.open();
             var addedLineItems = angular.copy(vm.addedLineItems);
+            console.log("on confirm print", addedLineItems);
 
             generateKitConstituentLineItem(addedLineItems);
             stockAdjustmentCreationService.printAdjustments(
