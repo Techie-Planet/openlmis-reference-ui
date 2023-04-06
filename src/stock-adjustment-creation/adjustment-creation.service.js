@@ -110,14 +110,12 @@
         }
 
         function printAdjustments(programId, facilityId, lineItems, adjustmentType) {
-            console.log("on Print adjustments",lineItems);
             var event = {
                 programId: programId,
                 facilityId: facilityId,
                 documentNumber: adjustmentType.state
             };
             event.lineItems = _.map(lineItems, function(item) {
-                console.log("item", item);
                 return angular.merge({
                     orderableId: item.orderable.id,
                     lotId: item.lot ? item.lot.id : null,
@@ -131,7 +129,6 @@
                 }, buildSourceDestinationInfo(item, adjustmentType));
             });
 
-            console.log("after", event);
             return repository.printIssue(event)
                 .then(function(response) {
                     return Object.values(response).join("");
@@ -140,8 +137,8 @@
 
         function buildSourceDestinationInfo(item, adjustmentType) {
             var res = {
-                extraData: angular.extend(item.extraData, {vvmStatus: item.vvmStatus})
-            };
+                extraData: angular.merge(item.extraData, item.vvmStatus ? {vvmStatus: item.vvmStatus} : {})
+              };
             if (adjustmentType.state === 'receive') {
                 res.sourceId = item.assignment.node.id;
                 res.sourceFreeText = item.srcDstFreeText;
