@@ -318,7 +318,7 @@
          * @param {Object} lineItem line item to be validated.
          */
         vm.validateVVMStatus = function(lineItem) {
-            console.log(lineitem);
+            console.log(lineItem);
             if (lineItem.orderable.extraData.useVVM === 'true') {
                 lineItem.$errors.vvmStatusInvalid = isEmpty(lineItem.vvmStatus);
             }
