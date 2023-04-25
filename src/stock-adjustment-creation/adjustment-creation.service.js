@@ -137,7 +137,7 @@
 
         function buildSourceDestinationInfo(item, adjustmentType) {
             var res = {
-                extraData: angular.merge(item.extraData, item.vvmStatus ? {vvmStatus: item.vvmStatus} : {})
+                extraData: angular.merge(item.extraData ? item.extraData : {}, item.vvmStatus ? {vvmStatus: item.vvmStatus} : {})
               };
             if (adjustmentType.state === 'receive') {
                 res.sourceId = item.assignment.node.id;
