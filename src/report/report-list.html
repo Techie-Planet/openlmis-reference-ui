@@ -16,8 +16,7 @@
                 </td>
             </tr>
             <tr ng-repeat="report in vm.supersetReports">
-                <!-- <td ng-if="vm.hasRight(report.right)"> -->
-                <td>
+                <td ng-if="vm.hasRight(report.right)">
                     <a ui-sref="{{'.superset.' + report.code}}">{{ 'report.superset.' + report.code | message}}</a>
                 </td>
             </tr>
