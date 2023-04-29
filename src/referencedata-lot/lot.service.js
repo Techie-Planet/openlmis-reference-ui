@@ -58,10 +58,10 @@
 
             return lotResource.query(queryParams)
                 .then(function(lots) {
-                    lots.content = lots.content.slice(0,2000);
-                    lots.content.forEach(function(lot) {
-                        lotsOffline.put(lot);
-                    });
+                    // lots.content = lots.content.slice(0,2000);
+                    // lots.content.forEach(function(lot) {
+                    //     lotsOffline.put(lot);
+                    // });
                     return lots;
                 });
         }
