@@ -101,7 +101,7 @@
 
         function enableVVM () {
             if (vm.orderable.extraData.useByEnabled){
-                vm.orderable.extraData.useByEnabled = false;
+                vm.orderable.extraData.useByEnabled = 'false';
             } 
             
             // vm.orderable.extraData.useVVM = !vm.orderable.extraData.useVVM;
@@ -110,7 +110,7 @@
     
         function enableUseBy () {
             if (vm.orderable.extraData.useVVM){
-                vm.orderable.extraData.useVVM = false;
+                vm.orderable.extraData.useVVM = 'false';
             } 
             // vm.orderable.extraData.useByEnabled = !vm.orderable.extraData.useByEnabled;
             console.log(vm.orderable.extraData);
