@@ -101,27 +101,18 @@
 
         function enableVVM () {
             if (vm.orderable.extraData.useByEnabled){
-                vm.orderable.extraData.useByEnabled = false;
+                vm.orderable.extraData.useByEnabled = 'false';
             } 
             
-            if (!vm.orderable.extraData.useVVM) {
-                vm.orderable.extraData.useVVM = true;
-            } else {
-                vm.orderable.extraData.useVVM = false;
-            }
+            // vm.orderable.extraData.useVVM = !vm.orderable.extraData.useVVM;
             console.log(vm.orderable.extraData);
         }
     
         function enableUseBy () {
             if (vm.orderable.extraData.useVVM){
-                vm.orderable.extraData.useVVM = false;
+                vm.orderable.extraData.useVVM = 'false';
             } 
-            if (!vm.orderable.extraData.useByEnabled) {
-                vm.orderable.extraData.useByEnabled = true;
-            } else {
-                vm.orderable.extraData.useByEnabled = false;
-            }
-
+            // vm.orderable.extraData.useByEnabled = !vm.orderable.extraData.useByEnabled;
             console.log(vm.orderable.extraData);
         }
 

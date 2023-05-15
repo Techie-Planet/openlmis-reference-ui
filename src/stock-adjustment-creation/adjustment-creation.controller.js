@@ -50,6 +50,7 @@
         vm.newLotCodeChanged = newLotCodeChanged;
         vm.validateExpirationDate = validateExpirationDate;
         vm.lotChanged = lotChanged;
+        vm.sublotChanged = sublotChanged;
         vm.addProduct = addProduct;
         vm.hasPermissionToAddNewLot = hasPermissionToAddNewLot;
 
@@ -341,6 +342,18 @@
         /**
          * @ngdoc method
          * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
+         * @name sublotChanged
+         *
+         * @description
+         * Allows inputs to add missing lot to be displayed.
+         */
+        function sublotChanged() {
+            
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-adjustment-creation.controller:StockAdjustmentCreationController
          * @name validateDate
          *
          * @description
@@ -436,6 +449,9 @@
 
             vm.lots = orderableGroupService.lotsOf(vm.selectedOrderableGroup, vm.hasPermissionToAddNewLot);
             vm.selectedOrderableHasLots = vm.lots.length > 0;
+            vm.selectedLotHasSublotsInFacility = false;
+            vm.sublots = [];
+
         };
 
         /**

@@ -28,9 +28,9 @@
         .module('stock-card')
         .controller('StockCardController', controller);
 
-    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService'];
+    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService'];
 
-    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService) {
+    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService, loadingModalService) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -39,6 +39,12 @@
         vm.displayedLineItems = [];
         vm.getLineItemVVMStatus = getLineItemVVMStatus;
         vm.getProductVVM = getProductVVM;
+        vm.sublots = [];
+        vm.sublotChanged = sublotChanged;
+        vm.stockcardHasSublots = stockcardHasSublots;
+        vm.selectedSublot = undefined;
+        vm.sublotStockCard = {sublotLineItems: [], sublotStockOnHand: 0};
+        vm.getSublotLineItemVVMStatus = getSublotLineItemVVMStatus;
 
         /**
          * @ngdoc method
@@ -74,6 +80,51 @@
         /**
          * @ngdoc method
          * @methodOf stock-card.controller:StockCardController
+         * @name sublotChanged
+         *
+         * @description
+         * function that handles when a sublot changed
+         *
+         */
+        function sublotChanged(){
+            if (vm.selectedSublot) {
+                loadingModalService.open();
+                vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
+                .then(function(sublotStockCard) {
+                    vm.sublotStockCard = sublotStockCard;
+                    //vm.displayedLineItems = sublotStockCard.sublotLineItems;
+                })
+                
+            }
+            loadingModalService.close();
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.controller:StockCardController
+         * @name loadSublots
+         *
+         * @description
+         * function that loads the sublots for the stock card
+         *
+         */
+        function loadSublots() {
+            if (vm.stockCard.lot) {
+                vm.sublots = stockCardService.getSublots(vm.stockCard)
+                .then(function(sublots) {
+                    vm.sublots = sublots;
+                })
+            } 
+
+        }
+
+        function stockcardHasSublots() {
+            return vm.stockCard.lot && vm.sublots.length > 0;
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.controller:StockCardController
          * @name getLineItemVVMStatus
          *
          * @description
@@ -85,6 +136,24 @@
         function getLineItemVVMStatus(lineItem) {
             return lineItem && lineItem.extraData && lineItem.extraData.vvmStatus
                 ? convertVVMStatusToRoman(lineItem.extraData.vvmStatus)
+                : '';
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.controller:StockCardController
+         * @name getSublotLineItemVVMStatus
+         *
+         * @description
+         * Get and display line Item VVM value from line extraData.
+         *
+         * @param {object} lineItem to get extraData.vvmStatus from
+         * @return {string} VVM status in roman numeral
+         */
+        function getSublotLineItemVVMStatus(lineItem) {
+            return lineItem && lineItem.sublotStockCardLineItemExtraData 
+            && lineItem.sublotStockCardLineItemExtraData.vvmStatus
+                ? convertVVMStatusToRoman(lineItem.sublotStockCardLineItemExtraData.vvmStatus)
                 : '';
         }
 
@@ -138,9 +207,9 @@
                     items.push(lineItem);
                 }
             });
-
             vm.stockCard = stockCard;
             vm.stockCard.lineItems = items;
+            loadSublots();
         }
 
         function getSignedQuantity(adjustment) {
