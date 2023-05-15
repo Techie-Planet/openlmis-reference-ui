@@ -3,5 +3,6 @@
     "adminOrderableEdit.name": "Product Name",
     "adminOrderableEdit.productManufacturer": "Manufacturer",
     "adminOrderableEdit.useVVM": "Enable VVM",
+    "adminOrderableEdit.useByEnabled": "Enable Use By",
     "adminOrderableEdit.productType": "Product Type"
 }

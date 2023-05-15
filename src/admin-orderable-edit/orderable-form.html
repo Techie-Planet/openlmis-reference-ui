@@ -12,8 +12,20 @@
                 ng-model="vm.orderable.extraData.useVVM"
                 ng-init="vm.orderable.extraData.useVVM"
                 ng-true-value="'true'" 
-                ng-false-value="'false'"/>
+                ng-false-value="'false'"
+                ng-change="vm.enableVVM()"
+                />
         {{'adminOrderableEdit.useVVM' | message}}
+    </label>
+    <label for="useByEnabled" class="checkbox">
+        <input id="useByEnabled" type="checkbox" 
+                ng-model="vm.orderable.extraData.useByEnabled"
+                ng-init="vm.orderable.extraData.useByEnabled"
+                ng-true-value="'true'" 
+                ng-false-value="'false'"
+                ng-change="vm.enableUseBy()"
+                />
+        {{'adminOrderableEdit.useByEnabled' | message}}
     </label>
     <label for="description">{{'adminOrderableEdit.description' | message}}</label>
     <input id="description" type="text" ng-model="vm.orderable.description" />

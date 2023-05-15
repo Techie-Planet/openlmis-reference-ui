@@ -69,6 +69,8 @@
                     <th ng-show="vm.srcDstAssignments">{{vm.key('srcDstLabel') | message}}</th>
                     <th ng-if="vm.showReasonDropdown">{{vm.key('reason') | message}}</th>
                     <th ng-if="vm.showReasonDropdown">{{vm.key('reasonComments') | message}}</th>
+                    <th ng-if="vm.showUseBy">{{'stockAdjustmentCreation.useByStatus' | message}}</th>
+                    <th ng-if="vm.showUseBy">{{'stockAdjustmentCreation.useBy' | message}}</th>
                     <th>{{vm.key('quantity') | message}}</th>
                     <th ng-if="vm.showVVMStatusColumn">{{vm.key('vvmStatus') | message}}</th>
                     <th>{{vm.key('actions') | message}}</th>
