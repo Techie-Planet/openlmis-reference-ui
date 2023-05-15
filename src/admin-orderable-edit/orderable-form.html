@@ -10,7 +10,6 @@
     <label for="vvmStatus" class="checkbox">
         <input id="vvmStatus" type="checkbox" 
                 ng-model="vm.orderable.extraData.useVVM"
-                ng-init="vm.orderable.extraData.useVVM"
                 ng-true-value="'true'" 
                 ng-false-value="'false'"
                 ng-change="vm.enableVVM()"
@@ -21,7 +20,6 @@
     <label for="useByEnabled" class="checkbox">
         <input id="useByEnabled" type="checkbox" 
                 ng-model="vm.orderable.extraData.useByEnabled"
-                ng-init="vm.orderable.extraData.useByEnabled"
                 ng-true-value="'true'" 
                 ng-false-value="'false'"
                 ng-change="vm.enableUseBy()"
