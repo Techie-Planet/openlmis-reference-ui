@@ -3,5 +3,6 @@
     "stockConstants.stage2": "II",
     "stockConstants.stage3": "III",
     "stockConstants.stage4": "IV",
-    "stockConstants.noVVM": "No VVM"
+    "stockConstants.noVVM": "No VVM",
+    "stockConstants.sublot": "Sublot"
 }
