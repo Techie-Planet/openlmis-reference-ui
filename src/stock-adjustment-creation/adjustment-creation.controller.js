@@ -449,7 +449,7 @@
 
             vm.lots = orderableGroupService.lotsOf(vm.selectedOrderableGroup, vm.hasPermissionToAddNewLot);
             vm.selectedOrderableHasLots = vm.lots.length > 0;
-            vm.selectedOrderableHasSublots = true;
+            vm.selectedLotHasSublotsInFacility = true;
             vm.sublots = [];
 
         };
