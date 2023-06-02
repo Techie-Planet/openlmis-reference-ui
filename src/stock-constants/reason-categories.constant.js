@@ -82,6 +82,7 @@
         function getCategories() {
             return [
                 REASON_CATEGORIES.TRANSFER,
+                REASON_CATEGORIES.SUBLOT,
                 REASON_CATEGORIES.ADJUSTMENT,
                 REASON_CATEGORIES.PHYSICAL_INVENTORY,
                 REASON_CATEGORIES.AGGREGATION
