@@ -31,7 +31,7 @@
     function type() {
         var REASON_CATEGORIES = {
                 TRANSFER: 'TRANSFER',
-                TRANSFER: 'SUBLOT',
+                SUBLOT: 'SUBLOT',
                 ADJUSTMENT: 'ADJUSTMENT',
                 PHYSICAL_INVENTORY: 'PHYSICAL_INVENTORY',
                 AGGREGATION: 'AGGREGATION',
