@@ -45,6 +45,7 @@
         this.getStockCard = getStockCard;
         this.print = print;
         this.deactivateStockCard = deactivateStockCard;
+        this.getSublots = getSublots;
 
         /**
          * @ngdoc method
@@ -96,6 +97,17 @@
             return data;
         }
 
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.stockCardService
+         * @name getSublots
+         *
+         * @description
+         * Get stock card by id.
+         *
+         * @param {Object} stockCard stock card
+         * @return {Promise} sublots promise.
+         */
         function getSublots(stockCard) {
             var sublotResource = $resource(openlmisUrlFactory('/api/sublots'), {}, {
                 get: {

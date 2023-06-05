@@ -88,6 +88,15 @@
             console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
         }
 
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.controller:StockCardController
+         * @name loadSublots
+         *
+         * @description
+         * function that loads the sublots for the stock card
+         *
+         */
         function loadSublots() {
             if (vm.stockCard.lot) {
                 vm.sublots = stockCardService.getSublots(vm.stockCard)
