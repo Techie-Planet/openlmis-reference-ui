@@ -109,7 +109,7 @@
          * @return {Promise} sublots promise.
          */
         function getSublots(stockCard) {
-            var sublotResource = $resource(openlmisUrlFactory('/api/sublots'), {}, {
+            var sublotResource = $resource(stockmanagementUrlFactory('/api/sublots'), {}, {
                 get: {
                     method: 'GET',
                     isArray: true,
