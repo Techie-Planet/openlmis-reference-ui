@@ -46,6 +46,14 @@
     </li>
   </ul> 
 </aside>
+<div ng-if="vm.stockcardHasSublots">
+  <label for="sublotSelect">{{'stockCard.sublotCode' | message}}</label>
+  <select id="sublotSelect" ng-model="vm.selectedSublot"
+      ng-options="sublot.sublotCode for sublot in vm.sublots"
+      ng-change="vm.sublotChanged()"
+      required>
+  </select>
+</div>
 
 <section class="openlmis-table-container">
 

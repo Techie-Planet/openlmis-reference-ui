@@ -39,6 +39,10 @@
         vm.displayedLineItems = [];
         vm.getLineItemVVMStatus = getLineItemVVMStatus;
         vm.getProductVVM = getProductVVM;
+        vm.sublots = [];
+        vm.sublotChanged = sublotChanged;
+        vm.stockcardHasSublots = stockcardHasSublots;
+        vm.selectedSublot = undefined;
 
         /**
          * @ngdoc method
@@ -69,6 +73,33 @@
             return stockCard.extraData && stockCard.extraData.vvmStatus
                 ? convertVVMStatusToRoman(stockCard.extraData.vvmStatus)
                 : '';
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.controller:StockCardController
+         * @name sublotChanged
+         *
+         * @description
+         * function that handles when a sublot changed
+         *
+         */
+        function sublotChanged(){
+            console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
+        }
+
+        function loadSublots() {
+            if (vm.stockCard.lot) {
+                vm.sublots = stockCardService.getSublots(vm.stockCard)
+                .then(function(sublots) {
+                    vm.sublots = sublots;
+                })
+            } 
+
+        }
+
+        function stockcardHasSublots() {
+            return vm.stockCard.lot && vm.sublots.length > 0;
         }
 
         /**
@@ -141,6 +172,7 @@
 
             vm.stockCard = stockCard;
             vm.stockCard.lineItems = items;
+            loadSublots();
         }
 
         function getSignedQuantity(adjustment) {

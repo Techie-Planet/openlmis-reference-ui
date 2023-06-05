@@ -17,5 +17,6 @@
   "stockCard.print": "Print",
   "stockCard.manufacturer": "Manufacturer",
   "stockCard.vvmStatus": "VVM Status",
-  "stockCard.lot": "Lot/Batch Number"
+  "stockCard.lot": "Lot/Batch Number",
+  "stockCard.sublotCode": "Sub-Batch Number"
 }
