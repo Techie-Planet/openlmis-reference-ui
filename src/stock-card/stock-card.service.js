@@ -46,6 +46,7 @@
         this.print = print;
         this.deactivateStockCard = deactivateStockCard;
         this.getSublots = getSublots;
+        this.getSublotStockCard = getSublotStockCard;
 
         /**
          * @ngdoc method
@@ -118,6 +119,29 @@
             return sublotResource.get({
                 facilityId: stockCard.facility.id,
                 lotId: stockCard.lot.id
+            }).$promise;
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.stockCardService
+         * @name getSublotStockCard
+         *
+         * @description
+         * Get sublot stock card stock card.
+         *
+         * @param {Object} sublot stock card
+         * @return {Promise} sublots promise.
+         */
+        function getSublotStockCard(sublot) {
+            var sublotResource = $resource(stockmanagementUrlFactory('/api/sublotStockCards'), {}, {
+                get: {
+                    method: 'GET',
+                    isArray: true,
+                }
+            });
+            return sublotResource.get({
+                sublot: sublot
             }).$promise;
         }
     }

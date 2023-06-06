@@ -28,9 +28,9 @@
         .module('stock-card')
         .controller('StockCardController', controller);
 
-    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService'];
+    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService'];
 
-    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService) {
+    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService, loadingModalService) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -43,6 +43,7 @@
         vm.sublotChanged = sublotChanged;
         vm.stockcardHasSublots = stockcardHasSublots;
         vm.selectedSublot = undefined;
+        vm.sublotStockCard = undefined;
 
         /**
          * @ngdoc method
@@ -85,7 +86,14 @@
          *
          */
         function sublotChanged(){
+            loadingModalService.open();
             console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
+            vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
+            .then(function(sublotStockCard) {
+                console.log(sublotStockCard);
+                vm.sublotStockCard = sublotStockCard;
+            })
+            loadingModalService.close();
         }
 
         /**
