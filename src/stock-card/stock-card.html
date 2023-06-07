@@ -44,6 +44,10 @@
       <strong>{{'stockCard.vvmStatus' | message}}</strong>
       {{vm.getProductVVM(vm.stockCard)}}
     </li>
+    <li ng-if="vm.selectedSublot">
+      <strong>{{'stockCard.sublotSOH' | message}}</strong>
+      {{vm.selectedSublot.sublotStockOnHand}}
+    </li>
   </ul> 
 </aside>
 <div class="form-inline" ng-if="vm.stockcardHasSublots">

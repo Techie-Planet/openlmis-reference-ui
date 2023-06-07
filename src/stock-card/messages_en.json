@@ -18,5 +18,6 @@
   "stockCard.manufacturer": "Manufacturer",
   "stockCard.vvmStatus": "VVM Status",
   "stockCard.lot": "Lot/Batch Number",
-  "stockCard.sublotCode": "Sub-Batch Number"
+  "stockCard.sublotCode": "Sub-Batch Number",
+  "stockCard.sublotSOH": "Sub-Batch Stock On Hand"
 }
