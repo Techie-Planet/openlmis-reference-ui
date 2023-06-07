@@ -141,7 +141,7 @@
                 }
             });
             return sublotResource.get({
-                sublot: sublot
+                sublot: sublot.sublotCode
             }).$promise;
         }
     }

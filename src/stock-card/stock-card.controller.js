@@ -86,13 +86,16 @@
          *
          */
         function sublotChanged(){
-            loadingModalService.open();
             console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
-            vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
-            .then(function(sublotStockCard) {
-                console.log(sublotStockCard);
-                vm.sublotStockCard = sublotStockCard;
-            })
+            loadingModalService.open();
+            if (vm.selectedSublot) {
+                vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
+                .then(function(sublotStockCard) {
+                    console.log(sublotStockCard);
+                    vm.sublotStockCard = sublotStockCard;
+                })
+                
+            }
             loadingModalService.close();
         }
 
