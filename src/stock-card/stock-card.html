@@ -90,7 +90,7 @@
       </td>
       <td align="right">{{lineItem.quantity}}</td>
       <td align="center">
-        {{lineitem.sublotLineItemExtraData ? vm.getSublotLineItemVVMStatus(lineItem) : vm.getLineItemVVMStatus(lineItem) }}
+        {{lineItem.sublotLineItemExtraData ? vm.getSublotLineItemVVMStatus(lineItem) : vm.getLineItemVVMStatus(lineItem) }}
       </td>
       <td align="right">{{lineItem.stockOnHand}}</td>
       <td>{{lineItem.signature}}</td>
@@ -99,7 +99,7 @@
   </table>
 
   <openlmis-pagination
-    list="vm.sublotStockCard.sublotLineItems || vm.stockCard.lineItems"
+    list="vm.sublotStockCard.sublotLineItems"
     paged-list="vm.displayedLineItems"
     pagination-id="'stockCard'">
   </openlmis-pagination>
