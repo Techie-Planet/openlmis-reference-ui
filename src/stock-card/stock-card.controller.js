@@ -190,6 +190,7 @@
             return vm.sublotstockcard;
           }, function(newValue) {
             if (newValue && newValue.sublotLineItems) {
+                console.log("new value",newValue);
               vm.displayedLineItems = newValue.sublotLineItems;
               $stateParams.displayedLineItems = newValue.sublotLineItems;
               $state.go($state.current.name, $stateParams, {
