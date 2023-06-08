@@ -59,7 +59,7 @@
   </select>
 </div>
 
-<section class="openlmis-table-container">
+<section ng-if="!vm.selectedSublot" class="openlmis-table-container">
 
   <table>
     <thead>
@@ -100,6 +100,51 @@
 
   <openlmis-pagination
     list="vm.stockCard.lineItems"
+    paged-list="vm.displayedLineItems"
+    pagination-id="'stockCard'">
+  </openlmis-pagination>
+</section>
+<section ng-if="vm.selectedSublot" class="openlmis-table-container">
+
+  <table>
+    <thead>
+    <tr>
+      <th>{{'stockCard.date' | message}}</th>
+      <th>{{'stockCard.from' | message}}</th>
+      <th>{{'stockCard.to' | message}}</th>
+      <th>{{'stockCard.reason' | message}}</th>
+      <th>{{'stockCard.adjustment' | message}}</th>
+      <th>{{'stockCard.vvmStatus' | message}}</th>
+      <th>{{'stockCard.soh' | message}}</th>
+      <th>{{'stockCard.signature' | message}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="lineItem in vm.sublotStockCard.sublotLineItems">
+      <td>{{lineItem.occurredDate | openlmisDate}}</td>
+      <td>
+        {{lineItem.sourceFreeText ? ('stockCard.srcDstAndFreeText' |
+        message: {name:lineItem.source.name, freeText: lineItem.sourceFreeText}) : lineItem.source.name}}
+      </td>
+      <td>
+        {{lineItem.destinationFreeText ? ('stockCard.srcDstAndFreeText' |
+        message: {name:lineItem.destination.name, freeText: lineItem.destinationFreeText}) : lineItem.destination.name}}
+      </td>
+      <td>
+        {{ vm.getReason(lineItem) }}
+      </td>
+      <td align="right">{{lineItem.quantity}}</td>
+      <td align="center">
+        {{lineItem.sublotLineItemExtraData}}
+      </td>
+      <td align="right">{{lineItem.stockOnHand}}</td>
+      <td>{{lineItem.signature}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <openlmis-pagination
+    list="vm.sublotStockCard.sublotLineItems"
     paged-list="vm.displayedLineItems"
     pagination-id="'stockCard'">
   </openlmis-pagination>
