@@ -90,7 +90,6 @@
             console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
             if (vm.selectedSublot) {
                 console.log("getting sublot stock card");
-                debugger
                 loadingModalService.open();
                 vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
                 .then(function(sublotStockCard) {
@@ -189,16 +188,16 @@
             }
         }
 
-        $scope.$watch(function() {
-            return vm.sublotstockcard;
-          }, function(newValue) {
-            if (newValue && newValue.sublotLineItems) {
-              $state.go($state.current.name, $stateParams, {
-                reload: false,
-                notify: false
-              });
-            }
-          }, true);
+        // $scope.$watch(function() {
+        //     return vm.sublotstockcard;
+        //   }, function(newValue) {
+        //     if (newValue && newValue.sublotLineItems) {
+        //       $state.go($state.current.name, $stateParams, {
+        //         reload: false,
+        //         notify: false
+        //       });
+        //     }
+        //   }, true);
 
         function onInit() {
             $state.current.label = stockCard.orderable.fullProductName;
