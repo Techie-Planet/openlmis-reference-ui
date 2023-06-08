@@ -44,6 +44,7 @@
         vm.stockcardHasSublots = stockcardHasSublots;
         vm.selectedSublot = undefined;
         vm.sublotStockCard = undefined;
+        vm.getSublotLineItemVVMStatus = getSublotLineItemVVMStatus;
 
         /**
          * @ngdoc method
@@ -136,6 +137,23 @@
         function getLineItemVVMStatus(lineItem) {
             return lineItem && lineItem.extraData && lineItem.extraData.vvmStatus
                 ? convertVVMStatusToRoman(lineItem.extraData.vvmStatus)
+                : '';
+        }
+
+        /**
+         * @ngdoc method
+         * @methodOf stock-card.controller:StockCardController
+         * @name getSublotLineItemVVMStatus
+         *
+         * @description
+         * Get and display line Item VVM value from line extraData.
+         *
+         * @param {object} lineItem to get extraData.vvmStatus from
+         * @return {string} VVM status in roman numeral
+         */
+        function getSublotLineItemVVMStatus(lineItem) {
+            return lineItem && lineItem.sublotLineItemExtraData && lineItem.sublotLineItemExtraData.vvmStatus
+                ? convertVVMStatusToRoman(lineItem.sublotLineItemExtraData.vvmStatus)
                 : '';
         }
 
