@@ -96,9 +96,9 @@
                     vm.sublotStockCard = sublotStockCard;
                     //vm.displayedLineItems = sublotStockCard.sublotLineItems;
                 })
-                loadingModalService.close();
                 
             }
+            loadingModalService.close();
         }
 
         /**
