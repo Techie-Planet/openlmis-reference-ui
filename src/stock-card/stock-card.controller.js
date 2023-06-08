@@ -89,10 +89,11 @@
         function sublotChanged(){
             console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
             if (vm.selectedSublot) {
+                console.log("getting sublot stock card");
                 loadingModalService.open();
                 stockCardService.getSublotStockCard(vm.selectedSublot)
                 .then(function(sublotStockCard) {
-                    console.log(sublotStockCard);
+                    console.log("got the card", sublotStockCard);
                     vm.sublotStockCard = sublotStockCard;
                     console.log(vm.sublotStockCard);
                     //vm.displayedLineItems = sublotStockCard.sublotLineItems;
