@@ -28,9 +28,9 @@
         .module('stock-card')
         .controller('StockCardController', controller);
 
-    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService'];
+    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService', '$scope'];
 
-    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService, loadingModalService) {
+    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService, loadingModalService, $scope) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -88,16 +88,17 @@
          */
         function sublotChanged(){
             console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
-            loadingModalService.open();
             if (vm.selectedSublot) {
+                loadingModalService.open();
                 vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
                 .then(function(sublotStockCard) {
                     console.log(sublotStockCard);
                     vm.sublotStockCard = sublotStockCard;
+                    //vm.displayedLineItems = sublotStockCard.sublotLineItems;
+                    loadingModalService.close();
                 })
                 
             }
-            loadingModalService.close();
         }
 
         /**
@@ -184,6 +185,14 @@
                 return 'I' + convertToRoman(num - 1);
             }
         }
+        
+        $scope.$watch('vm.sublotStockCard', function(newSublotStockCard, oldSublotStockCard) {
+            if (newSublotStockCard && newSublotStockCard.sublotLineItems) {
+              vm.stockCard.lineItems = newSublotStockCard.sublotLineItems;
+            } else {
+              vm.stockCard.lineItems = stockCard.lineItems;
+            }
+          }, true);
 
         function onInit() {
             $state.current.label = stockCard.orderable.fullProductName;
@@ -207,7 +216,6 @@
                     items.push(lineItem);
                 }
             });
-
             vm.stockCard = stockCard;
             vm.stockCard.lineItems = items;
             loadSublots();
