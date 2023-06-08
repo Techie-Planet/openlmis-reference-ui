@@ -95,8 +95,8 @@
                     console.log(sublotStockCard);
                     vm.sublotStockCard = sublotStockCard;
                     //vm.displayedLineItems = sublotStockCard.sublotLineItems;
-                    loadingModalService.close();
                 })
+                loadingModalService.close();
                 
             }
         }
@@ -185,7 +185,7 @@
                 return 'I' + convertToRoman(num - 1);
             }
         }
-        
+
         $scope.$watch('vm.sublotStockCard', function(newSublotStockCard, oldSublotStockCard) {
             if (newSublotStockCard && newSublotStockCard.sublotLineItems) {
               vm.stockCard.lineItems = newSublotStockCard.sublotLineItems;
