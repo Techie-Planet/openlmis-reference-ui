@@ -90,10 +90,11 @@
             console.log("sublot changed. sublot selected is: ", vm.selectedSublot);
             if (vm.selectedSublot) {
                 loadingModalService.open();
-                vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
+                stockCardService.getSublotStockCard(vm.selectedSublot)
                 .then(function(sublotStockCard) {
                     console.log(sublotStockCard);
                     vm.sublotStockCard = sublotStockCard;
+                    console.log(vm.sublotStockCard);
                     //vm.displayedLineItems = sublotStockCard.sublotLineItems;
                 })
                 
