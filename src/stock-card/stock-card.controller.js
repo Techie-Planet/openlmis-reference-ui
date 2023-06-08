@@ -92,7 +92,7 @@
                 console.log("getting sublot stock card");
                 debugger
                 loadingModalService.open();
-                stockCardService.getSublotStockCard(vm.selectedSublot)
+                vm.sublotStockCard = stockCardService.getSublotStockCard(vm.selectedSublot)
                 .then(function(sublotStockCard) {
                     console.log("got the card", sublotStockCard);
                     vm.sublotStockCard = sublotStockCard;
