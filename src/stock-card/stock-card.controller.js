@@ -43,7 +43,7 @@
         vm.sublotChanged = sublotChanged;
         vm.stockcardHasSublots = stockcardHasSublots;
         vm.selectedSublot = undefined;
-        vm.sublotStockCard = undefined;
+        vm.sublotStockCard = {sublotLineItems: [], sublotStockOnHand: 0};
         vm.getSublotLineItemVVMStatus = getSublotLineItemVVMStatus;
 
         /**
@@ -190,9 +190,6 @@
             return vm.sublotstockcard;
           }, function(newValue) {
             if (newValue && newValue.sublotLineItems) {
-                console.log("new value",newValue);
-              vm.displayedLineItems = newValue.sublotLineItems;
-              $stateParams.displayedLineItems = newValue.sublotLineItems;
               $state.go($state.current.name, $stateParams, {
                 reload: false,
                 notify: false
