@@ -28,9 +28,9 @@
         .module('stock-card')
         .controller('StockCardController', controller);
 
-    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService', '$scope'];
+    controller.$inject = ['stockCard', '$state','$stateParams', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService', '$scope'];
 
-    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService, loadingModalService, $scope) {
+    function controller(stockCard, $state, $stateParams, stockCardService, REASON_TYPES, messageService, loadingModalService, $scope) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -186,13 +186,16 @@
             }
         }
 
-        $scope.$watch('vm.sublotStockCard', function(newSublotStockCard, oldSublotStockCard) {
-            if (newSublotStockCard && newSublotStockCard.sublotLineItems) {
-              vm.stockCard.lineItems = newSublotStockCard.sublotLineItems;
-              $scope.$apply()
-            } else {
-              vm.stockCard.lineItems = stockCard.lineItems;
-              $scope.$apply()
+        $scope.$watch(function() {
+            return vm.sublotstockcard;
+          }, function(newValue) {
+            if (newValue && newValue.sublotLineItems) {
+              vm.displayedLineItems = newValue.sublotLineItems;
+              $stateParams.displayedLineItems = newValue.sublotLineItems;
+              $state.go($state.current.name, $stateParams, {
+                reload: false,
+                notify: false
+              });
             }
           }, true);
 
