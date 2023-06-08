@@ -137,7 +137,7 @@
             var sublotResource = $resource(stockmanagementUrlFactory('/api/sublotStockCards'), {}, {
                 get: {
                     method: 'GET',
-                    isArray: true,
+                    isArray: false,
                 }
             });
             return sublotResource.get({
