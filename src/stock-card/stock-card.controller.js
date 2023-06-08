@@ -189,8 +189,10 @@
         $scope.$watch('vm.sublotStockCard', function(newSublotStockCard, oldSublotStockCard) {
             if (newSublotStockCard && newSublotStockCard.sublotLineItems) {
               vm.stockCard.lineItems = newSublotStockCard.sublotLineItems;
+              $scope.$apply()
             } else {
               vm.stockCard.lineItems = stockCard.lineItems;
+              $scope.$apply()
             }
           }, true);
 
