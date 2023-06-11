@@ -90,7 +90,7 @@
       </td>
       <td align="right">{{lineItem.quantity}}</td>
       <td align="center">
-        {{lineItem.sublotLineItemExtraData ? vm.getSublotLineItemVVMStatus(lineItem) : vm.getLineItemVVMStatus(lineItem) }}
+        {{ vm.getLineItemVVMStatus(lineItem) }}
       </td>
       <td align="right">{{lineItem.stockOnHand}}</td>
       <td>{{lineItem.signature}}</td>
@@ -135,7 +135,7 @@
       </td>
       <td align="right">{{lineItem.quantity}}</td>
       <td align="center">
-        {{lineItem.sublotLineItemExtraData}}
+        {{ vm.getSublotLineItemVVMStatus(lineItem) }}
       </td>
       <td align="right">{{lineItem.stockOnHand}}</td>
       <td>{{lineItem.signature}}</td>

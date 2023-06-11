@@ -28,9 +28,9 @@
         .module('stock-card')
         .controller('StockCardController', controller);
 
-    controller.$inject = ['stockCard', '$state','$stateParams', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService', '$scope'];
+    controller.$inject = ['stockCard', '$state', 'stockCardService', 'REASON_TYPES', 'messageService', 'loadingModalService'];
 
-    function controller(stockCard, $state, $stateParams, stockCardService, REASON_TYPES, messageService, loadingModalService, $scope) {
+    function controller(stockCard, $state, stockCardService, REASON_TYPES, messageService, loadingModalService) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -155,8 +155,9 @@
          * @return {string} VVM status in roman numeral
          */
         function getSublotLineItemVVMStatus(lineItem) {
-            return lineItem && lineItem.sublotLineItemExtraData && lineItem.sublotLineItemExtraData.vvmStatus
-                ? convertVVMStatusToRoman(lineItem.sublotLineItemExtraData.vvmStatus)
+            return lineItem && lineItem.sublotStockCardLineItemExtraData 
+            && lineItem.sublotStockCardLineItemExtraData.vvmStatus
+                ? convertVVMStatusToRoman(lineItem.sublotStockCardLineItemExtraData.vvmStatus)
                 : '';
         }
 
@@ -187,17 +188,6 @@
                 return 'I' + convertToRoman(num - 1);
             }
         }
-
-        // $scope.$watch(function() {
-        //     return vm.sublotstockcard;
-        //   }, function(newValue) {
-        //     if (newValue && newValue.sublotLineItems) {
-        //       $state.go($state.current.name, $stateParams, {
-        //         reload: false,
-        //         notify: false
-        //       });
-        //     }
-        //   }, true);
 
         function onInit() {
             $state.current.label = stockCard.orderable.fullProductName;
